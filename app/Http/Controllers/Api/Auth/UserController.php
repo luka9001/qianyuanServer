@@ -110,6 +110,9 @@ class UserController extends Controller {
 		$personality = request( 'personality' );
 		$job         = request( 'job' );
 		$live        = request( 'live' );
+		$food =request('food');
+		$travel = request('travel');
+		$marrystatus = request('marrystatus');
 
 		$user                = $request->user();
 		$user['realname']    = $realname;
@@ -125,6 +128,9 @@ class UserController extends Controller {
 		$user['live']        = $live;
 		$user['phone']       = request( 'phone' );
 		$user['state']       = 1;
+		$user['food'] = $food;
+		$user['travel'] = $travel;
+		$user['marrystatus'] = $marrystatus;
 
 		$fileStoragePath = public_path() . '/uploadFile/files/';
 		$dateFolder      = date( 'Y-m-d', time() ); // 日期作为目录
