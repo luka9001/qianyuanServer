@@ -28,6 +28,7 @@ Route::middleware( 'auth:api' )->get( '/user', function ( Request $request ) {
 Route::group( [ 'middleware' => [ 'auth:api' ], 'prefix' => 'v1' ], function () {
 	Route::post( '/upload', 'Api\Auth\UserController@fileUpload' );
 	Route::post( '/realname', 'Api\Auth\UserController@realNameAuthentication' );
+	Route::post( '/pi', 'Api\Auth\UserController@personalInformation' );
 	Route::post( '/getmembers', 'Api\MembersController@getMembers' );
 	Route::post( '/savefavorites', 'Api\MembersController@saveFavorites' );
 	Route::post( '/delfavorites', 'Api\MembersController@delFavorites' );
