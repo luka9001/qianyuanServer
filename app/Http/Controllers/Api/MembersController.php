@@ -12,6 +12,7 @@ use App\Models\Favorites;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class MembersController {
 	public function getMembers( Request $request ) {
@@ -19,7 +20,7 @@ class MembersController {
 		DB::beginTransaction();
 		$data = '';
 		try {
-			$members = User::where( 'id', '!=', $request->user()->id )->paginate( 10 );
+			$members = User::where( 'id', '!=', $request->user()->id )->orderBy('id', 'desc')->paginate( 10 );
 			//TODO 是否被当前用户标记
 			foreach ( $members as $d ) {
 				$count = Favorites::where( 'user_id', $request->user()->id )->where( 'favorite_uid', $d->id )->count();
@@ -35,6 +36,13 @@ class MembersController {
 
 		return response()->json( array( 'code' => 200, 'data' => $data ) );
 	}
+
+	public function memberDetail(){
+		$id = request('id');
+		Log::info($id);
+		$user = User::find($id);
+		return response()->json(array('code'=>200,'data'=>$user));
+}
 
 	public function saveFavorites( Request $request ) {
 		$favorite               = new Favorites();

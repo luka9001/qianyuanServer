@@ -168,7 +168,6 @@ class UserController extends Controller
             }
 
             $user->save();
-
             return response()->json(array('code' => '200'));
         } else {
             return response()->json(array('code' => '201', 'msg' => '未检测到文件！'));
@@ -234,7 +233,7 @@ class UserController extends Controller
                 $src = '/uploadFile/files/' . $dateFolder . '/' . $newName;
                 array_push($photo, $src);
             }
-            $user['lifephoto'] = json_encode($photo);
+            $user['lifephoto'] = json_decode(json_encode($photo),320);
             $user->save();
 
             return response()->json(array('code' => '200'));

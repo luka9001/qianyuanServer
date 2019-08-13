@@ -30,6 +30,7 @@ Route::group( [ 'middleware' => [ 'auth:api' ], 'prefix' => 'v1' ], function () 
 	Route::post( '/realname', 'Api\Auth\UserController@realNameAuthentication' );
 	Route::post( '/pi', 'Api\Auth\UserController@personalInformation' );
 	Route::post( '/getmembers', 'Api\MembersController@getMembers' );
+	Route::post( '/getmemberdetail', 'Api\MembersController@memberDetail' );
 	Route::post( '/savefavorites', 'Api\MembersController@saveFavorites' );
 	Route::post( '/delfavorites', 'Api\MembersController@delFavorites' );
 	Route::post( '/sendmessage', 'Api\SocialController@sendMessage' );

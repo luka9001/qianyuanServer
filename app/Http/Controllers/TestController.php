@@ -8,15 +8,25 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 
 class TestController extends Controller {
 	public function test() {
 //		$date = '2019-04-14 14:44:07';
 //		$m    = date( 'm-d', strtotime( $date ) );
 //		$re   = $this->get_constellation( strtotime( $date ) );
-		$d = '{大学}';
+		// $d = '{大学}';
 
-		return ltrim( rtrim( $d, '}' ), '{' );
+		// return ltrim( rtrim( $d, '}' ), '{' );
+			$params = array();
+			$id = request('id');
+			$message = request('message');
+			array_push($params, $message);
+			array_push($params, $id);
+			$save = json_decode(json_encode($params),320);
+			DB::table('test')->insert(['test'=>json_encode($params)]);
+			return json_encode($params);
+			// return json_decode(json_encode($params),320);
 	}
 
 	function get_constellation( $time ) {
