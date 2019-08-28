@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
+use Ramsey\Uuid\Uuid;
 
 class TestController extends Controller {
 	public function test() {
@@ -18,6 +19,9 @@ class TestController extends Controller {
 		// $d = '{大学}';
 
 		// return ltrim( rtrim( $d, '}' ), '{' );
+
+			return Uuid::uuid4();
+
 			$params = array();
 			$id = request('id');
 			$message = request('message');

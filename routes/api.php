@@ -35,6 +35,7 @@ Route::group( [ 'middleware' => [ 'auth:api' ], 'prefix' => 'v1' ], function () 
 	Route::post( '/delfavorites', 'Api\MembersController@delFavorites' );
 	Route::post( '/sendmessage', 'Api\SocialController@sendMessage' );
 	Route::post( '/getsocial', 'Api\SocialController@getSocial' );
+	Route::get('/getuserinfo','Api\Auth\UserController@getUserInfo');
 } );
 
 Route::post( '/login', 'Api\Auth\UserController@login' );

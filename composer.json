@@ -10,7 +10,8 @@
         "laravel/framework": "5.4.*",
         "laravel/passport": "^4.0",
         "laravel/tinker": "~1.0",
-        "predis/predis": "^1.1"
+        "predis/predis": "^1.1",
+        "ramsey/uuid": "^3.8"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -50,5 +51,11 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "optimize-autoloader": true
+    },
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://packagist.phpcomposer.com"
+        }
     }
 }

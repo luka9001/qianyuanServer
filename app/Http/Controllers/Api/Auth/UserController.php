@@ -174,6 +174,15 @@ class UserController extends Controller
         }
     }
 
+    public function getUserInfo(Request $request)
+    {
+        $user = $request->user();
+        unset( $user['password']);
+        unset( $user['remember_token']);
+        unset( $user['password']);
+        return response()->json(array('code' => 200, 'data' => $user));
+    }
+
     public function personalInformation(Request $request)
     {
         $realname = request('realname');
@@ -183,14 +192,21 @@ class UserController extends Controller
         $birthplace = request('birthplace');
         $height = request('height');
         $education = request('school');
-        $hobby = request('hobby');
-        $personality = request('personality');
-        $job = request('job');
         $live = request('live');
-        $food = request('food');
-        $travel = request('travel');
         $marrystatus = request('marryStatus');
         $detail = request('detail');
+        $smoke = request('smoke');
+        $drink = request('drink');
+        $bady = request('baby');
+
+        //对象信息
+        $nbirthdate = request('nbirthDay');
+        $nsex = request('nsex');
+        $nbirthplace = request('nbirthplace');
+        $nheight = request('nheight');
+        $neducation = request('nschool');
+        $nlive = request('nlive');
+        $nmarrystatus = request('nmarryStatus');
 
         $user = $request->user();
         $user['realname'] = $realname;
@@ -233,7 +249,7 @@ class UserController extends Controller
                 $src = '/uploadFile/files/' . $dateFolder . '/' . $newName;
                 array_push($photo, $src);
             }
-            $user['lifephoto'] = json_decode(json_encode($photo),320);
+            $user['lifephoto'] = json_encode($photo);
             $user->save();
 
             return response()->json(array('code' => '200'));
