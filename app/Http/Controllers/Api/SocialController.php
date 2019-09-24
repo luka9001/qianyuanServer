@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use App\Models\SocialMessage;
+use App\Models\Likes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Ramsey\Uuid\Uuid;
@@ -20,6 +21,9 @@ class SocialController extends Controller
     //发布状态消息
     public function sendMessage(Request $request)
     {
+        $this->validate($request, [
+            'message' => 'required|string|max:100',
+        ]);
         $user = $request->user();
         $socialMessage = new SocialMessage();
         $message = request('message');
@@ -38,7 +42,6 @@ class SocialController extends Controller
             foreach ($files as $file) {
                 $clientName = $file->getClientOriginalName(); //初始名
                 $entension = 'png';
-                Log::info('!!!!!!!!!' . $clientName);
                 $user = $request->user();
                 $newName = $dateFolder.'/' . Uuid::uuid4() . '.' . $entension;
                 $file->move($folder, $newName);
@@ -65,5 +68,24 @@ class SocialController extends Controller
         }
 
         return response()->json(array('code' => 200, 'data' => $socialMessage));
+    }
+
+    public function postLike(Request $request)
+    {
+        $this->validate($request, [
+            'social_message_id' => 'required|string|max:2',
+        ]);
+
+        $socialMessage_id = request('social_message_id');
+
+        $likes = new Likes();
+        $likes->liked_uid = $request->user()->id;
+        $status = SocialMessage::find($socialMessage_id)->likes()->save($likes);
+
+        if ($status) {
+            return response()->json(array('code' => '200'));
+        } else {
+            return response()->json(array('code' => '201'));
+        }
     }
 }

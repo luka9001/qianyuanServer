@@ -12,10 +12,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class SocialMessage extends Model {
+class Favoriteme extends Model {
 
 	use SoftDeletes;
-	protected $table = 'social_message';
+	protected $table = 'favoriteme';
 	protected $dates = [ 'deleted_at' ];
 	public $timestamps = true;
 	protected $guarded = array();
@@ -23,9 +23,5 @@ class SocialMessage extends Model {
 
 	public function user() {
 		return $this->belongsTo( 'App\User' );
-	}
-
-	public function likes(){
-		return $this->hasMany('App\Models\Likes');
 	}
 }

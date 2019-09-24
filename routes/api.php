@@ -12,35 +12,44 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
-*/
+ */
 
-Route::middleware( 'auth:api' )->get( '/user', function ( Request $request ) {
-	$user                = $request->user();
-	$return              = array();
-	$return['nickname']  = $user['name'];
-	$return['email']     = $user['email'];
-	$return['state']     = $user['state'];
-	$return['lifephoto'] = $user['lifephoto'];
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    $user = $request->user();
+    $return = array();
+    $return['nickname'] = $user['name'];
+    $return['email'] = $user['email'];
+    $return['state'] = $user['state'];
+    $return['lifephoto'] = $user['lifephoto'];
 
-	return $return;
-} );
+    return $return;
+});
 
-Route::group( [ 'middleware' => [ 'auth:api' ], 'prefix' => 'v1' ], function () {
-	Route::post( '/upload', 'Api\Auth\UserController@fileUpload' );
-	Route::post( '/realname', 'Api\Auth\UserController@realNameAuthentication' );
-	Route::post( '/pi', 'Api\Auth\UserController@personalInformation' );
-	Route::post( '/getmembers', 'Api\MembersController@getMembers' );
-	Route::post( '/getmemberdetail', 'Api\MembersController@memberDetail' );
-	Route::post( '/savefavorites', 'Api\MembersController@saveFavorites' );
-	Route::post( '/delfavorites', 'Api\MembersController@delFavorites' );
-	Route::post( '/sendmessage', 'Api\SocialController@sendMessage' );
-	Route::post( '/getsocial', 'Api\SocialController@getSocial' );
-	Route::get('/getuserinfo','Api\Auth\UserController@getUserInfo');
-} );
+Route::group(['prefix' => 'v1'], function () {
+    Route::post('/getmembers', 'Api\MembersController@getMembers');
+    Route::post('/getmemberdetail', 'Api\MembersController@memberDetail');
 
-Route::post( '/login', 'Api\Auth\UserController@login' );
-Route::post( '/register', 'Api\Auth\UserController@register' );
-Route::post( '/code', 'Api\Auth\UserController@emailCode' );
-Route::post( '/refreshtoken', 'Api\Auth\UserController@refresh_token' );
+    Route::post('/getsocial', 'Api\SocialController@getSocial');
+});
 
-Route::post( '/test', 'TestController@test' );
+Route::group(['middleware' => ['auth:api'], 'prefix' => 'v1'], function () {
+    Route::post('/upload', 'Api\Auth\UserController@fileUpload');
+    Route::post('/realname', 'Api\Auth\UserController@realNameAuthentication');
+    Route::post('/pi', 'Api\Auth\UserController@personalInformation');
+    Route::get('/getuserinfo', 'Api\Auth\UserController@getUserInfo');
+
+    Route::post('/savefavorites', 'Api\MembersController@saveFavorites');
+    Route::post('/delfavorites', 'Api\MembersController@delFavorites');
+    Route::post('/cmk', 'Api\MembersController@callMatchMaker');
+
+    Route::post('/sendmessage', 'Api\SocialController@sendMessage');
+
+    Route::post('/postlikes', 'Api\SocialController@postLike');
+});
+
+Route::post('/login', 'Api\Auth\UserController@login');
+Route::post('/register', 'Api\Auth\UserController@register');
+Route::post('/code', 'Api\Auth\UserController@emailCode');
+Route::post('/refreshtoken', 'Api\Auth\UserController@refresh_token');
+
+Route::post('/test', 'TestController@test');

@@ -31,7 +31,12 @@ class User extends Authenticatable
 	public function favorites()
 	{
 		return $this->hasMany( 'App\Models\Favorites' );
-	}
+    }
+    
+    public function favoriteme()
+    {
+        return $this->hasMany('App\Models\Favoriteme');
+    }
 
 	public function social_messages()
 	{

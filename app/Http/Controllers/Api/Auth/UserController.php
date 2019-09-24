@@ -51,9 +51,9 @@ class UserController extends Controller
     public function register(Request $request)
     {
         $this->validate($request, [
-            'nickname' => 'required',
+            'nickname' => 'required|max:10|unique:users,name',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6',
+            'password' => 'required|min:6|max:20',
             'code' => 'required',
         ]);
 
@@ -79,8 +79,8 @@ class UserController extends Controller
     public function login(Request $request)
     {
         $this->validate($request, [
-            'email' => 'required',
-            'password' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|min:6|max:20',
         ]);
 
         $email = request('email');
@@ -103,6 +103,7 @@ class UserController extends Controller
         return $return;
     }
 
+    //已废弃
     public function realNameAuthentication(Request $request)
     {
         $realname = request('realname');
@@ -177,16 +178,55 @@ class UserController extends Controller
     public function getUserInfo(Request $request)
     {
         $user = $request->user();
-        unset( $user['password']);
-        unset( $user['remember_token']);
-        unset( $user['password']);
+        unset($user['password']);
+        unset($user['remember_token']);
+        unset($user['password']);
         return response()->json(array('code' => 200, 'data' => $user));
     }
 
     public function personalInformation(Request $request)
     {
-        $realname = request('realname');
-        $nickname = request('nickName');
+        $this->validate($request, [
+            // 'realname' => 'max:6',
+            'birthDay' => 'required|date',
+            'sex' => 'required|string|max:2',
+            'birthplace' => 'required|string|max:10',
+            'live' => 'required|string|max:10',
+            'height' => 'required|string|max:3',
+            'marryStatus' => 'required|string|max:2',
+            'language' => 'required|string|max:2',
+            'school' => 'nullable|string|max:2',
+            'detail' => 'nullable|string|max:100',
+            'smoke' => 'nullable|string|max:2',
+            'drink' => 'nullable|string|max:2',
+            'baby' => 'nullable|string|max:2',
+            'income' => 'nullable|string|max:2',
+            'car' => 'nullable|string|max:2',
+            'house' => 'nullable|string|max:2',
+            'occupation' => 'nullable|string|max:10',
+            'religion' => 'nullable|string|max:2',
+            'hobby' => 'nullable|string|max:10',
+
+            'nbirthDay' => 'required|date',
+            'nsex' => 'required|boolean',
+            'nbirthplace' => 'required|string|max:10',
+            'nlive' => 'required|string|max:10',
+            'nheight' => 'required|string|max:3',
+            'nmaxheight' => 'required|string|max:2',
+            'nmarryStatus' => 'required|string|max:2',
+            'nlanguage' => 'required|string|max:2',
+            'nschool' => 'nullable|string|max:2',
+            'nsmoke' => 'nullable|string|max:2',
+            'ndrink' => 'nullable|string|max:2',
+            'nbaby' => 'nullable|string|max:2',
+            'nincome' => 'nullable|string|max:2',
+            'ncar' => 'nullable|string|max:2',
+            'nhouse' => 'nullable|string|max:2',
+            'noccupation' => 'nullable|string|max:10',
+            'nreligion' => 'nullable|string|max:2',
+        ]);
+
+        // $realname = request('realname');
         $birthdate = request('birthDay');
         $sex = request('sex');
         $birthplace = request('birthplace');
@@ -197,16 +237,33 @@ class UserController extends Controller
         $detail = request('detail');
         $smoke = request('smoke');
         $drink = request('drink');
-        $bady = request('baby');
+        $baby = request('baby');
+        $income = request('income');
+        $car = request('car');
+        $house = request('house');
+        $language = request('language');
+        $occupation = request('occupation');
+        $religion = request('religion');
+        $hobby = request('hobby');
 
         //对象信息
         $nbirthdate = request('nbirthDay');
         $nsex = request('nsex');
         $nbirthplace = request('nbirthplace');
         $nheight = request('nheight');
+        $nmaxheight = request('nmaxheight');
         $neducation = request('nschool');
         $nlive = request('nlive');
         $nmarrystatus = request('nmarryStatus');
+        $nsmoke = request('nsmoke');
+        $ndrink = request('ndrink');
+        $nbaby = request('nbaby');
+        $nincome = request('nincome');
+        $ncar = request('ncar');
+        $nhouse = request('nhouse');
+        $nlanguage = request('nlanguage');
+        $noccupation = request('noccupation');
+        $nreligion = request('nreligion');
 
         $user = $request->user();
         $user['realname'] = $realname;
@@ -218,17 +275,40 @@ class UserController extends Controller
         $user['birthplace'] = $birthplace;
         $user['height'] = $height;
         $user['education'] = $education;
-        $user['hobby'] = ltrim(rtrim($hobby, '}'), '{');
-        $user['personality'] = ltrim(rtrim($personality, '}'), '{');
-        $user['job'] = $job;
         $user['live'] = $live;
-        $user['phone'] = request('phone');
+        // $user['phone'] = request('phone');
         $user['state'] = 1;
-        $user['food'] = $food;
-        $user['travel'] = $travel;
         $user['marrystatus'] = $marrystatus;
-        $user['nickname'] = $nickname;
         $user['detail'] = $detail;
+        $user['smoke'] = $smoke;
+        $user['drink'] = $drink;
+        $user['baby'] = $baby;
+        $user['income'] = $income;
+        $user['car'] = $car;
+        $user['house'] = $house;
+        $user['language'] = $language;
+        $user['occupation'] = $occupation;
+        $user['religion'] = $religion;
+        $user['hobby'] = $hobby;
+
+        //对象信息存储
+        $user['nbirthdate'] = date("Y-m-d", strtotime($nbirthdate));
+        $user['nsex'] = $nsex === '男' ? '0' : '1';
+        $user['nbirthplace'] = $nbirthplace;
+        $user['nheight'] = $nheight;
+        $user['nmaxheight'] = $nmaxheight;
+        $user['neducation'] = $neducation;
+        $user['nlive'] = $nlive;
+        $user['nmarrystatus'] = $nmarrystatus;
+        $user['nsmoke'] = $nsmoke;
+        $user['ndrink'] = $ndrink;
+        $user['nbaby'] = $nbaby;
+        $user['nincome'] = $nincome;
+        $user['ncar'] = $ncar;
+        $user['nhouse'] = $nhouse;
+        $user['nlanguage'] = $nlanguage;
+        $user['noccupation'] = $noccupation;
+        $user['nreligion'] = $nreligion;
 
         $fileStoragePath = public_path() . '/uploadFile/files/';
         $dateFolder = date('Y-m-d', time()); // 日期作为目录
