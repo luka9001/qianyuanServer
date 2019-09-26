@@ -43,7 +43,7 @@ class UserController extends Controller
         } else {
             $code = rand(0, 9999);
 
-            Redis::setex($email, 300, $code); //保留五分钟
+            Redis::setex($email, 3000, $code); //保留五分钟
             // Mail::send()的返回值为空，所以可以其他方法进行判断
             Mail::send('mail', ['code' => $code], function ($message) {
                 $email = request('email');
@@ -94,15 +94,16 @@ class UserController extends Controller
         $password = request('password');
 
         $loginTimes = Redis::get($loginTag);
+        $saveTime = 300;
 
         if (isset($loginTimes)) {
             if ($loginTimes > 4) {
                 return response()->json(array('code' => '201', 'msg' => '不要再试啦！用户名密码错误,已超过5次,账户暂时锁定'));
             } else {
                 $return = $this->issueToken($request, $email, $password, 'password', '*');
-                if (!isset($return->access_token)) {
+                if (!strpos($return, 'access_token')) {
                     $loginTimes = $loginTimes + 1;
-                    Redis::setex($loginTag, 300, $loginTimes);
+                    Redis::setex($loginTag, $saveTime, $loginTimes);
                     return response()->json(array('code' => '201', 'msg' => '用户名密码错误,错误次数' . $loginTimes . '次,5次将暂时锁定账户'));
                 } else {
                     return $return;
@@ -110,8 +111,8 @@ class UserController extends Controller
             }
         } else {
             $return = $this->issueToken($request, $email, $password, 'password', '*');
-            if (!isset($return->access_token)) {
-                Redis::setex($loginTag, 300, 1);
+            if (!strpos($return, 'access_token')) {
+                Redis::setex($loginTag, $saveTime, 1);
                 return response()->json(array('code' => '201', 'msg' => '用户名密码错误,错误次数1次,5次将暂时锁定账户'));
             } else {
                 return $return;
