@@ -42,7 +42,6 @@ class SocialController extends Controller
             foreach ($files as $file) {
                 $clientName = $file->getClientOriginalName(); //初始名
                 $entension = 'png';
-                $user = $request->user();
                 $newName = $dateFolder.'/' . Uuid::uuid4() . '.' . $entension;
                 $file->move($folder, $newName);
                 array_push($photos, $newName);

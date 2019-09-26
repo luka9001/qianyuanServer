@@ -36,16 +36,23 @@ class UserController extends Controller
         ]);
 
         $email = request('email');
-        $code = rand(0, 9999);
-        Redis::setex($email, 300, $code); //保留五分钟
-        // Mail::send()的返回值为空，所以可以其他方法进行判断
-        Mail::send('mail', ['code' => $code], function ($message) {
-            $email = request('email');
-            $to = $email;
-            $message->to($to)->subject('牵缘————婚恋交友平台！');
-        });
 
-        return response()->json(array('code' => '200'));
+        $code = Redis::get($email);
+        if (isset($code)) {
+            return response()->json(array('code' => '201', 'msg' => '上次发送的验证码未过期,有效期5分钟,注意超时临界线！'));
+        } else {
+            $code = rand(0, 9999);
+
+            Redis::setex($email, 300, $code); //保留五分钟
+            // Mail::send()的返回值为空，所以可以其他方法进行判断
+            Mail::send('mail', ['code' => $code], function ($message) {
+                $email = request('email');
+                $to = $email;
+                $message->to($to)->subject('牵缘————婚恋交友平台！');
+            });
+
+            return response()->json(array('code' => '200'));
+        }
     }
 
     public function register(Request $request)
@@ -59,7 +66,6 @@ class UserController extends Controller
 
         $email = request('email');
         $password = request('password');
-        $code = Redis::get($email);
 
         if ($code == null || $code != request('code')) {
             return response()->json(array('code' => '201', 'msg' => '验证码错误！'));
@@ -84,11 +90,33 @@ class UserController extends Controller
         ]);
 
         $email = request('email');
+        $loginTag = $email . 'login';
         $password = request('password');
 
-        $return = $this->issueToken($request, $email, $password, 'password', '*');
+        $loginTimes = Redis::get($loginTag);
 
-        return $return;
+        if (isset($loginTimes)) {
+            if ($loginTimes > 4) {
+                return response()->json(array('code' => '201', 'msg' => '不要再试啦！用户名密码错误,已超过5次,账户暂时锁定'));
+            } else {
+                $return = $this->issueToken($request, $email, $password, 'password', '*');
+                if (!isset($return->access_token)) {
+                    $loginTimes = $loginTimes + 1;
+                    Redis::setex($loginTag, 300, $loginTimes);
+                    return response()->json(array('code' => '201', 'msg' => '用户名密码错误,错误次数' . $loginTimes . '次,5次将暂时锁定账户'));
+                } else {
+                    return $return;
+                }
+            }
+        } else {
+            $return = $this->issueToken($request, $email, $password, 'password', '*');
+            if (!isset($return->access_token)) {
+                Redis::setex($loginTag, 300, 1);
+                return response()->json(array('code' => '201', 'msg' => '用户名密码错误,错误次数1次,5次将暂时锁定账户'));
+            } else {
+                return $return;
+            }
+        }
     }
 
     public function refresh_token(Request $request)
@@ -178,53 +206,53 @@ class UserController extends Controller
     public function getUserInfo(Request $request)
     {
         $user = $request->user();
-        unset($user['password']);
         unset($user['remember_token']);
         unset($user['password']);
+        unset($user['email']);
         return response()->json(array('code' => 200, 'data' => $user));
     }
 
     public function personalInformation(Request $request)
     {
-        $this->validate($request, [
-            // 'realname' => 'max:6',
-            'birthDay' => 'required|date',
-            'sex' => 'required|string|max:2',
-            'birthplace' => 'required|string|max:10',
-            'live' => 'required|string|max:10',
-            'height' => 'required|string|max:3',
-            'marryStatus' => 'required|string|max:2',
-            'language' => 'required|string|max:2',
-            'school' => 'nullable|string|max:2',
-            'detail' => 'nullable|string|max:100',
-            'smoke' => 'nullable|string|max:2',
-            'drink' => 'nullable|string|max:2',
-            'baby' => 'nullable|string|max:2',
-            'income' => 'nullable|string|max:2',
-            'car' => 'nullable|string|max:2',
-            'house' => 'nullable|string|max:2',
-            'occupation' => 'nullable|string|max:10',
-            'religion' => 'nullable|string|max:2',
-            'hobby' => 'nullable|string|max:10',
+        // $this->validate($request, [
+        //     // 'realname' => 'max:6',
+        //     'birthDay' => 'required|date',
+        //     'sex' => 'required|string|max:2',
+        //     'birthplace' => 'required|string|max:10',
+        //     'live' => 'required|string|max:10',
+        //     'height' => 'required|string|max:3',
+        //     'marryStatus' => 'required|string|max:2',
+        //     'language' => 'required|string',
+        //     'school' => 'nullable|string|max:2',
+        //     'detail' => 'nullable|string|max:100',
+        //     'smoke' => 'nullable|string|max:2',
+        //     'drink' => 'nullable|string|max:2',
+        //     'baby' => 'nullable|string|max:2',
+        //     'income' => 'nullable|string|max:2',
+        //     'car' => 'nullable|string|max:2',
+        //     'house' => 'nullable|string|max:2',
+        //     'occupation' => 'nullable|string|max:10',
+        //     'religion' => 'nullable|string|max:2',
+        //     'hobby' => 'nullable|string|max:10',
 
-            'nbirthDay' => 'required|date',
-            'nsex' => 'required|boolean',
-            'nbirthplace' => 'required|string|max:10',
-            'nlive' => 'required|string|max:10',
-            'nheight' => 'required|string|max:3',
-            'nmaxheight' => 'required|string|max:2',
-            'nmarryStatus' => 'required|string|max:2',
-            'nlanguage' => 'required|string|max:2',
-            'nschool' => 'nullable|string|max:2',
-            'nsmoke' => 'nullable|string|max:2',
-            'ndrink' => 'nullable|string|max:2',
-            'nbaby' => 'nullable|string|max:2',
-            'nincome' => 'nullable|string|max:2',
-            'ncar' => 'nullable|string|max:2',
-            'nhouse' => 'nullable|string|max:2',
-            'noccupation' => 'nullable|string|max:10',
-            'nreligion' => 'nullable|string|max:2',
-        ]);
+        //     'nbirthDay' => 'nullable|date',
+        //     'nsex' => 'nullable|boolean',
+        //     'nbirthplace' => 'nullable|string|max:10',
+        //     'nlive' => 'nullable|string|max:10',
+        //     'nheight' => 'nullable|string|max:3',
+        //     'nmaxheight' => 'nullable|string|max:2',
+        //     'nmarryStatus' => 'nullable|string|max:2',
+        //     'nlanguage' => 'nullable|string|max:2',
+        //     'nschool' => 'nullable|string|max:2',
+        //     'nsmoke' => 'nullable|string|max:2',
+        //     'ndrink' => 'nullable|string|max:2',
+        //     'nbaby' => 'nullable|string|max:2',
+        //     'nincome' => 'nullable|string|max:2',
+        //     'ncar' => 'nullable|string|max:2',
+        //     'nhouse' => 'nullable|string|max:2',
+        //     'noccupation' => 'nullable|string|max:10',
+        //     'nreligion' => 'nullable|string|max:2',
+        // ]);
 
         // $realname = request('realname');
         $birthdate = request('birthDay');
@@ -266,7 +294,7 @@ class UserController extends Controller
         $nreligion = request('nreligion');
 
         $user = $request->user();
-        $user['realname'] = $realname;
+        // $user['realname'] = $realname;
         if ($birthdate != null) {
             $user['birthdate'] = date("Y-m-d", strtotime($birthdate));
             $user['starsign'] = $this->get_constellation(strtotime($birthdate));
@@ -292,7 +320,7 @@ class UserController extends Controller
         $user['hobby'] = $hobby;
 
         //对象信息存储
-        $user['nbirthdate'] = date("Y-m-d", strtotime($nbirthdate));
+        $user['nbirthdate'] = $nbirthdate == '' ? null : date("Y-m-d", strtotime($nbirthdate));
         $user['nsex'] = $nsex === '男' ? '0' : '1';
         $user['nbirthplace'] = $nbirthplace;
         $user['nheight'] = $nheight;

@@ -14,7 +14,6 @@ use App\Models\Favorites;
 use App\Models\MatchMaker;
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class MembersController extends Controller
 {
@@ -41,8 +40,15 @@ class MembersController extends Controller
     //     return response()->json(array('code' => 200, 'data' => $data));
     // }
 
-    public function getMembers(){
+    public function getMembers()
+    {
         $members = User::orderBy('id', 'desc')->paginate(10);
+        return response()->json(array('code' => 200, 'data' => $members));
+    }
+
+    public function getMembersLogin(Request $request)
+    {
+        $members = User::where('id', '!=', $request->user()->id)->orderBy('id', 'desc')->paginate(10);
         return response()->json(array('code' => 200, 'data' => $members));
     }
 
@@ -53,6 +59,21 @@ class MembersController extends Controller
         ]);
         $id = request('id');
         $user = User::find($id);
+        unset($user['remember_token']);
+        unset($user['password']);
+        return response()->json(array('code' => 200, 'data' => $user));
+    }
+
+    public function memberDetailLogin(Request $request)
+    {
+        $this->validate($request, [
+            'id' => 'required|string|max:2',
+        ]);
+        $id = request('id');
+        $user = User::find($id);
+        unset($user['remember_token']);
+        unset($user['password']);
+        unset($user['email']);
         $favoriteMeUid = $user->favoriteme()->where('who_f_me_uid', $request->user()->id)->first();
         $user->favoriteMeUid = isset($favoriteMeUid->who_f_me_uid);
         return response()->json(array('code' => 200, 'data' => $user));

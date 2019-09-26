@@ -33,6 +33,9 @@ Route::group(['prefix' => 'v1'], function () {
 });
 
 Route::group(['middleware' => ['auth:api'], 'prefix' => 'v1'], function () {
+    Route::post('/getmemberslogin', 'Api\MembersController@getMembersLogin');
+    Route::post('/getmemberdetaillogin', 'Api\MembersController@memberDetailLogin');
+
     Route::post('/upload', 'Api\Auth\UserController@fileUpload');
     Route::post('/realname', 'Api\Auth\UserController@realNameAuthentication');
     Route::post('/pi', 'Api\Auth\UserController@personalInformation');
