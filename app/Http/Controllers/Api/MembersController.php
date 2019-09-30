@@ -40,15 +40,18 @@ class MembersController extends Controller
     //     return response()->json(array('code' => 200, 'data' => $data));
     // }
 
+    /**
+     * state 为 0 的账户 连照片都没有 所以不返回
+     */
     public function getMembers()
     {
-        $members = User::orderBy('id', 'desc')->paginate(10);
+        $members = User::where('state', '!=', 0)->orderBy('id', 'desc')->paginate(10);
         return response()->json(array('code' => 200, 'data' => $members));
     }
 
     public function getMembersLogin(Request $request)
     {
-        $members = User::where('id', '!=', $request->user()->id)->orderBy('id', 'desc')->paginate(10);
+        $members = User::where('id', '!=', $request->user()->id)->where('state', '!=', 0)->orderBy('id', 'desc')->paginate(10);
         return response()->json(array('code' => 200, 'data' => $members));
     }
 

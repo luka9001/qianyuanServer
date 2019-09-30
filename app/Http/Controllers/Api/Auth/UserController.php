@@ -66,9 +66,9 @@ class UserController extends Controller
 
         $email = request('email');
         $password = request('password');
-
+        $code = Redis::get($email);
         if ($code == null || $code != request('code')) {
-            return response()->json(array('code' => '201', 'msg' => '验证码错误！'));
+            return response()->json(array('code' => '201', 'msg' => '验证码错误！或者过期！'));
         }
 
         $result = User::create([
@@ -94,7 +94,7 @@ class UserController extends Controller
         $password = request('password');
 
         $loginTimes = Redis::get($loginTag);
-        $saveTime = 300;
+        $saveTime = 3000;
 
         if (isset($loginTimes)) {
             if ($loginTimes > 4) {
