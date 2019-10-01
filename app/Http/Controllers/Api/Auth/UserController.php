@@ -210,6 +210,15 @@ class UserController extends Controller
         unset($user['remember_token']);
         unset($user['password']);
         unset($user['email']);
+        unset($user['realname']);
+
+        unset($user['realname']);
+        unset($user['greencard']);
+        unset($user['divorce']);
+        unset($user['phone']);
+
+        unset($user['deleted_at']);
+        unset($user['headimg']);
         return response()->json(array('code' => 200, 'data' => $user));
     }
 
