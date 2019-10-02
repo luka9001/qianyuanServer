@@ -10,10 +10,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
-use App\Models\SocialMessage;
 use App\Models\Likes;
+use App\Models\SocialMessage;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Ramsey\Uuid\Uuid;
 
 class SocialController extends Controller
@@ -42,7 +41,7 @@ class SocialController extends Controller
             foreach ($files as $file) {
                 $clientName = $file->getClientOriginalName(); //初始名
                 $entension = 'png';
-                $newName = $dateFolder.'/' . Uuid::uuid4() . '.' . $entension;
+                $newName = $dateFolder . '/' . Uuid::uuid4() . '.' . $entension;
                 $file->move($folder, $newName);
                 array_push($photos, $newName);
             }
@@ -63,6 +62,7 @@ class SocialController extends Controller
     {
         $socialMessage = SocialMessage::leftJoin('users', 'social_message.user_id', '=', 'users.id')->select('social_message.id', 'social_message.user_id', 'social_message.message', 'social_message.liked', 'social_message.created_at', 'social_message.photos', 'users.lifephoto', 'users.name', 'users.live', 'users.sex')->orderBy('id', 'desc')->paginate(10);
         foreach ($socialMessage as $item) {
+            $item['likescount'] = Likes::where('social_message_id', '=', $item->id)->count();
             $item['commentcount'] = Comment::where('social_message_id', '=', $item->id)->count();
         }
 
@@ -71,9 +71,9 @@ class SocialController extends Controller
 
     public function postLike(Request $request)
     {
-        $this->validate($request, [
-            'social_message_id' => 'required|string|max:2',
-        ]);
+        // $this->validate($request, [
+        //     'social_message_id' => 'required|string|max:2',
+        // ]);
 
         $socialMessage_id = request('social_message_id');
 
@@ -82,9 +82,9 @@ class SocialController extends Controller
         $status = SocialMessage::find($socialMessage_id)->likes()->save($likes);
 
         if ($status) {
-            return response()->json(array('code' => '200'));
+            return response()->json(array('code' => 200));
         } else {
-            return response()->json(array('code' => '201'));
+            return response()->json(array('code' => 201));
         }
     }
 }
