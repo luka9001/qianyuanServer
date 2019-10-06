@@ -33,10 +33,12 @@ Route::group(['prefix' => 'v1'], function () {
 });
 
 Route::group(['middleware' => ['auth:api'], 'prefix' => 'v1'], function () {
+    Route::post('/getmysocial', 'Api\SocialController@getMySocial');
+
     Route::post('/getmemberslogin', 'Api\MembersController@getMembersLogin');
     Route::post('/getmemberdetaillogin', 'Api\MembersController@memberDetailLogin');
     Route::post('/getmyfavorites', 'Api\MembersController@getMyFavorites');
-
+    Route::post('/getfavoriteme', 'Api\MembersController@getFavoriteMe');
 
     Route::post('/upload', 'Api\Auth\UserController@fileUpload');
     Route::post('/realname', 'Api\Auth\UserController@realNameAuthentication');

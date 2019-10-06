@@ -137,6 +137,25 @@ class MembersController extends Controller
         return response()->json(array('code' => 200, 'data' => $data));
     }
 
+    public function getFavoriteMe(Request $request)
+    {
+        DB::beginTransaction();
+        $data = array();
+        try {
+            $favorite_ids = $request->user()->favoriteme()->orderBy('id', 'desc')->paginate(10);
+            foreach ($favorite_ids as $key => $value) {
+                $user = User::find($value->who_f_me_uid);
+                array_push($data, ['id' => $user['id'], 'name' => $user['name'], 'sex' => $user['sex'], 'live' => $user['live'], 'lifephoto' => $user['lifephoto']]);
+            }
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(array('code' => 201));
+        }
+        DB::commit();
+
+        return response()->json(array('code' => 200, 'data' => $data));
+    }
+
     //求助红娘
     public function callMatchMaker(Request $request)
     {
