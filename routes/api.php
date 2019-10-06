@@ -35,12 +35,14 @@ Route::group(['prefix' => 'v1'], function () {
 Route::group(['middleware' => ['auth:api'], 'prefix' => 'v1'], function () {
     Route::post('/getmemberslogin', 'Api\MembersController@getMembersLogin');
     Route::post('/getmemberdetaillogin', 'Api\MembersController@memberDetailLogin');
+    Route::post('/getmyfavorites', 'Api\MembersController@getMyFavorites');
+
 
     Route::post('/upload', 'Api\Auth\UserController@fileUpload');
     Route::post('/realname', 'Api\Auth\UserController@realNameAuthentication');
     Route::post('/pi', 'Api\Auth\UserController@personalInformation');
     Route::get('/getuserinfo', 'Api\Auth\UserController@getUserInfo');
-
+   
     Route::post('/savefavorites', 'Api\MembersController@saveFavorites');
     Route::post('/delfavorites', 'Api\MembersController@delFavorites');
     Route::post('/cmk', 'Api\MembersController@callMatchMaker');
@@ -48,6 +50,11 @@ Route::group(['middleware' => ['auth:api'], 'prefix' => 'v1'], function () {
     Route::post('/sendmessage', 'Api\SocialController@sendMessage');
 
     Route::post('/postlikes', 'Api\SocialController@postLike');
+    Route::post('/postcomment', 'Api\SocialController@postComment');
+    Route::post('/getcomments', 'Api\SocialController@getComments');
+    Route::post('/getcommentsbyuser', 'Api\SocialController@getCommentsByUser');
+    Route::post('/getthumbupbyuser', 'Api\SocialController@getThumbUpByUser');
+    Route::post('/getcommentscount', 'Api\SocialController@getCommentsCount');
 });
 
 Route::post('/login', 'Api\Auth\UserController@login');

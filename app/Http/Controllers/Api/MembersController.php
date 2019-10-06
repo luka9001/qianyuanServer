@@ -14,6 +14,7 @@ use App\Models\Favorites;
 use App\Models\MatchMaker;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MembersController extends Controller
 {
@@ -115,6 +116,25 @@ class MembersController extends Controller
         } else {
             return response()->json(array('code' => 404));
         }
+    }
+
+    public function getMyFavorites(Request $request)
+    {
+        DB::beginTransaction();
+        $data = array();
+        try {
+            $favorite_ids = $request->user()->favorites()->orderBy('id', 'desc')->paginate(10);
+            foreach ($favorite_ids as $key => $value) {
+                $user = User::find($value->favorite_uid);
+                array_push($data, ['id' => $user['id'], 'name' => $user['name'], 'sex' => $user['sex'], 'live' => $user['live'], 'lifephoto' => $user['lifephoto']]);
+            }
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(array('code' => 201));
+        }
+        DB::commit();
+
+        return response()->json(array('code' => 200, 'data' => $data));
     }
 
     //求助红娘
