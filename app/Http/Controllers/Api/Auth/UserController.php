@@ -101,6 +101,7 @@ class UserController extends Controller
                 return response()->json(array('code' => '201', 'msg' => '不要再试啦！用户名密码错误,已超过5次,账户暂时锁定'));
             } else {
                 $return = $this->issueToken($request, $email, $password, 'password', '*');
+
                 if (!strpos($return, 'access_token')) {
                     $loginTimes = $loginTimes + 1;
                     Redis::setex($loginTag, $saveTime, $loginTimes);
@@ -304,12 +305,15 @@ class UserController extends Controller
         $nreligion = request('nreligion');
 
         $user = $request->user();
-        // $user['realname'] = $realname;
         if ($birthdate != null) {
             $user['birthdate'] = date("Y-m-d", strtotime($birthdate));
             $user['starsign'] = $this->get_constellation(strtotime($birthdate));
         }
-        $user['sex'] = $sex === '男' ? '0' : '1';
+        if ($sex === '男') {
+            $user['sex'] = 0;
+        } else if ($sex === '女') {
+            $user['sex'] = 1;
+        }
         $user['birthplace'] = $birthplace;
         $user['height'] = $height;
         $user['education'] = $education;
@@ -331,7 +335,11 @@ class UserController extends Controller
 
         //对象信息存储
         $user['nbirthdate'] = $nbirthdate == '' ? null : date("Y-m-d", strtotime($nbirthdate));
-        $user['nsex'] = $nsex === '男' ? '0' : '1';
+        if ($nsex === '男') {
+            $user['nsex'] = 0;
+        } else if ($nsex === '女') {
+            $user['nsex'] = 1;
+        }
         $user['nbirthplace'] = $nbirthplace;
         $user['nheight'] = $nheight;
         $user['nmaxheight'] = $nmaxheight;
@@ -370,7 +378,7 @@ class UserController extends Controller
             $user['lifephoto'] = json_encode($photo);
             $user->save();
 
-            return response()->json(array('code' => '200'));
+            return response()->json(array('code' => '200', 'data' => $user));
         } else {
             return response()->json(array('code' => '201', 'msg' => '未检测到文件！'));
         }

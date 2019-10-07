@@ -22,6 +22,10 @@ class SocialController extends Controller
     //发布状态消息
     public function sendMessage(Request $request)
     {
+        if ($request->user()->state != 1) {
+            return response()->json(array('code' => '201'));
+        }
+
         $this->validate($request, [
             'message' => 'required|string|max:100',
         ]);
@@ -83,8 +87,14 @@ class SocialController extends Controller
         return response()->json(array('code' => 200, 'data' => $socialMessage));
     }
 
+    /**
+     * 点赞
+     */
     public function postLike(Request $request)
     {
+        if ($request->user()->state != 1) {
+            return response()->json(array('code' => 201));
+        }
         // $this->validate($request, [
         //     'social_message_id' => 'required|string|max:2',
         // ]);
@@ -104,8 +114,14 @@ class SocialController extends Controller
         }
     }
 
+    /**
+     * 评论
+     */
     public function postComment(Request $request)
     {
+        if ($request->user()->state != 1) {
+            return response()->json(array('code' => 201));
+        }
         $socialMessage_id = request('social_message_id');
         $commentStr = request('comment');
         $to_user_id = request('to_user_id');

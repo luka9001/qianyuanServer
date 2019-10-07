@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\ActivitiesAD;
 use App\Models\Favoriteme;
 use App\Models\Favorites;
 use App\Models\MatchMaker;
@@ -44,22 +45,54 @@ class MembersController extends Controller
     /**
      * state 为 0 的账户 连照片都没有 所以不返回
      */
-    public function getMembers()
+    public function getMembers(Request $request)
     {
-        $members = User::where('state', '!=', 0)->orderBy('id', 'desc')->paginate(10);
-        return response()->json(array('code' => 200, 'data' => $members));
+        $this->validate($request, [
+            'page' => 'required|numeric',
+            'filter' => 'required|numeric',
+        ]);
+
+        $page = request('page');
+        $filter = request('filter');
+        $activitiesAD = ActivitiesAD::orderBy('id', 'desc')->get();
+        if ($filter === 2) {
+            $members = User::where('state', '!=', 0)->orderBy('id', 'desc')->paginate(10);
+        } else {
+            $members = User::where([['state', '!=', 0], ['sex', $filter]])->orderBy('id', 'desc')->paginate(10);
+        }
+        if (count($activitiesAD) >= $page) {
+            return response()->json(array('code' => 200, 'data' => $members, 'ad' => $activitiesAD[$page - 1]));
+        } else {
+            return response()->json(array('code' => 200, 'data' => $members));
+        }
     }
 
     public function getMembersLogin(Request $request)
     {
-        $members = User::where('id', '!=', $request->user()->id)->where('state', '!=', 0)->orderBy('id', 'desc')->paginate(10);
-        return response()->json(array('code' => 200, 'data' => $members));
+        $this->validate($request, [
+            'page' => 'required|numeric',
+            'filter' => 'required|numeric',
+        ]);
+
+        $page = request('page');
+        $filter = request('filter');
+        $activitiesAD = ActivitiesAD::orderBy('id', 'desc')->get();
+        if ($filter === 2) {
+            $members = User::where('state', '!=', 0)->orderBy('id', 'desc')->paginate(10);
+        } else {
+            $members = User::where([['state', '!=', 0], ['sex', $filter]])->orderBy('id', 'desc')->paginate(10);
+        }
+        if (count($activitiesAD) >= $page) {
+            return response()->json(array('code' => 200, 'data' => $members, 'ad' => $activitiesAD[$page - 1]));
+        } else {
+            return response()->json(array('code' => 200, 'data' => $members));
+        }
     }
 
     public function memberDetail(Request $request)
     {
         $this->validate($request, [
-            'id' => 'required|string|max:2',
+            'id' => 'required|numeric',
         ]);
         $id = request('id');
         $user = User::find($id);
@@ -71,7 +104,7 @@ class MembersController extends Controller
     public function memberDetailLogin(Request $request)
     {
         $this->validate($request, [
-            'id' => 'required|string|max:2',
+            'id' => 'required|numeric',
         ]);
         $id = request('id');
         $user = User::find($id);
@@ -85,6 +118,10 @@ class MembersController extends Controller
 
     public function saveFavorites(Request $request)
     {
+        if ($request->user()->state != 1) {
+            return response()->json(array('code' => 201));
+        }
+
         $this->validate($request, [
             'favorite_uid' => 'required|numeric',
         ]);
@@ -103,6 +140,10 @@ class MembersController extends Controller
     //数据先做软删除，曾今关注过的人，数据分析
     public function delFavorites(Request $request)
     {
+        if ($request->user()->state != 1) {
+            return response()->json(array('code' => 201));
+        }
+
         $this->validate($request, [
             'favorite_uid' => 'required|numeric',
         ]);
@@ -160,7 +201,7 @@ class MembersController extends Controller
     public function callMatchMaker(Request $request)
     {
         $this->validate($request, [
-            'id' => 'required|string|max:2',
+            'id' => 'required|numeric',
             'question' => 'required|digits:1',
             'detail' => 'nullable|string|max:20',
         ]);
