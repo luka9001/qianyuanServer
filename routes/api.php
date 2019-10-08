@@ -24,7 +24,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
     return $return;
 });
-
 Route::group(['prefix' => 'v1'], function () {
     Route::post('/getmembers', 'Api\MembersController@getMembers');
     Route::post('/getmemberdetail', 'Api\MembersController@memberDetail');
@@ -64,4 +63,4 @@ Route::post('/register', 'Api\Auth\UserController@register');
 Route::post('/code', 'Api\Auth\UserController@emailCode');
 Route::post('/refreshtoken', 'Api\Auth\UserController@refresh_token');
 
-Route::post('/test', 'TestController@test');
+// Route::post('/test', 'TestController@test');
