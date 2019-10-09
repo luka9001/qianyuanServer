@@ -24,11 +24,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
     return $return;
 });
+
 Route::group(['prefix' => 'v1'], function () {
     Route::post('/getmembers', 'Api\MembersController@getMembers');
     Route::post('/getmemberdetail', 'Api\MembersController@memberDetail');
 
     Route::post('/getsocial', 'Api\SocialController@getSocial');
+    Route::post('/getcomments', 'Api\SocialController@getComments');
 });
 
 Route::group(['middleware' => ['auth:api'], 'prefix' => 'v1'], function () {
@@ -52,7 +54,7 @@ Route::group(['middleware' => ['auth:api'], 'prefix' => 'v1'], function () {
 
     Route::post('/postlikes', 'Api\SocialController@postLike');
     Route::post('/postcomment', 'Api\SocialController@postComment');
-    Route::post('/getcomments', 'Api\SocialController@getComments');
+    
     Route::post('/getcommentsbyuser', 'Api\SocialController@getCommentsByUser');
     Route::post('/getthumbupbyuser', 'Api\SocialController@getThumbUpByUser');
     Route::post('/getcommentscount', 'Api\SocialController@getCommentsCount');
