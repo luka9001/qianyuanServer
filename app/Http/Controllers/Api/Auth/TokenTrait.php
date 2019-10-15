@@ -29,7 +29,6 @@ trait TokenTrait {
 		$proxy = Request::create( 'oauth/token', 'POST' );
 
 		return Route::dispatch( $proxy );
-
 	}
 
 	public function refreshToken( Request $request, $refresh_token, $scope = '' ) {

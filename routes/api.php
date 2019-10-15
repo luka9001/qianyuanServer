@@ -45,6 +45,7 @@ Route::group(['middleware' => ['auth:api'], 'prefix' => 'v1'], function () {
     Route::post('/realname', 'Api\Auth\UserController@realNameAuthentication');
     Route::post('/pi', 'Api\Auth\UserController@personalInformation');
     Route::get('/getuserinfo', 'Api\Auth\UserController@getUserInfo');
+    Route::post('/pjs', 'Api\Auth\UserController@postJMessageStatus');
    
     Route::post('/savefavorites', 'Api\MembersController@saveFavorites');
     Route::post('/delfavorites', 'Api\MembersController@delFavorites');
@@ -64,5 +65,3 @@ Route::post('/login', 'Api\Auth\UserController@login');
 Route::post('/register', 'Api\Auth\UserController@register');
 Route::post('/code', 'Api\Auth\UserController@emailCode');
 Route::post('/refreshtoken', 'Api\Auth\UserController@refresh_token');
-
-// Route::post('/test', 'TestController@test');

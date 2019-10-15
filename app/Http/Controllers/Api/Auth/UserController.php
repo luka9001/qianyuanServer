@@ -39,11 +39,11 @@ class UserController extends Controller
 
         $code = Redis::get($email);
         if (isset($code)) {
-            return response()->json(array('code' => '201', 'msg' => '上次发送的验证码未过期,有效期5分钟,注意超时临界线！'));
+            return response()->json(array('code' => '201'));
         } else {
             $code = rand(0, 9999);
 
-            Redis::setex($email, 3000, $code); //保留五分钟
+            Redis::setex($email, 300, $code); //保留五分钟
             // Mail::send()的返回值为空，所以可以其他方法进行判断
             Mail::send('mail', ['code' => $code], function ($message) {
                 $email = request('email');
@@ -58,7 +58,7 @@ class UserController extends Controller
     public function register(Request $request)
     {
         $this->validate($request, [
-            'nickname' => 'required|max:10|unique:users,name',
+            'nickname' => 'required|max:10',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6|max:20',
             'code' => 'required',
@@ -68,7 +68,7 @@ class UserController extends Controller
         $password = request('password');
         $code = Redis::get($email);
         if ($code == null || $code != request('code')) {
-            return response()->json(array('code' => '201', 'msg' => '验证码错误！或者过期！'));
+            return response()->json(array('code' => '201'));
         }
 
         $result = User::create([
@@ -78,7 +78,6 @@ class UserController extends Controller
         ]);
 
         $return = $this->issueToken($request, $email, $password, 'password', '*');
-
         return $return;
     }
 
@@ -94,7 +93,7 @@ class UserController extends Controller
         $password = request('password');
 
         $loginTimes = Redis::get($loginTag);
-        $saveTime = 3000;
+        $saveTime = 300;
 
         if (isset($loginTimes)) {
             if ($loginTimes > 4) {
@@ -451,5 +450,21 @@ class UserController extends Controller
 
             return $error_message;
         }
+    }
+
+    public function postJMessageStatus(Request $request)
+    {
+        $this->validate($request, [
+            'status' => 'required|numeric',
+        ]);
+
+        $status = request('status');
+        if ($status == 1) {
+            $request->user()->j_register_status = $status;
+            $request->user()->save();
+            return response()->json(array('code' => 200));
+        }
+        
+        return response()->json(array('code' => 201));
     }
 }
