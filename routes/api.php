@@ -52,9 +52,9 @@ Route::group(['middleware' => ['auth:api'], 'prefix' => 'v1'], function () {
     Route::post('/cmk', 'Api\MembersController@callMatchMaker');
 
     Route::post('/sendmessage', 'Api\SocialController@sendMessage');
-
     Route::post('/postlikes', 'Api\SocialController@postLike');
     Route::post('/postcomment', 'Api\SocialController@postComment');
+    Route::post('/gun', 'Api\SocialController@getUserInfoById');
     
     Route::post('/getcommentsbyuser', 'Api\SocialController@getCommentsByUser');
     Route::post('/getthumbupbyuser', 'Api\SocialController@getThumbUpByUser');

@@ -19,6 +19,18 @@ use Ramsey\Uuid\Uuid;
 
 class SocialController extends Controller
 {
+    //根据获取用户昵称
+    public function getUserInfoById(Request $request)
+    {
+        $this->validate($request, [
+            'id' => 'required|numeric',
+        ]);
+        $id = request('id');
+        $user = User::find($id);
+        $data['nickname'] = $user->name;
+        $data['photo'] = $user->lifephoto;
+        return response()->json(array('code' => 200, 'data' => $data));
+    }
     //发布状态消息
     public function sendMessage(Request $request)
     {
