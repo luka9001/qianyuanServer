@@ -90,12 +90,20 @@ class SocialController extends Controller
     //获取我发布的社交圈信息
     public function getMySocial(Request $request)
     {
-        $socialMessage = SocialMessage::leftJoin('users', 'social_message.user_id', '=', 'users.id')->where('social_message.user_id', $request->user()->id)->select('social_message.id', 'social_message.user_id', 'social_message.message', 'social_message.liked', 'social_message.created_at', 'social_message.photos', 'users.lifephoto', 'users.name', 'users.live', 'users.sex')->orderBy('id', 'desc')->paginate(10);
-        foreach ($socialMessage as $item) {
-            $item['likescount'] = Likes::where('social_message_id', '=', $item->id)->count();
-            $item['commentcount'] = Comment::where('social_message_id', '=', $item->id)->count();
+        $id = request('id');
+        if ($id != null) {
+            $socialMessage = SocialMessage::leftJoin('users', 'social_message.user_id', '=', 'users.id')->where('social_message.user_id', $id)->select('social_message.id', 'social_message.user_id', 'social_message.message', 'social_message.liked', 'social_message.created_at', 'social_message.photos', 'users.lifephoto', 'users.name', 'users.live', 'users.sex')->orderBy('id', 'desc')->paginate(10);
+            foreach ($socialMessage as $item) {
+                $item['likescount'] = Likes::where('social_message_id', '=', $item->id)->count();
+                $item['commentcount'] = Comment::where('social_message_id', '=', $item->id)->count();
+            }
+        } else {
+            $socialMessage = SocialMessage::leftJoin('users', 'social_message.user_id', '=', 'users.id')->where('social_message.user_id', $request->user()->id)->select('social_message.id', 'social_message.user_id', 'social_message.message', 'social_message.liked', 'social_message.created_at', 'social_message.photos', 'users.lifephoto', 'users.name', 'users.live', 'users.sex')->orderBy('id', 'desc')->paginate(10);
+            foreach ($socialMessage as $item) {
+                $item['likescount'] = Likes::where('social_message_id', '=', $item->id)->count();
+                $item['commentcount'] = Comment::where('social_message_id', '=', $item->id)->count();
+            }
         }
-
         return response()->json(array('code' => 200, 'data' => $socialMessage));
     }
 

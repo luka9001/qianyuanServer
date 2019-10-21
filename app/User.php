@@ -47,4 +47,13 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Comment');
     }
+
+    public function blacklist()
+    {
+        return $this->hasMany('App\Models\BlackList');
+    }
+
+    public function price(){
+        return $this->hasMany('App\Models\Price');
+    }
 }

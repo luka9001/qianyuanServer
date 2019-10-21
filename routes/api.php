@@ -34,12 +34,18 @@ Route::group(['prefix' => 'v1'], function () {
 });
 
 Route::group(['middleware' => ['auth:api'], 'prefix' => 'v1'], function () {
+    Route::post('/coin', 'Api\Auth\UserController@getCoin');
+
     Route::post('/getmysocial', 'Api\SocialController@getMySocial');
 
     Route::post('/getmemberslogin', 'Api\MembersController@getMembersLogin');
     Route::post('/getmemberdetaillogin', 'Api\MembersController@memberDetailLogin');
     Route::post('/getmyfavorites', 'Api\MembersController@getMyFavorites');
     Route::post('/getfavoriteme', 'Api\MembersController@getFavoriteMe');
+    Route::post('/pbl', 'Api\MembersController@postBlackList');
+    Route::post('/dbl', 'Api\MembersController@delBlackList');
+    Route::get('/gbl', 'Api\MembersController@getBlackList');
+  
 
     Route::post('/upload', 'Api\Auth\UserController@fileUpload');
     Route::post('/realname', 'Api\Auth\UserController@realNameAuthentication');

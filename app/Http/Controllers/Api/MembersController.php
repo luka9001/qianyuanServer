@@ -10,7 +10,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\ActivitiesAD;
-use App\Models\Favoriteme;
+use App\Models\BlackList;
 use App\Models\Favorites;
 use App\Models\MatchMaker;
 use App\User;
@@ -111,8 +111,14 @@ class MembersController extends Controller
         unset($user['remember_token']);
         unset($user['password']);
         unset($user['email']);
-        $favoriteMeUid = $user->favoriteme()->where('who_f_me_uid', $request->user()->id)->first();
-        $user->favoriteMeUid = isset($favoriteMeUid->who_f_me_uid);
+        // $favoriteMeUid = $user->favoriteme()->where('who_f_me_uid', $request->user()->id)->first();
+        // $user->favoriteMeUid = isset($favoriteMeUid->who_f_me_uid);
+        $favoriteMeUid = $request->user()->favorites()->where('favorite_uid', $id)->first();
+        $user->favoriteMeUid = isset($favoriteMeUid->favorite_uid);
+
+        $blackListUid = $request->user()->blacklist()->where('black_uid', $id)->first();
+        $user->blackListUid = isset($blackListUid->black_uid);
+
         return response()->json(array('code' => 200, 'data' => $user));
     }
 
@@ -131,9 +137,9 @@ class MembersController extends Controller
         User::find($request->user()->id)->favorites()->save($favorite);
 
         //给被关注的用户添加谁关注我记录
-        $favoriteme = new Favoriteme();
-        $favoriteme->who_f_me_uid = $request->user()->id;
-        User::find(request('favorite_uid'))->favoriteme()->save($favoriteme);
+        // $favoriteme = new Favoriteme();
+        // $favoriteme->who_f_me_uid = $request->user()->id;
+        // User::find(request('favorite_uid'))->favoriteme()->save($favoriteme);
         return response()->json(array('code' => 200));
     }
 
@@ -151,8 +157,8 @@ class MembersController extends Controller
         $favorite = Favorites::where('user_id', $request->user()->id)->where('favorite_uid', $favorite_uid)->first();
         $status = $favorite->delete();
 
-        $status_me = Favoriteme::where('user_id', $favorite_uid)->where('who_f_me_uid', $request->user()->id)->delete();
-        if ($status && $status_me) {
+        // $status_me = Favoriteme::where('user_id', $favorite_uid)->where('who_f_me_uid', $request->user()->id)->delete();
+        if ($status) {
             return response()->json(array('code' => 200, 'status' => $status));
         } else {
             return response()->json(array('code' => 404));
@@ -183,9 +189,15 @@ class MembersController extends Controller
         DB::beginTransaction();
         $data = array();
         try {
-            $favorite_ids = $request->user()->favoriteme()->orderBy('id', 'desc')->paginate(10);
+            // $favorite_ids = $request->user()->favoriteme()->orderBy('id', 'desc')->paginate(10);
+            // foreach ($favorite_ids as $key => $value) {
+            //     $user = User::find($value->who_f_me_uid);
+            //     array_push($data, ['id' => $user['id'], 'name' => $user['name'], 'sex' => $user['sex'], 'live' => $user['live'], 'lifephoto' => $user['lifephoto']]);
+            // }
+
+            $favorite_ids = Favorites::where('favorite_uid', $request->user()->id)->orderBy('id', 'desc')->paginate(10);
             foreach ($favorite_ids as $key => $value) {
-                $user = User::find($value->who_f_me_uid);
+                $user = User::find($value->user_id);
                 array_push($data, ['id' => $user['id'], 'name' => $user['name'], 'sex' => $user['sex'], 'live' => $user['live'], 'lifephoto' => $user['lifephoto']]);
             }
         } catch (\Exception $e) {
@@ -217,5 +229,61 @@ class MembersController extends Controller
         } else {
             return response()->json(array('code' => 201));
         }
+    }
+
+    public function postBlackList(Request $request)
+    {
+        if ($request->user()->state != 1) {
+            return response()->json(array('code' => 201));
+        }
+
+        $this->validate($request, [
+            'id' => 'required|numeric',
+        ]);
+
+        $blackList = new BlackList();
+        $blackList->black_uid = request('id');
+        //拉黑了谁
+        $request->user()->blacklist()->save($blackList);
+
+        return response()->json(array('code' => 200));
+    }
+
+    public function delBlackList(Request $request)
+    {
+        if ($request->user()->state != 1) {
+            return response()->json(array('code' => 201));
+        }
+
+        $this->validate($request, [
+            'id' => 'required|numeric',
+        ]);
+
+        $request->user()->blacklist()->where('black_uid', request('id'))->delete();
+
+        return response()->json(array('code' => 200));
+    }
+
+    public function getBlackList(Request $request)
+    {
+        if ($request->user()->state != 1) {
+            return response()->json(array('code' => 201));
+        }
+
+        DB::beginTransaction();
+        $data = array();
+        try {
+            $favorite_ids = $request->user()->blacklist()->orderBy('id', 'desc')->paginate(10);
+            foreach ($favorite_ids as $key => $value) {
+                $user = User::find($value->black_uid);
+                array_push($data, ['black_uid' => $user['id'], 'name' => $user['name'], 'sex' => $user['sex'], 'live' => $user['live'], 'lifephoto' => $user['lifephoto']]);
+            }
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(array('code' => 201));
+        }
+        DB::commit();
+
+        return response()->json(array('code' => 200, 'data' => $data));
     }
 }

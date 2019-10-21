@@ -464,7 +464,20 @@ class UserController extends Controller
             $request->user()->save();
             return response()->json(array('code' => 200));
         }
-        
+
         return response()->json(array('code' => 201));
+    }
+
+    public function getCoin(Request $request)
+    {
+        $user = $request->user();
+
+        $data['favorites'] = $user->favorites()->count();
+        $data['social_messages'] = $user->social_messages()->count();
+        if ($user->price()->count() > 0) {
+            $data['coin'] = $user->price()->first()->coin;
+        }
+        
+        return response()->json(array('code' => 200, 'data' => $data));
     }
 }
