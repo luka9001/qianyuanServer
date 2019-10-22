@@ -9,8 +9,10 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Price;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redis;
@@ -207,6 +209,7 @@ class UserController extends Controller
     public function getUserInfo(Request $request)
     {
         $user = $request->user();
+
         unset($user['remember_token']);
         unset($user['password']);
         unset($user['email']);
@@ -219,6 +222,10 @@ class UserController extends Controller
 
         unset($user['deleted_at']);
         unset($user['headimg']);
+        $price = $user->price();
+        $user['vip_level'] = $price->vip_level;
+        $user['vip_start_time'] = $prive->vip_start_time;
+        $user['coin'] = $price->coin;
         return response()->json(array('code' => 200, 'data' => $user));
     }
 
@@ -472,12 +479,25 @@ class UserController extends Controller
     {
         $user = $request->user();
 
+        $info = DB::table('users')->where('id', $user->id)->select('nreligion', 'noccupation', 'nhouse', 'ncar', 'nincome', 'nbaby', 'ndrink', 'nsmoke', 'nmarrystatus', 'nbirthplace', 'nlive', 'education', 'smoke', 'drink', 'baby', 'detail', 'income', 'car', 'house', 'occupation', 'religion', 'hobby', 'nsex', 'nbirthdate', 'nheight', 'nmaxheight', 'neducation')->get()->toArray();
+        // return response()->json(array('code' => 200, 'data' => $info));
+        $allInfoStatus = true;
+        foreach ($info[0] as $k => $v) {
+            if ($v === null) {
+                $allInfoStatus = false;
+                // return response()->json(array('code' => $k, 'data' => $v));
+                break;
+            }
+        }
+        // return response()->json(array('code' => 2000));
+
         $data['favorites'] = $user->favorites()->count();
         $data['social_messages'] = $user->social_messages()->count();
         if ($user->price()->count() > 0) {
             $data['coin'] = $user->price()->first()->coin;
         }
-        
+        $data['allInfoStatus'] = $allInfoStatus;
+
         return response()->json(array('code' => 200, 'data' => $data));
     }
 }
