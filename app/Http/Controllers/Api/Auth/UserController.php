@@ -222,10 +222,10 @@ class UserController extends Controller
 
         unset($user['deleted_at']);
         unset($user['headimg']);
-        $price = $user->price();
-        $user['vip_level'] = $price->vip_level;
-        $user['vip_start_time'] = $prive->vip_start_time;
-        $user['coin'] = $price->coin;
+        $price = $user->price()->first();
+        $user['vip_level'] = $price === null ? 0 : $price->vip_level;
+        $user['vip_start_time'] = $price === null ? null : $prive->vip_start_time;
+        $user['coin'] = $price === null ? 0 : $price->coin;
         return response()->json(array('code' => 200, 'data' => $user));
     }
 
