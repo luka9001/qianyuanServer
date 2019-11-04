@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use App\Models\Likes;
+use App\Models\Price;
 use App\Models\SocialMessage;
 use App\User;
 use Illuminate\Http\Request;
@@ -42,6 +43,7 @@ class SocialController extends Controller
             'message' => 'required|string|max:100',
         ]);
         $user = $request->user();
+
         $socialMessage = new SocialMessage();
         $message = request('message');
         $socialMessage['message'] = $message;
@@ -68,6 +70,16 @@ class SocialController extends Controller
         }
 
         $status = $user->social_messages()->save($socialMessage);
+
+        /**
+         * 首次发布动态心动币+1
+         */
+        $sCount = SocialMessage::where('user_id', $user->id)->count();
+        if ($sCount === 1) {
+            $price = Price::where('user_id', $user->id)->first();
+            $price->coin = $price->coin + 1;
+            $price->save();
+        }
         if ($status) {
             return response()->json(array('code' => '200'));
         } else {

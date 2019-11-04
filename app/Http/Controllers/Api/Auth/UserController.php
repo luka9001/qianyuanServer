@@ -224,7 +224,7 @@ class UserController extends Controller
         unset($user['headimg']);
         $price = $user->price()->first();
         $user['vip_level'] = $price === null ? 0 : $price->vip_level;
-        $user['vip_start_time'] = $price === null ? null : $prive->vip_start_time;
+        $user['vip_start_time'] = $price === null ? null : $price->vip_start_time;
         $user['coin'] = $price === null ? 0 : $price->coin;
         return response()->json(array('code' => 200, 'data' => $user));
     }
@@ -384,6 +384,25 @@ class UserController extends Controller
             $user['lifephoto'] = json_encode($photo);
             $user->save();
 
+            //注册时初始化会员与金币
+            $price = Price::where('user_id', $request->user()->id)->first();
+            if ($price === null) {
+                Price::create(['user_id' => $request->user()->id, 'coin' => 10]);
+            }
+
+            $info = DB::table('users')->where('id', $user->id)->select('nreligion', 'noccupation', 'nhouse', 'ncar', 'nincome', 'nbaby', 'ndrink', 'nsmoke', 'nmarrystatus', 'nbirthplace', 'nlive', 'education', 'smoke', 'drink', 'baby', 'detail', 'income', 'car', 'house', 'occupation', 'religion', 'hobby', 'nsex', 'nbirthdate', 'nheight', 'nmaxheight', 'neducation')->get()->toArray();
+            $allInfoStatus = true;
+            foreach ($info[0] as $k => $v) {
+                if ($v === null) {
+                    $allInfoStatus = false;
+                    break;
+                }
+            }
+            if ($allInfoStatus) {
+                $price->coin = $price->coin + 10;
+                $price->save();
+            }
+
             return response()->json(array('code' => '200', 'data' => $user));
         } else {
             return response()->json(array('code' => '201', 'msg' => '未检测到文件！'));
@@ -473,31 +492,5 @@ class UserController extends Controller
         }
 
         return response()->json(array('code' => 201));
-    }
-
-    public function getCoin(Request $request)
-    {
-        $user = $request->user();
-
-        $info = DB::table('users')->where('id', $user->id)->select('nreligion', 'noccupation', 'nhouse', 'ncar', 'nincome', 'nbaby', 'ndrink', 'nsmoke', 'nmarrystatus', 'nbirthplace', 'nlive', 'education', 'smoke', 'drink', 'baby', 'detail', 'income', 'car', 'house', 'occupation', 'religion', 'hobby', 'nsex', 'nbirthdate', 'nheight', 'nmaxheight', 'neducation')->get()->toArray();
-        // return response()->json(array('code' => 200, 'data' => $info));
-        $allInfoStatus = true;
-        foreach ($info[0] as $k => $v) {
-            if ($v === null) {
-                $allInfoStatus = false;
-                // return response()->json(array('code' => $k, 'data' => $v));
-                break;
-            }
-        }
-        // return response()->json(array('code' => 2000));
-
-        $data['favorites'] = $user->favorites()->count();
-        $data['social_messages'] = $user->social_messages()->count();
-        if ($user->price()->count() > 0) {
-            $data['coin'] = $user->price()->first()->coin;
-        }
-        $data['allInfoStatus'] = $allInfoStatus;
-
-        return response()->json(array('code' => 200, 'data' => $data));
     }
 }

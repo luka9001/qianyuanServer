@@ -13,6 +13,8 @@ use App\Models\ActivitiesAD;
 use App\Models\BlackList;
 use App\Models\Favorites;
 use App\Models\MatchMaker;
+use App\Models\PayForMessage;
+use App\Models\Price;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -82,6 +84,7 @@ class MembersController extends Controller
         } else {
             $members = User::where([['state', '!=', 0], ['sex', $filter]])->orderBy('id', 'desc')->paginate(10);
         }
+
         if (count($activitiesAD) >= $page) {
             return response()->json(array('code' => 200, 'data' => $members, 'ad' => $activitiesAD[$page - 1]));
         } else {
@@ -98,6 +101,7 @@ class MembersController extends Controller
         $user = User::find($id);
         unset($user['remember_token']);
         unset($user['password']);
+
         return response()->json(array('code' => 200, 'data' => $user));
     }
 
@@ -119,6 +123,22 @@ class MembersController extends Controller
         $blackListUid = $request->user()->blacklist()->where('black_uid', $id)->first();
         $user->blackListUid = isset($blackListUid->black_uid);
 
+        $price = Price::where('user_id', $request->user()->id)->first();
+        if ($price != null) {
+            $user['vip_level'] = $price->vip_level;
+            $user['coin'] = $price->coin;
+            $user['vip_start_time'] = $price->vip_start_time;
+        }
+
+        if ($request->user()->sex === 1) {
+            $pCount = PayForMessage::where([['user_id', $request->user()->id], ['message_uid', $id]])->count();
+            if ($pCount > 0) {
+                $user['par_for_message'] = true;
+            } else {
+                $user['par_for_message'] = false;
+            }
+        }
+
         return response()->json(array('code' => 200, 'data' => $user));
     }
 
@@ -135,6 +155,16 @@ class MembersController extends Controller
         $favorite->favorite_uid = request('favorite_uid');
         //我关注谁
         User::find($request->user()->id)->favorites()->save($favorite);
+
+        /**
+         * 首次关注用户心动币+1
+         */
+        $fCount = DB::table('favorites')->where('user_id', $request->user()->id)->count();
+        if ($fCount === 1) {
+            $price = Price::where('user_id', $request->user()->id)->first();
+            $price->coin = $price->coin + 1;
+            $price->save();
+        }
 
         //给被关注的用户添加谁关注我记录
         // $favoriteme = new Favoriteme();

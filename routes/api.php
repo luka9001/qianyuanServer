@@ -34,7 +34,8 @@ Route::group(['prefix' => 'v1'], function () {
 });
 
 Route::group(['middleware' => ['auth:api'], 'prefix' => 'v1'], function () {
-    Route::post('/coin', 'Api\Auth\UserController@getCoin');
+    Route::post('/coin', 'Api\PriceController@getCoin');
+    Route::post('/pfm', 'Api\PriceController@payForMessage');
 
     Route::post('/getmysocial', 'Api\SocialController@getMySocial');
 
@@ -65,9 +66,17 @@ Route::group(['middleware' => ['auth:api'], 'prefix' => 'v1'], function () {
     Route::post('/getcommentsbyuser', 'Api\SocialController@getCommentsByUser');
     Route::post('/getthumbupbyuser', 'Api\SocialController@getThumbUpByUser');
     Route::post('/getcommentscount', 'Api\SocialController@getCommentsCount');
+
+    Route::post('/adsu', 'Api\ADController@activitySignUp');
+
+    Route::post('/agm', 'Api\JMessageController@addGroupMember');
+    Route::post('/gmi', 'Api\JMessageController@getMembersInfo');
+    Route::post('/ga', 'Api\JMessageController@groupAvatar');
 });
 
 Route::post('/login', 'Api\Auth\UserController@login');
 Route::post('/register', 'Api\Auth\UserController@register');
 Route::post('/code', 'Api\Auth\UserController@emailCode');
 Route::post('/refreshtoken', 'Api\Auth\UserController@refresh_token');
+
+Route::post('/test', 'TestController@test');

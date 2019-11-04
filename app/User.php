@@ -56,4 +56,8 @@ class User extends Authenticatable
     public function price(){
         return $this->hasMany('App\Models\Price');
     }
+
+    public function adSignUp(){
+        return $this->hasMany('App\Models\ADSignUp');
+    }
 }
