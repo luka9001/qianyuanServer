@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'mobile', 'password',
     ];
 
     /**
@@ -27,6 +27,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * passport 验证字段修改
+     */
+    public function findForPassport($username)
+    {
+        return $this->orWhere('mobile', $username)->first();
+    }
 
     public function favorites()
     {
@@ -53,11 +61,13 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\BlackList');
     }
 
-    public function price(){
+    public function price()
+    {
         return $this->hasMany('App\Models\Price');
     }
 
-    public function adSignUp(){
+    public function adSignUp()
+    {
         return $this->hasMany('App\Models\ADSignUp');
     }
 }

@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Utils\SMS;
 use App\Models\Price;
 use App\User;
 use Illuminate\Http\Request;
@@ -29,6 +30,33 @@ class UserController extends Controller
     public function __construct()
     {
         $this->client = Client::find(1);
+    }
+
+    public function smsCode(Request $request)
+    {
+        $this->validate($request, [
+            'mobile' => 'required',
+        ]);
+
+        $mobile = request('mobile');
+
+        $code = Redis::get($mobile);
+
+        if (isset($code)) {
+            return response()->json(array('code' => 201));
+        } else {
+            $code = SMS::randCode();
+
+            Redis::setex($mobile, 300, $code); //保留五分钟
+
+            return response()->json(array('code' => $code));
+            $response = SMS::sendSMS($mobile, $code);
+            if (strpos($response, 'Success') !== false) {
+                return response()->json(array('code' => 200));
+            } else {
+                return response()->json(array('code' => 202));
+            }
+        }
     }
 
     public function emailCode(Request $request)
@@ -61,37 +89,62 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'nickname' => 'required|max:10',
-            'email' => 'required|email|unique:users,email',
+            'mobile' => 'required|unique:users,mobile',
             'password' => 'required|min:6|max:20',
             'code' => 'required',
         ]);
 
-        $email = request('email');
+        $mobile = request('mobile');
         $password = request('password');
-        $code = Redis::get($email);
+
+        $code = Redis::get($mobile);
         if ($code == null || $code != request('code')) {
             return response()->json(array('code' => '201'));
         }
 
         $result = User::create([
             'name' => request('nickname'),
-            'email' => $email,
+            'mobile' => $mobile,
             'password' => bcrypt($password),
         ]);
 
-        $return = $this->issueToken($request, $email, $password, 'password', '*');
+        $return = $this->issueToken($request, $mobile, $password, 'password', '*');
+        return $return;
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $this->validate($request, [
+            'mobile' => 'required',
+            'password' => 'required|min:6|max:20',
+            'code' => 'required',
+        ]);
+
+        $mobile = request('mobile');
+        $password = request('password');
+
+        $code = Redis::get($mobile);
+
+        if ($code == null || $code != request('code')) {
+            return response()->json(array('code' => '201'));
+        }
+
+        $user = User::where('mobile', $mobile)->first();
+        $user->password = bcrypt($password);
+        $user->save();
+        $return = $this->issueToken($request, $mobile, $password, 'password', '*');
         return $return;
     }
 
     public function login(Request $request)
     {
         $this->validate($request, [
-            'email' => 'required|email',
+            'mobile' => 'required',
             'password' => 'required|min:6|max:20',
         ]);
 
-        $email = request('email');
-        $loginTag = $email . 'login';
+        $mobile = request('mobile');
+        $loginTag = $mobile . 'login';
         $password = request('password');
 
         $loginTimes = Redis::get($loginTag);
@@ -101,7 +154,7 @@ class UserController extends Controller
             if ($loginTimes > 4) {
                 return response()->json(array('code' => '201', 'msg' => '不要再试啦！用户名密码错误,已超过5次,账户暂时锁定'));
             } else {
-                $return = $this->issueToken($request, $email, $password, 'password', '*');
+                $return = $this->issueToken($request, $mobile, $password, 'password', '*');
 
                 if (!strpos($return, 'access_token')) {
                     $loginTimes = $loginTimes + 1;
@@ -112,7 +165,7 @@ class UserController extends Controller
                 }
             }
         } else {
-            $return = $this->issueToken($request, $email, $password, 'password', '*');
+            $return = $this->issueToken($request, $mobile, $password, 'password', '*');
             if (!strpos($return, 'access_token')) {
                 Redis::setex($loginTag, $saveTime, 1);
                 return response()->json(array('code' => '201', 'msg' => '用户名密码错误,错误次数1次,5次将暂时锁定账户'));
@@ -176,7 +229,7 @@ class UserController extends Controller
                 $entension = 'png';
 
                 $user = $request->user();
-                $newName = $clientName . $user->email . '.' . $entension;
+                $newName = $clientName . $user->mobile . '.' . $entension;
                 $file->move($folder, $newName);
                 $src = '/uploadFile/files/' . $dateFolder . '/' . $newName;
                 switch ($clientName) {
@@ -212,7 +265,7 @@ class UserController extends Controller
 
         unset($user['remember_token']);
         unset($user['password']);
-        unset($user['email']);
+        unset($user['mobile']);
         unset($user['realname']);
 
         unset($user['realname']);
@@ -376,7 +429,7 @@ class UserController extends Controller
                 $entension = 'png';
 
                 $user = $request->user();
-                $newName = $clientName . $user->email . '.' . $entension;
+                $newName = $clientName . $user->mobile . '.' . $entension;
                 $file->move($folder, $newName);
                 $src = '/uploadFile/files/' . $dateFolder . '/' . $newName;
                 array_push($photo, $src);
@@ -427,7 +480,7 @@ class UserController extends Controller
                 $entension = 'png';
 
                 $user = $request->user();
-                $newName = $clientName . $user->email . '.' . $entension;
+                $newName = $clientName . $user->mobile . '.' . $entension;
                 $file->move($folder, $newName);
                 $src = '/uploadFile/files/' . $dateFolder . '/' . $newName;
             }

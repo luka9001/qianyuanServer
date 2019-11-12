@@ -13,13 +13,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 trait TokenTrait {
-	public function issueToken( Request $request, $email, $password, $grantType, $scope = "" ) {
+	public function issueToken( Request $request, $mobile, $password, $grantType, $scope = "" ) {
 
 		$params = [
 			'grant_type'    => $grantType,
 			'client_id'     => '1',
 			'client_secret' => '5xju5ChjG0L5uVV5uPcEqJEotejLFY6U78Z4pHye',
-			'username'      => $email,
+			'username'      => $mobile,
 			'password'      => $password,
 			'scope'         => $scope
 		];

@@ -15,6 +15,7 @@ use App\Models\Favorites;
 use App\Models\MatchMaker;
 use App\Models\PayForMessage;
 use App\Models\Price;
+use App\Models\PriceInfo;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -129,6 +130,9 @@ class MembersController extends Controller
             $user['coin'] = $price->coin;
             $user['vip_start_time'] = $price->vip_start_time;
         }
+
+        $priceInfo = PriceInfo::where('type', 1)->first();
+        $user['payCoin'] = $priceInfo->coin;
 
         if ($request->user()->sex === 1) {
             $pCount = PayForMessage::where([['user_id', $request->user()->id], ['message_uid', $id]])->count();
@@ -253,6 +257,10 @@ class MembersController extends Controller
             'question' => request('question'),
             'detail' => request('detail'),
         ]);
+
+        $price = Price::where('user_id', $request->user()->id)->first();
+        $price->coin = $price->coin - request('payCoin');
+        $price->save();
 
         if ($result) {
             return response()->json(array('code' => 200));

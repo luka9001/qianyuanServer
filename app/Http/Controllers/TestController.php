@@ -8,23 +8,27 @@
 
 namespace App\Http\Controllers;
 
-use JMessage\IM\Group;
-use JMessage\JMessage;
-
 class TestController extends Controller
 {
 
     public function test()
     {
-        $appKey = '27837b1c1fed6927c288e3df';
-        $masterSecret = 'c7664b0d3f55056db560ecab';
+        $str = 'Success \"69436e0d-fc6a-4272-875e-5598492cfddb\"';
+        if (strpos($str, 'Success') !== false) {
+            return 'yes';
+        } else {
+            return 'no';
+        }
 
-        $client = new JMessage($appKey, $masterSecret, ['disable_ssl' => true]);
-        $group = new Group($client);
-        $gid = 41156304;
-        $usernames = ['qy_64'];
-        $response = $group->addMembers($gid, $usernames);
-        return $response;
+        // $appKey = '27837b1c1fed6927c288e3df';
+        // $masterSecret = 'c7664b0d3f55056db560ecab';
+
+        // $client = new JMessage($appKey, $masterSecret, ['disable_ssl' => true]);
+        // $group = new Group($client);
+        // $gid = 41156304;
+        // $usernames = ['qy_64'];
+        // $response = $group->addMembers($gid, $usernames);
+        // return $response;
 
 //        $date = '2019-04-14 14:44:07';
         //        $m    = date( 'm-d', strtotime( $date ) );
