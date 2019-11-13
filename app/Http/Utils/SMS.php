@@ -17,7 +17,7 @@ class SMS
     public static function sendSMS($to, $code)
     {
         $postUrl = 'https://http-api.d7networks.com/send';
-        $curlPost = ['to' => $to, 'from' => 'u&me', 'content' => '【u&me】code:'+$code, 'username' => 'marc2209', 'password' => 'Pmtgh7Fl'];
+        $curlPost = ['to' => $to, 'from' => 'u&me', 'content' => '【u&me】code:' . $code, 'username' => 'marc2209', 'password' => 'Pmtgh7Fl'];
         $ch = curl_init(); //初始化curl
         curl_setopt($ch, CURLOPT_URL, $postUrl); //抓取指定网页
         curl_setopt($ch, CURLOPT_HEADER, 0); //设置header
