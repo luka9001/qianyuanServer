@@ -12,6 +12,7 @@
         "laravel/passport": "^4.0",
         "laravel/tinker": "~1.0",
         "mashape/unirest-php": "^3.0",
+        "paypal/paypal-checkout-sdk": "^1.0",
         "predis/predis": "^1.1",
         "ramsey/uuid": "^3.8"
     },
