@@ -34,6 +34,9 @@ class UserController extends Controller
 
     public function smsCode(Request $request)
     {
+        // $this->validate($request, [
+        //     'mobile' => 'required|unique:users,mobile',
+        // ]);
         $this->validate($request, [
             'mobile' => 'required',
         ]);
@@ -49,7 +52,7 @@ class UserController extends Controller
 
             Redis::setex($mobile, 300, $code); //保留五分钟
 
-            // return response()->json(array('code' => $code));
+            return response()->json(array('code' => $code));
             $response = SMS::sendSMS($mobile, $code);
             if (strpos($response, 'Success') !== false) {
                 return response()->json(array('code' => 200));
@@ -275,6 +278,8 @@ class UserController extends Controller
 
         unset($user['deleted_at']);
         unset($user['headimg']);
+
+        unset($user['email']);
         $price = $user->price()->first();
         $user['vip_level'] = $price === null ? 0 : $price->vip_level;
         $user['vip_start_time'] = $price === null ? null : $price->vip_start_time;

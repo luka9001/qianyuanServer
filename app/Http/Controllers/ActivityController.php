@@ -8,4 +8,8 @@ class ActivityController extends Controller
     {
       return view('em');
     }
+
+    public function payPalClientView(){
+      return view('paypalclient');
+    }
 }
