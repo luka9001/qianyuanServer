@@ -6,10 +6,11 @@ class ActivityController extends Controller
 {
     public function activityView()
     {
-      return view('em');
+        return view('em');
     }
 
-    public function payPalClientView(){
-      return view('paypalclient');
+    public function payPalClientView()
+    {
+        return view('paypalclient');
     }
 }

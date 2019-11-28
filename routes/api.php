@@ -80,6 +80,10 @@ Route::group(['middleware' => ['auth:api'], 'prefix' => 'v1'], function () {
     Route::post('/ga', 'Api\JMessageController@groupAvatar');
 });
 
+Route::group(['middleware' => ['auth:api'], 'prefix' => 'v1'], function () {
+    Route::post('/report', 'Api\ReportController@report');
+});
+
 Route::post('/rp', 'Api\Auth\UserController@resetPassword');
 Route::post('/login', 'Api\Auth\UserController@login');
 Route::post('/register', 'Api\Auth\UserController@register');

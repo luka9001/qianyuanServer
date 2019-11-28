@@ -16,6 +16,6 @@ Route::get('/', function () {
 });
 
 // Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/em','ActivityController@activityView');
-Route::get('/pay','ActivityController@payPalClientView');
+// Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/em','ActivityController@activityView');
+// Route::get('/pay','ActivityController@payPalClientView');

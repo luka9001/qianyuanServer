@@ -10,7 +10,6 @@
 <script
     src="https://www.paypal.com/sdk/js?client-id=AZeJRPH86pfGCwR3axOhotnk0f9CcMcobD2TtadouQ9uIusr2AO_VfFex_UpEq_9vz_F-4-fIs9mBJF5&currency=EUR"> // Required. Replace SB_CLIENT_ID with your sandbox client ID.
   </script>
-
 <div id="paypal-button-container"></div>
 </body>
 <script>
