@@ -10,6 +10,13 @@ use App\Models\PriceInfo;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PayPalCheckoutSdk\Core\PayPalHttpClient;
+use PayPalCheckoutSdk\Core\SandboxEnvironment;
+use PayPalCheckoutSdk\Orders\OrdersGetRequest;
+
+ini_set('error_reporting', E_ALL); // or error_reporting(E_ALL);
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
 
 class PriceController extends Controller
 {
@@ -122,5 +129,37 @@ class PriceController extends Controller
         $payInfo = PayInfo::where([['type', '>=', 3], ['type', '<=', 5]])->get();
 
         return response()->json(array('code' => 200, 'data' => $payInfo));
+    }
+
+    /**
+     * 处理Paypal付款结果
+     */
+    public function getOrder(Request $request)
+    {
+        $orderId = request('orderId');
+        $client = self::client();
+        // $order = new OrdersGetRequest($orderId);
+        // return response()->json(array('code' => 200, 'data' => $order));
+        // echo $order;
+        $response = $client->execute(new OrdersGetRequest($orderId));
+
+        return response()->json(array('code' => 200, 'data' => $response->result));
+    }
+
+    public static function client()
+    {
+        return new PayPalHttpClient(self::environment());
+    }
+
+    /**
+     * Setting up and Returns PayPal SDK environment with PayPal Access credentials.
+     * For demo purpose, we are using SandboxEnvironment. In production this will be
+     * ProductionEnvironment.
+     */
+    public static function environment()
+    {
+        $clientId = getenv("CLIENT_ID");
+        $clientSecret = getenv("CLIENT_SECRET");
+        return new SandboxEnvironment($clientId, $clientSecret);
     }
 }

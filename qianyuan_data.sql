@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50727
 File Encoding         : 65001
 
-Date: 2019-11-28 10:08:17
+Date: 2019-11-28 21:24:11
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -206,61 +206,6 @@ CREATE TABLE `comment` (
 -- ----------------------------
 -- Records of comment
 -- ----------------------------
-INSERT INTO `comment` VALUES ('1', '36', '尺寸', '44', '46', '2019-10-03 10:45:06', '2019-10-05 10:36:06', null, '1');
-INSERT INTO `comment` VALUES ('2', '38', '测试', '43', '46', '2019-10-03 10:45:22', '2019-10-05 10:36:06', null, '1');
-INSERT INTO `comment` VALUES ('3', '38', '尺寸', '42', '46', '2019-10-03 10:50:42', '2019-10-05 10:36:06', null, '1');
-INSERT INTO `comment` VALUES ('4', '38', '嗯', '41', '46', '2019-10-04 12:43:58', '2019-10-05 10:36:06', null, '1');
-INSERT INTO `comment` VALUES ('5', '38', '嗯', '40', '46', '2019-10-04 12:46:22', '2019-10-05 10:36:06', null, '1');
-INSERT INTO `comment` VALUES ('6', '38', '嗯嗯', '39', '46', '2019-10-04 12:46:26', '2019-10-05 10:36:06', null, '1');
-INSERT INTO `comment` VALUES ('7', '38', '嗯ヽ(○^㉨^)ﾉ♪', '38', '46', '2019-10-04 12:46:41', '2019-10-05 10:36:06', null, '1');
-INSERT INTO `comment` VALUES ('8', '38', '嗯ヽ(○^㉨^)ﾉ♪', '37', '46', '2019-10-04 12:46:45', '2019-10-05 10:36:06', null, '1');
-INSERT INTO `comment` VALUES ('9', '38', '嗯ヽ(○^㉨^)ﾉ♪', '36', '46', '2019-10-04 12:46:47', '2019-10-05 10:36:06', null, '1');
-INSERT INTO `comment` VALUES ('10', '38', '嗯', '35', '46', '2019-10-04 12:59:10', '2019-10-05 10:36:06', null, '1');
-INSERT INTO `comment` VALUES ('11', '38', '嗯ヽ(○^㉨^)ﾉ♪', '34', '46', '2019-10-04 13:06:52', '2019-10-05 10:36:06', null, '1');
-INSERT INTO `comment` VALUES ('12', '38', '嗯ヽ(○^㉨^)ﾉ♪', '33', '46', '2019-10-04 13:06:56', '2019-10-05 10:36:06', null, '1');
-INSERT INTO `comment` VALUES ('13', '38', '嗯ヽ(○^㉨^)ﾉ♪', '32', '46', '2019-10-04 13:06:59', '2019-10-05 10:36:06', null, '1');
-INSERT INTO `comment` VALUES ('14', '38', '嗯ヽ(○^㉨^)ﾉ♪', '31', '46', '2019-10-04 13:07:02', '2019-10-05 10:36:06', null, '1');
-INSERT INTO `comment` VALUES ('15', '38', '嗯ヽ(○^㉨^)ﾉ♪', '30', '46', '2019-10-04 13:07:48', '2019-10-05 10:36:06', null, '1');
-INSERT INTO `comment` VALUES ('16', '38', '嗯ヽ(○^㉨^)ﾉ♪', '29', '46', '2019-10-04 13:08:10', '2019-10-05 10:36:06', null, '1');
-INSERT INTO `comment` VALUES ('17', '38', '嗯ヽ(○^㉨^)ﾉ♪', '28', '46', '2019-10-04 13:10:04', '2019-10-05 10:36:06', null, '1');
-INSERT INTO `comment` VALUES ('18', '38', '嗯ヽ(○^㉨^)ﾉ♪', '27', '46', '2019-10-04 13:12:39', '2019-10-05 10:36:06', null, '1');
-INSERT INTO `comment` VALUES ('19', '38', '嗯ヽ(○^㉨^)ﾉ♪', '26', '46', '2019-10-04 13:12:58', '2019-10-05 10:36:06', null, '1');
-INSERT INTO `comment` VALUES ('20', '38', '你的男的女的你到哪些你从哪电脑', '25', '46', '2019-10-04 13:13:18', '2019-10-05 10:36:06', null, '1');
-INSERT INTO `comment` VALUES ('21', '38', '嗯ヽ(○^㉨^)ﾉ♪', '24', '46', '2019-10-04 13:14:22', '2019-10-05 10:36:06', null, '1');
-INSERT INTO `comment` VALUES ('22', '38', '我在', '23', '46', '2019-10-04 13:14:38', '2019-10-05 10:36:06', null, '1');
-INSERT INTO `comment` VALUES ('23', '38', '嗯ヽ(○^㉨^)ﾉ♪', '22', '46', '2019-10-04 13:24:38', '2019-10-05 10:36:06', null, '1');
-INSERT INTO `comment` VALUES ('24', '38', '嗯ヽ(○^㉨^)ﾉ♪', '21', '46', '2019-10-04 13:24:43', '2019-10-05 10:36:06', null, '1');
-INSERT INTO `comment` VALUES ('25', '38', '好的', '20', '46', '2019-10-04 13:26:23', '2019-10-05 10:36:06', null, '1');
-INSERT INTO `comment` VALUES ('26', '38', '好的好的', '19', '46', '2019-10-04 13:26:28', '2019-10-05 10:36:06', null, '1');
-INSERT INTO `comment` VALUES ('27', '38', '好的', '18', '46', '2019-10-04 13:26:34', '2019-10-05 10:36:06', null, '1');
-INSERT INTO `comment` VALUES ('28', '32', '嗯ヽ(○^㉨^)ﾉ♪', '17', '45', '2019-10-04 13:48:49', '2019-10-04 13:48:49', null, '0');
-INSERT INTO `comment` VALUES ('29', '30', '我的普通话', '16', '45', '2019-10-04 13:49:00', '2019-10-04 13:49:00', null, '0');
-INSERT INTO `comment` VALUES ('30', '30', '我的世界', '15', '45', '2019-10-04 13:49:59', '2019-10-04 13:49:59', null, '0');
-INSERT INTO `comment` VALUES ('31', '30', '嗯ヽ(○^㉨^)ﾉ♪', '14', '45', '2019-10-04 13:58:00', '2019-10-04 13:58:00', null, '0');
-INSERT INTO `comment` VALUES ('32', '30', '嗯ヽ(○^㉨^)ﾉ♪', '44', '45', '2019-10-04 13:58:04', '2019-10-04 13:58:04', null, '0');
-INSERT INTO `comment` VALUES ('33', '30', '嗯ヽ(○^㉨^)ﾉ♪', '44', '45', '2019-10-04 13:58:09', '2019-10-04 13:58:09', null, '0');
-INSERT INTO `comment` VALUES ('34', '30', '嗯ヽ(○^㉨^)ﾉ♪', '44', '45', '2019-10-04 14:01:02', '2019-10-04 14:01:02', null, '0');
-INSERT INTO `comment` VALUES ('35', '30', '嗯ヽ(○^㉨^)ﾉ♪', '44', '45', '2019-10-04 14:01:07', '2019-10-04 14:01:07', null, '0');
-INSERT INTO `comment` VALUES ('36', '30', '嗯ヽ(○^㉨^)ﾉ♪', '44', '45', '2019-10-04 14:01:13', '2019-10-04 14:01:13', null, '0');
-INSERT INTO `comment` VALUES ('37', '30', '嗯ヽ(○^㉨^)ﾉ♪', '44', '45', '2019-10-04 14:01:18', '2019-10-04 14:01:18', null, '0');
-INSERT INTO `comment` VALUES ('38', '30', '嗯ヽ(○^㉨^)ﾉ♪', '44', '45', '2019-10-04 14:01:23', '2019-10-04 14:01:23', null, '0');
-INSERT INTO `comment` VALUES ('39', '30', '你的男的女的你到哪', '44', '45', '2019-10-04 14:01:28', '2019-10-04 14:01:28', null, '0');
-INSERT INTO `comment` VALUES ('40', '30', '嗯ヽ(○^㉨^)ﾉ♪', '44', '45', '2019-10-04 14:02:10', '2019-10-04 14:02:10', null, '0');
-INSERT INTO `comment` VALUES ('41', '27', '我的普通话', '44', '45', '2019-10-04 14:02:43', '2019-10-04 14:02:43', null, '0');
-INSERT INTO `comment` VALUES ('42', '27', '我的普通话', '44', '45', '2019-10-04 14:02:48', '2019-10-04 14:02:48', null, '0');
-INSERT INTO `comment` VALUES ('43', '27', '好了没', '44', '45', '2019-10-04 14:02:54', '2019-10-04 14:02:54', null, '0');
-INSERT INTO `comment` VALUES ('44', '27', '你的男的女的你到哪', '44', '45', '2019-10-04 14:03:00', '2019-10-04 14:03:00', null, '0');
-INSERT INTO `comment` VALUES ('45', '38', '我的孩子我的家', '44', '46', '2019-10-04 14:13:31', '2019-10-05 10:36:06', null, '1');
-INSERT INTO `comment` VALUES ('46', '38', '你的', '44', '46', '2019-10-04 14:13:43', '2019-10-05 10:36:06', null, '1');
-INSERT INTO `comment` VALUES ('47', '38', '@xccc 京东就觉得', '44', '46', '2019-10-04 14:13:51', '2019-10-05 10:36:06', null, '1');
-INSERT INTO `comment` VALUES ('48', '30', '嗯ヽ(○^㉨^)ﾉ♪', '44', '46', '2019-10-04 14:55:53', '2019-10-05 10:36:06', null, '1');
-INSERT INTO `comment` VALUES ('49', '30', '对对对', '44', '45', '2019-10-04 14:56:10', '2019-10-04 14:56:10', null, '0');
-INSERT INTO `comment` VALUES ('50', '38', '@luke  呃呃呃', '44', '44', '2019-10-04 14:57:51', '2019-10-04 14:57:51', null, '0');
-INSERT INTO `comment` VALUES ('51', '38', '@luke  呃呃呃呃呃', '13', '46', '2019-10-04 14:57:58', '2019-10-05 10:36:06', null, '1');
-INSERT INTO `comment` VALUES ('52', '38', '@luke  怎么回事', '46', '13', '2019-10-05 10:29:37', '2019-10-05 10:29:37', null, '0');
-INSERT INTO `comment` VALUES ('53', '49', 'dsdds', '58', '63', '2019-10-21 02:48:47', '2019-10-21 02:48:47', null, '0');
-INSERT INTO `comment` VALUES ('54', '48', '点解点解点击肯定', '74', '46', '2019-11-21 05:10:46', '2019-11-21 05:10:46', null, '0');
-INSERT INTO `comment` VALUES ('55', '60', '大口大口大口大口', '74', '74', '2019-11-21 05:26:18', '2019-11-21 05:26:24', null, '1');
 
 -- ----------------------------
 -- Table structure for favoriteme
@@ -409,45 +354,6 @@ CREATE TABLE `likes` (
 -- ----------------------------
 -- Records of likes
 -- ----------------------------
-INSERT INTO `likes` VALUES ('1', '36', '44', '2019-10-02 12:06:11', '2019-10-02 12:06:11', null, '0', '44');
-INSERT INTO `likes` VALUES ('2', '36', '44', '2019-10-02 12:07:30', '2019-10-02 12:07:30', null, '0', '44');
-INSERT INTO `likes` VALUES ('3', '38', '46', '2019-10-02 12:13:51', '2019-10-02 12:13:51', null, '0', '44');
-INSERT INTO `likes` VALUES ('4', '38', '46', '2019-10-02 12:19:49', '2019-10-02 12:19:49', null, '0', '44');
-INSERT INTO `likes` VALUES ('5', '38', '46', '2019-10-02 12:20:33', '2019-10-02 12:20:33', null, '0', '44');
-INSERT INTO `likes` VALUES ('6', '38', '46', '2019-10-02 12:21:17', '2019-10-02 12:21:17', null, '0', '44');
-INSERT INTO `likes` VALUES ('7', '38', '46', '2019-10-02 12:21:19', '2019-10-02 12:21:19', null, '0', '45');
-INSERT INTO `likes` VALUES ('8', '36', '46', '2019-10-02 13:48:09', '2019-10-02 13:48:09', null, '0', '45');
-INSERT INTO `likes` VALUES ('9', '37', '46', '2019-10-02 13:48:13', '2019-10-02 13:48:13', null, '0', '45');
-INSERT INTO `likes` VALUES ('10', '35', '46', '2019-10-02 13:48:15', '2019-10-02 13:48:15', null, '0', '45');
-INSERT INTO `likes` VALUES ('11', '38', '46', '2019-10-02 14:40:32', '2019-10-02 14:40:32', null, '0', '45');
-INSERT INTO `likes` VALUES ('12', '38', '46', '2019-10-02 14:40:33', '2019-10-02 14:40:33', null, '0', '45');
-INSERT INTO `likes` VALUES ('13', '38', '46', '2019-10-02 14:45:01', '2019-10-02 14:45:01', null, '0', '45');
-INSERT INTO `likes` VALUES ('14', '38', '46', '2019-10-03 09:28:42', '2019-10-03 09:28:42', null, '0', '45');
-INSERT INTO `likes` VALUES ('15', '38', '46', '2019-10-03 09:32:03', '2019-10-03 09:32:03', null, '0', '45');
-INSERT INTO `likes` VALUES ('16', '38', '46', '2019-10-04 13:14:47', '2019-10-04 13:14:47', null, '0', '45');
-INSERT INTO `likes` VALUES ('17', '38', '46', '2019-10-04 13:16:12', '2019-10-04 13:16:12', null, '0', '45');
-INSERT INTO `likes` VALUES ('18', '38', '46', '2019-10-04 13:18:20', '2019-10-04 13:18:20', null, '0', '45');
-INSERT INTO `likes` VALUES ('19', '38', '46', '2019-10-04 13:18:54', '2019-10-04 13:18:54', null, '0', '45');
-INSERT INTO `likes` VALUES ('20', '38', '46', '2019-10-04 13:18:57', '2019-10-04 13:18:57', null, '0', '45');
-INSERT INTO `likes` VALUES ('21', '38', '46', '2019-10-04 13:22:47', '2019-10-04 13:22:47', null, '0', '45');
-INSERT INTO `likes` VALUES ('22', '38', '46', '2019-10-04 13:24:21', '2019-10-04 13:24:21', null, '0', '45');
-INSERT INTO `likes` VALUES ('23', '38', '46', '2019-10-04 13:24:23', '2019-10-04 13:24:23', null, '0', '45');
-INSERT INTO `likes` VALUES ('24', '38', '46', '2019-10-04 13:24:24', '2019-10-04 13:24:24', null, '0', '45');
-INSERT INTO `likes` VALUES ('25', '38', '46', '2019-10-04 13:24:25', '2019-10-04 13:24:25', null, '0', '45');
-INSERT INTO `likes` VALUES ('26', '32', '46', '2019-10-04 13:48:44', '2019-10-04 13:48:44', null, '0', '45');
-INSERT INTO `likes` VALUES ('27', '30', '46', '2019-10-04 13:48:56', '2019-10-04 13:48:56', null, '0', '45');
-INSERT INTO `likes` VALUES ('28', '37', '46', '2019-10-05 11:16:31', '2019-10-05 11:16:31', null, '0', '45');
-INSERT INTO `likes` VALUES ('29', '37', '46', '2019-10-05 11:17:22', '2019-10-05 11:17:22', null, '0', '44');
-INSERT INTO `likes` VALUES ('30', '35', '43', '2019-10-05 11:17:40', '2019-10-05 11:35:17', null, '1', '46');
-INSERT INTO `likes` VALUES ('31', '34', '48', '2019-10-07 02:57:03', '2019-10-07 02:57:03', null, '0', '45');
-INSERT INTO `likes` VALUES ('32', '33', '48', '2019-10-07 02:57:06', '2019-10-07 02:57:06', null, '0', '45');
-INSERT INTO `likes` VALUES ('33', '32', '48', '2019-10-07 02:57:11', '2019-10-07 02:57:11', null, '0', '45');
-INSERT INTO `likes` VALUES ('34', '31', '48', '2019-10-07 02:57:15', '2019-10-07 02:57:15', null, '0', '45');
-INSERT INTO `likes` VALUES ('35', '40', '42', '2019-10-08 01:19:49', '2019-10-08 01:19:49', null, '0', null);
-INSERT INTO `likes` VALUES ('36', '40', '42', '2019-10-08 01:19:52', '2019-10-08 01:19:52', null, '0', null);
-INSERT INTO `likes` VALUES ('37', '49', '58', '2019-10-21 02:48:50', '2019-10-21 02:48:50', null, '0', null);
-INSERT INTO `likes` VALUES ('38', '48', '74', '2019-11-21 05:10:36', '2019-11-21 05:10:36', null, '0', null);
-INSERT INTO `likes` VALUES ('39', '60', '74', '2019-11-21 05:26:32', '2019-11-21 05:26:32', null, '0', null);
 
 -- ----------------------------
 -- Table structure for matchmaker
@@ -2485,71 +2391,6 @@ CREATE TABLE `social_message` (
 -- ----------------------------
 -- Records of social_message
 -- ----------------------------
-INSERT INTO `social_message` VALUES ('1', '12', 'test', '[\"2019-08-14\\/3e956e47-e6ef-4a12-ac45-cdbbac25a2a1.png\",\"2019-08-14\\/a254bb91-9289-4f85-8b9f-086045d73880.png\"]', '0', '2019-03-20 02:30:20', '2019-03-20 02:30:20', null);
-INSERT INTO `social_message` VALUES ('2', '12', 'test', '[\"2019-08-14\\/3e956e47-e6ef-4a12-ac45-cdbbac25a2a1.png\",\"2019-08-14\\/a254bb91-9289-4f85-8b9f-086045d73880.png\"]', '0', '2019-03-20 02:31:22', '2019-03-20 02:31:22', null);
-INSERT INTO `social_message` VALUES ('3', '12', 'test', '[\"2019-08-14\\/3e956e47-e6ef-4a12-ac45-cdbbac25a2a1.png\",\"2019-08-14\\/a254bb91-9289-4f85-8b9f-086045d73880.png\"]', '0', '2019-03-20 02:35:40', '2019-03-20 02:35:40', null);
-INSERT INTO `social_message` VALUES ('4', '12', 'null', null, '0', '2019-03-20 06:17:39', '2019-03-20 06:17:39', null);
-INSERT INTO `social_message` VALUES ('5', '12', 'ggbb', null, '0', '2019-03-20 06:52:28', '2019-03-20 06:52:28', null);
-INSERT INTO `social_message` VALUES ('6', '12', 'hhhhh', '[\"2019-08-14\\/3e956e47-e6ef-4a12-ac45-cdbbac25a2a1.png\",\"2019-08-14\\/a254bb91-9289-4f85-8b9f-086045d73880.png\"]', '0', '2019-03-20 06:53:14', '2019-03-20 06:53:14', null);
-INSERT INTO `social_message` VALUES ('7', '12', 'djjdjdj', null, '0', '2019-03-20 06:54:19', '2019-03-20 06:54:19', null);
-INSERT INTO `social_message` VALUES ('8', '12', 'dddff', null, '0', '2019-03-20 06:56:13', '2019-03-20 06:56:13', null);
-INSERT INTO `social_message` VALUES ('9', '12', 'null', null, '0', '2019-03-21 08:29:30', '2019-03-21 08:29:30', null);
-INSERT INTO `social_message` VALUES ('10', '12', 'null', null, '0', '2019-03-22 07:08:37', '2019-03-22 07:08:37', null);
-INSERT INTO `social_message` VALUES ('11', '12', 'null', '[\"2019-08-14\\/3e956e47-e6ef-4a12-ac45-cdbbac25a2a1.png\",\"2019-08-14\\/a254bb91-9289-4f85-8b9f-086045d73880.png\"]', '0', '2019-03-22 09:34:51', '2019-03-22 09:34:51', null);
-INSERT INTO `social_message` VALUES ('12', '12', 'null', '[\"2019-08-14\\/3e956e47-e6ef-4a12-ac45-cdbbac25a2a1.png\",\"2019-08-14\\/a254bb91-9289-4f85-8b9f-086045d73880.png\"]', '0', '2019-03-22 09:36:14', '2019-03-22 09:36:14', null);
-INSERT INTO `social_message` VALUES ('13', '12', 'null', '[\"2019-08-14\\/3e956e47-e6ef-4a12-ac45-cdbbac25a2a1.png\",\"2019-08-14\\/a254bb91-9289-4f85-8b9f-086045d73880.png\"]', '0', '2019-03-22 09:37:05', '2019-03-22 09:37:05', null);
-INSERT INTO `social_message` VALUES ('14', '12', 'asdfasfdasdf', '[\"2019-08-14\\/3e956e47-e6ef-4a12-ac45-cdbbac25a2a1.png\",\"2019-08-14\\/a254bb91-9289-4f85-8b9f-086045d73880.png\"]', '0', '2019-03-22 10:40:24', '2019-03-22 10:40:24', null);
-INSERT INTO `social_message` VALUES ('15', '12', 'asdfasdfasdf', '[\"2019-08-14\\/3e956e47-e6ef-4a12-ac45-cdbbac25a2a1.png\",\"2019-08-14\\/a254bb91-9289-4f85-8b9f-086045d73880.png\"]', '0', '2019-03-22 10:41:35', '2019-03-22 10:41:35', null);
-INSERT INTO `social_message` VALUES ('16', '12', 'asdfasdfsdf', '[\"2019-08-14\\/3e956e47-e6ef-4a12-ac45-cdbbac25a2a1.png\",\"2019-08-14\\/a254bb91-9289-4f85-8b9f-086045d73880.png\"]', '0', '2019-03-22 10:50:22', '2019-03-22 10:50:22', null);
-INSERT INTO `social_message` VALUES ('17', '12', 'adsfasdfasdf', '[\"2019-08-14\\/3e956e47-e6ef-4a12-ac45-cdbbac25a2a1.png\",\"2019-08-14\\/a254bb91-9289-4f85-8b9f-086045d73880.png\"]', '0', '2019-03-22 11:04:15', '2019-03-22 11:04:15', null);
-INSERT INTO `social_message` VALUES ('18', '12', 'asfasdfasdfasdf', null, '0', '2019-03-22 11:08:52', '2019-03-22 11:08:52', null);
-INSERT INTO `social_message` VALUES ('19', '12', 'asdfasfasdf', '[\"2019-08-14\\/3e956e47-e6ef-4a12-ac45-cdbbac25a2a1.png\",\"2019-08-14\\/a254bb91-9289-4f85-8b9f-086045d73880.png\"]', '0', '2019-03-22 11:10:12', '2019-03-22 11:10:12', null);
-INSERT INTO `social_message` VALUES ('20', '12', 'cvvvvv', '[\"2019-08-14\\/3e956e47-e6ef-4a12-ac45-cdbbac25a2a1.png\",\"2019-08-14\\/a254bb91-9289-4f85-8b9f-086045d73880.png\"]', '0', '2019-03-23 02:07:06', '2019-03-23 02:07:06', null);
-INSERT INTO `social_message` VALUES ('21', '45', '46', null, '0', '2019-08-14 14:30:06', '2019-08-14 14:30:06', null);
-INSERT INTO `social_message` VALUES ('22', '45', '46', '[\"2019-08-14\\/3e956e47-e6ef-4a12-ac45-cdbbac25a2a1.png\",\"2019-08-14\\/a254bb91-9289-4f85-8b9f-086045d73880.png\"]', '0', '2019-08-14 14:30:26', '2019-08-14 14:30:26', null);
-INSERT INTO `social_message` VALUES ('23', '45', '46', '[\"2019-08-14\\/3e956e47-e6ef-4a12-ac45-cdbbac25a2a1.png\",\"2019-08-14\\/a254bb91-9289-4f85-8b9f-086045d73880.png\"]', '0', '2019-08-14 14:31:03', '2019-08-14 14:31:03', null);
-INSERT INTO `social_message` VALUES ('24', '45', '测试', '[\"2019-08-14\\/3e956e47-e6ef-4a12-ac45-cdbbac25a2a1.png\",\"2019-08-14\\/a254bb91-9289-4f85-8b9f-086045d73880.png\"]', '0', '2019-08-14 14:44:53', '2019-08-14 14:44:53', null);
-INSERT INTO `social_message` VALUES ('25', '45', '我很饿', '[\"2019-08-14\\/3e956e47-e6ef-4a12-ac45-cdbbac25a2a1.png\",\"2019-08-14\\/a254bb91-9289-4f85-8b9f-086045d73880.png\"]', '0', '2019-08-14 16:02:16', '2019-08-14 16:02:16', null);
-INSERT INTO `social_message` VALUES ('26', '45', '我很饿', '[\"2019-08-14\\/3e956e47-e6ef-4a12-ac45-cdbbac25a2a1.png\",\"2019-08-14\\/a254bb91-9289-4f85-8b9f-086045d73880.png\"]', '0', '2019-08-14 16:03:56', '2019-08-14 16:03:56', null);
-INSERT INTO `social_message` VALUES ('27', '45', '饿', '[\"2019-08-14\\/a53ebe35-9367-49f3-a0c4-254796847cfc.png\",\"2019-08-14\\/11128622-baa0-4c49-8741-52d96506ffff.png\",\"2019-08-14\\/b0d46d23-86f5-448b-b6e3-b4047d5f99a1.png\",\"2019-08-14\\/685f75f8-0b0a-4cc3-9c82-72349dffd410.png\",\"2019-08-14\\/6d129b21-1b15-4eed-a99b-a8abbf3b0124.png\",\"2019-08-14\\/4c391d5f-8746-44fd-b238-d9a62f5915b4.png\",\"2019-08-14\\/58da9582-0d1e-44c8-bcf9-246efc52d9e9.png\",\"2019-08-14\\/9862650f-7ca7-4667-af1f-2983b421c9b9.png\",\"2019-08-14\\/2b38bd37-bdee-4cec-b1a2-05a961913987.png\"]', '0', '2019-08-14 16:16:04', '2019-10-04 14:03:00', null);
-INSERT INTO `social_message` VALUES ('28', '45', '卡西尼', '[\"2019-08-15\\/d82f6c22-5cd1-47df-a56e-aaf700f45660.png\",\"2019-08-15\\/d1807ad7-f8a8-47fe-8233-e915e57bb2c2.png\",\"2019-08-15\\/4deb9956-7bde-4b01-8b19-12dc17fbd204.png\"]', '0', '2019-08-15 02:29:39', '2019-08-15 02:29:39', null);
-INSERT INTO `social_message` VALUES ('29', '45', '闪', '[\"2019-08-15\\/db9f23fe-c253-4192-9f8a-18d7ef25cf62.png\",\"2019-08-15\\/8a7fc435-ed63-400a-b574-120a7033de81.png\"]', '0', '2019-08-15 02:31:56', '2019-08-15 02:31:56', null);
-INSERT INTO `social_message` VALUES ('30', '45', '赏', '[\"2019-08-15\\/8a9e351b-01e9-44d6-9024-465abb44e25d.png\",\"2019-08-15\\/eddd8a9d-47e7-423a-8d10-db800dd9e810.png\",\"2019-08-15\\/ef601407-716b-41f9-8a96-87850b1584a3.png\",\"2019-08-15\\/d7d50ba1-1a4a-4887-be0d-e503ab22ac16.png\",\"2019-08-15\\/6c181b24-811d-41a2-ab16-00628086b85e.png\",\"2019-08-15\\/60f30257-6697-4f45-b4d6-f05603b05d8a.png\"]', '0', '2019-08-15 02:32:58', '2019-10-04 14:56:10', null);
-INSERT INTO `social_message` VALUES ('31', '45', '一张', '[\"2019-08-15\\/6b26a575-8887-4011-9e15-6acb0b629308.png\"]', '0', '2019-08-15 02:33:21', '2019-10-07 02:57:15', null);
-INSERT INTO `social_message` VALUES ('32', '45', '三张', '[\"2019-08-15\\/454665c4-2e77-4a3f-8e3d-8ee76476b3d4.png\",\"2019-08-15\\/89d028e8-ff8b-404f-93ae-6901d37d9a59.png\",\"2019-08-15\\/be0fbe23-c831-4e1f-9347-3e31a7e0f1bc.png\"]', '0', '2019-08-15 02:33:47', '2019-10-07 02:57:11', null);
-INSERT INTO `social_message` VALUES ('33', '45', '出差', null, '0', '2019-09-19 08:42:18', '2019-10-07 02:57:06', null);
-INSERT INTO `social_message` VALUES ('34', '45', '出差', null, '0', '2019-09-25 02:03:59', '2019-10-07 02:57:03', null);
-INSERT INTO `social_message` VALUES ('35', '45', '33', null, '0', '2019-09-25 02:04:23', '2019-10-05 11:17:40', null);
-INSERT INTO `social_message` VALUES ('36', '44', '谢谢', null, '0', '2019-09-25 03:08:04', '2019-10-03 10:45:06', null);
-INSERT INTO `social_message` VALUES ('37', '44', '谢谢', null, '0', '2019-09-25 03:17:25', '2019-10-05 11:17:22', null);
-INSERT INTO `social_message` VALUES ('38', '46', '碰碰', null, '0', '2019-09-25 07:44:32', '2019-10-05 10:29:37', null);
-INSERT INTO `social_message` VALUES ('39', '46', '什么情况', '[\"2019-10-06\\/78522b81-f777-424e-8724-ffcb610cd0d9.png\",\"2019-10-06\\/a1f67aec-5f23-4c14-a846-0b9b0c039db9.png\"]', '0', '2019-10-06 06:17:08', '2019-10-06 06:17:08', null);
-INSERT INTO `social_message` VALUES ('40', '46', '测试', '[\"2019-10-06\\/dc858b42-1fe4-4551-a287-6c793263cb66.png\",\"2019-10-06\\/dca1137b-e0d0-498f-8b42-be45b99e93a1.png\",\"2019-10-06\\/b728629a-d39b-4cd5-8e39-cef3f1140544.png\",\"2019-10-06\\/e3e8d8f9-80c2-4a09-b360-cda65928fcf2.png\"]', '0', '2019-10-06 06:20:35', '2019-10-08 01:19:52', null);
-INSERT INTO `social_message` VALUES ('41', '46', '信息', '[\"2019-10-08\\/1a183f66-feb9-417c-94bb-8a6362a3e701.png\",\"2019-10-08\\/e043e2a6-bdba-45a9-a1d3-0d861762698d.png\",\"2019-10-08\\/4b630eab-212c-4edb-bfa0-4106c3b40b8a.png\"]', '0', '2019-10-08 01:57:13', '2019-10-08 01:57:13', null);
-INSERT INTO `social_message` VALUES ('42', '46', '谢谢', '[\"2019-10-08\\/bb877b78-f371-46c9-a6be-12f334b5f742.png\",\"2019-10-08\\/45c02316-023f-461e-b31d-a43a97223a9c.png\"]', '0', '2019-10-08 01:57:53', '2019-10-08 01:57:53', null);
-INSERT INTO `social_message` VALUES ('43', '46', '订单', '[\"2019-10-08\\/8d2f56ad-687e-46c5-97ee-76414391a63f.png\",\"2019-10-08\\/43884b91-8bce-4647-84ac-b6670ca8e0d8.png\"]', '0', '2019-10-08 01:58:21', '2019-10-08 01:58:21', null);
-INSERT INTO `social_message` VALUES ('44', '46', '吃吃吃', null, '0', '2019-10-08 01:58:58', '2019-10-08 01:58:58', null);
-INSERT INTO `social_message` VALUES ('45', '46', '啊啊啊', null, '0', '2019-10-08 01:59:28', '2019-10-08 01:59:28', null);
-INSERT INTO `social_message` VALUES ('46', '46', '尺寸', '[\"2019-10-08\\/af8d0172-755b-4296-b809-cd1ba27b3ee4.png\",\"2019-10-08\\/7a5da606-6b5c-4b54-b5c2-3d4fba2740a0.png\"]', '0', '2019-10-08 02:00:16', '2019-10-08 02:00:16', null);
-INSERT INTO `social_message` VALUES ('47', '46', '谷歌', '[\"2019-10-08\\/a0cc9945-567b-4283-9d15-55c54f85d0d5.png\",\"2019-10-08\\/8d548e3b-0e5d-4e33-b6ba-3347166320a7.png\"]', '0', '2019-10-08 02:05:52', '2019-10-08 02:05:52', null);
-INSERT INTO `social_message` VALUES ('48', '46', '天天', '[\"2019-10-08\\/14964ca4-ebc3-4ffc-8a5a-21fd460bed29.png\"]', '0', '2019-10-08 02:06:28', '2019-11-21 05:10:46', null);
-INSERT INTO `social_message` VALUES ('49', '63', '青青', null, '0', '2019-10-20 12:37:15', '2019-10-21 02:48:50', null);
-INSERT INTO `social_message` VALUES ('50', '58', 'ddddd', null, '0', '2019-10-21 02:41:50', '2019-10-21 02:41:50', null);
-INSERT INTO `social_message` VALUES ('52', '64', 'ccc', null, '0', '2019-11-04 14:05:55', '2019-11-04 14:05:55', null);
-INSERT INTO `social_message` VALUES ('53', '64', 'sss', null, '0', '2019-11-04 14:06:14', '2019-11-04 14:06:14', null);
-INSERT INTO `social_message` VALUES ('54', '74', '二二', null, '0', '2019-11-21 05:11:51', '2019-11-21 05:11:51', null);
-INSERT INTO `social_message` VALUES ('55', '74', '如果他', null, '0', '2019-11-21 05:12:20', '2019-11-21 05:12:20', null);
-INSERT INTO `social_message` VALUES ('56', '74', '突突突', null, '0', '2019-11-21 05:19:29', '2019-11-21 05:19:29', null);
-INSERT INTO `social_message` VALUES ('57', '74', '呃呃呃呃', null, '0', '2019-11-21 05:19:54', '2019-11-21 05:19:54', null);
-INSERT INTO `social_message` VALUES ('58', '74', '呃呃呃呃', null, '0', '2019-11-21 05:19:54', '2019-11-21 05:19:54', null);
-INSERT INTO `social_message` VALUES ('59', '74', 'QQ去去去', null, '0', '2019-11-21 05:20:07', '2019-11-21 05:20:07', null);
-INSERT INTO `social_message` VALUES ('60', '74', '轻轻巧巧', '[\"2019-11-21\\/bc89fdf0-a1f9-4473-90cf-1733ff15453a.png\"]', '0', '2019-11-21 05:20:24', '2019-11-21 05:26:32', null);
-INSERT INTO `social_message` VALUES ('61', '74', '投影仪', null, '0', '2019-11-21 06:28:42', '2019-11-21 06:28:42', null);
-INSERT INTO `social_message` VALUES ('62', '74', '东景大酒店', null, '0', '2019-11-21 06:31:25', '2019-11-21 06:31:25', null);
-INSERT INTO `social_message` VALUES ('63', '74', '刚刚好', null, '0', '2019-11-21 06:32:26', '2019-11-21 06:32:26', null);
-INSERT INTO `social_message` VALUES ('64', '74', '投影仪', null, '0', '2019-11-21 06:32:59', '2019-11-21 06:32:59', null);
-INSERT INTO `social_message` VALUES ('65', '74', '团团圆圆', null, '0', '2019-11-21 06:35:24', '2019-11-21 06:35:24', null);
-INSERT INTO `social_message` VALUES ('66', '74', '不不不', null, '0', '2019-11-21 06:49:18', '2019-11-21 06:49:18', null);
 
 -- ----------------------------
 -- Table structure for users
@@ -2669,6 +2510,6 @@ INSERT INTO `users` VALUES ('62', null, '球球', 'luka9001@50.com', '$2y$10$VC/
 INSERT INTO `users` VALUES ('63', null, '球球', 'luka9001@51.com', '$2y$10$SO.OIGyi.as5o63CBJBIKOgZOH0zcjuPGqNmEzY8mzYOkVCetrA1y', null, '2019-10-13 14:29:08', '2019-10-21 02:48:50', null, '1', '苏州', '1998-02-01', '172', null, '马德里', null, '1', null, null, '[\"\\/uploadFile\\/files\\/2019-10-20\\/0luka9001@51.com.png\",\"\\/uploadFile\\/files\\/2019-10-20\\/1luka9001@51.com.png\",\"\\/uploadFile\\/files\\/2019-10-20\\/2luka9001@51.com.png\"]', '水瓶座', null, null, '0', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '普通话,粤语,西班牙语', null, null, null, null, null, null, null, '1');
 INSERT INTO `users` VALUES ('64', null, '可可', 'luka9001@52.com', '$2y$10$ag7W7Fu2P1bbW7xBMok6dekCjXuwtY0rjdQV9NX9K0PGmOL4SxPka', null, '2019-10-13 16:20:36', '2019-11-06 12:59:47', null, '1', '苏州', '1995-02-01', '174', null, '马德里', null, '1', null, null, '[\"\\/uploadFile\\/files\\/2019-10-13\\/0luka9001@qq.com.png\",\"\\/uploadFile\\/files\\/2019-10-13\\/1luka9001@qq.com.png\",\"\\/uploadFile\\/files\\/2019-10-13\\/2luka9001@qq.com.png\"]', '水瓶座', null, null, '0', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '粤语,普通话,西班牙语', null, null, null, null, null, null, null, '1');
 INSERT INTO `users` VALUES ('65', '+15301555464', 'luka', 'luka9001@53.com', '$2y$10$pRMMpwCJ5QyF.MpKKchaUu2wZtRs7.oPkratPyaBwRv8XzEwM4ImK', null, '2019-11-02 09:06:40', '2019-11-02 09:08:09', null, '0', '东北', '1986-02-01', '181', null, '马德里', null, '1', null, null, '[\"\\/uploadFile\\/files\\/2019-11-02\\/0luka9001@qq.com.png\"]', '水瓶座', null, null, '0', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '普通话,西班牙语', null, null, null, null, null, null, null, '1');
-INSERT INTO `users` VALUES ('74', '+8615301555464', '比伯', null, '$2y$10$ezPbMKjYHND4TqCwB0aTnOgTnGX9vngjSBhwfiyClnp0YZ7a2bjdW', null, '2019-11-11 06:25:34', '2019-11-21 15:05:13', null, '1', '苏州', '1992-02-01', '175', '本科', '马德里', '随便说点', '1', null, null, '[\"\\/uploadFile\\/files\\/2019-11-21\\/0+8615301555464.png\"]', '水瓶座', null, null, '0', '0', '0', '0', '0', '1995-01-01', '马德里', '马德里', '160', '0', '0', '0', '0', '本科', '1', '1', '0', '0', '0', '0', '普通话,粤语,西班牙语,意大利语', '普通话,粤语,英语,日语', '程序员', '天才', '6', '6', '篮球', '180', '1');
+INSERT INTO `users` VALUES ('74', '+8615301555464', '比伯', null, '$2y$10$ezPbMKjYHND4TqCwB0aTnOgTnGX9vngjSBhwfiyClnp0YZ7a2bjdW', null, '2019-11-11 06:25:34', '2019-11-21 15:05:13', null, null, null, null, null, null, null, null, '0', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '1');
 INSERT INTO `users` VALUES ('75', '+8615301555465', 'qq', null, '$2y$10$mMlSKSa.uPD0qGvflfk4vuN4zvTrffOVbXlFMhknmhXnhB6EA4MTq', null, '2019-11-21 11:03:01', '2019-11-21 13:31:43', null, '0', '苏州', '1990-01-01', '178', null, '马德里', null, '1', null, null, '[\"\\/uploadFile\\/files\\/2019-11-21\\/0+8615301555465.png\"]', '摩羯座', null, null, '0', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '普通话,粤语,英语,日语', null, null, null, null, null, null, null, '1');
 INSERT INTO `users` VALUES ('76', '+8615301555466', '天才', null, '$2y$10$Buoh3BPMJ/KSX6/gVXT/nuDm0q3dCd.eNfazRZ8UeLJ6A9slioBzu', null, '2019-11-21 12:57:08', '2019-11-21 15:04:26', null, null, null, null, null, null, null, null, '0', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '0');

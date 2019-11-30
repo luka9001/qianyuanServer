@@ -41,6 +41,7 @@ Route::group(['middleware' => ['auth:api'], 'prefix' => 'v1'], function () {
     Route::post('/vd', 'Api\PriceController@vipDisCount');
     Route::post('/cpi', 'Api\PriceController@getCoinPayInfo');
     Route::post('/vpi', 'Api\PriceController@getVipPayInfo');
+    Route::post('/paypal', 'Api\PriceController@getOrder');
 });
 
 Route::group(['middleware' => ['auth:api'], 'prefix' => 'v1'], function () {
@@ -90,5 +91,3 @@ Route::post('/register', 'Api\Auth\UserController@register');
 Route::post('/code', 'Api\Auth\UserController@emailCode');
 Route::post('/sc', 'Api\Auth\UserController@smsCode');
 Route::post('/refreshtoken', 'Api\Auth\UserController@refresh_token');
-
-Route::post('/test', 'TestController@test');
