@@ -4,6 +4,8 @@
  * User: brucewei
  * Date: 2019/3/10
  * Time: 4:50 PM
+ * 
+ * 黑名单
  */
 
 namespace App\Models;

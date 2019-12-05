@@ -4,6 +4,8 @@
  * User: brucewei
  * Date: 2019/3/10
  * Time: 4:50 PM
+ * 
+ * 官方活动报名信息
  */
 
 namespace App\Models;

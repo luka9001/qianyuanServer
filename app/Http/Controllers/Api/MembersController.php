@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Utils\VipStatus;
 use App\Models\ActivitiesAD;
 use App\Models\BlackList;
 use App\Models\Favorites;
@@ -126,7 +127,8 @@ class MembersController extends Controller
 
         $price = Price::where('user_id', $request->user()->id)->first();
         if ($price != null) {
-            $user['vip_level'] = $price->vip_level;
+
+            $user['vip_level'] = VipStatus::isVipNow($price->vip_end_time) ? $price->vip_level : 0;
             $user['coin'] = $price->coin;
             $user['vip_start_time'] = $price->vip_start_time;
         }

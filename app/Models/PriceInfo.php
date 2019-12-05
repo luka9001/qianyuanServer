@@ -4,6 +4,7 @@
  * User: brucewei
  * Date: 2019/3/10
  * Time: 4:50 PM
+ * 会员购买的各种平台服务的定价
  */
 
 namespace App\Models;

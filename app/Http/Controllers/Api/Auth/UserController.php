@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redis;
 use Laravel\Passport\Client;
+use App\Http\Utils\VipStatus;
 
 class UserController extends Controller
 {
@@ -281,9 +282,12 @@ class UserController extends Controller
 
         unset($user['email']);
         $price = $user->price()->first();
-        $user['vip_level'] = $price === null ? 0 : $price->vip_level;
-        $user['vip_start_time'] = $price === null ? null : $price->vip_start_time;
-        $user['coin'] = $price === null ? 0 : $price->coin;
+        if($price != null){
+            $user['vip_level'] = VipStatus::isVipNow($price->vip_end_time) ? $price->vip_level : 0;
+            $user['vip_start_time'] = $price->vip_start_time;
+            $user['coin'] = $price->coin;
+        }
+       
         return response()->json(array('code' => 200, 'data' => $user));
     }
 

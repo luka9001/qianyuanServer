@@ -4,6 +4,7 @@
  * User: brucewei
  * Date: 2019/3/10
  * Time: 4:50 PM
+ * 用户已经购买的心动币和会员
  */
 
 namespace App\Models;

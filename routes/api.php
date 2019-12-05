@@ -41,7 +41,7 @@ Route::group(['middleware' => ['auth:api'], 'prefix' => 'v1'], function () {
     Route::post('/vd', 'Api\PriceController@vipDisCount');
     Route::post('/cpi', 'Api\PriceController@getCoinPayInfo');
     Route::post('/vpi', 'Api\PriceController@getVipPayInfo');
-    Route::post('/paypal', 'Api\PriceController@getOrder');
+    Route::post('/paypal', 'Api\PriceController@payPal');
 });
 
 Route::group(['middleware' => ['auth:api'], 'prefix' => 'v1'], function () {
