@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : qianyuanMysql5.7
-Source Server Version : 50727
-Source Host           : localhost:3306
+Source Server Version : 50724
+Source Host           : localhost:3307
 Source Database       : qianyuan
 
 Target Server Type    : MYSQL
-Target Server Version : 50727
+Target Server Version : 50724
 File Encoding         : 65001
 
-Date: 2019-12-05 10:12:31
+Date: 2019-12-09 23:08:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -719,6 +719,7 @@ INSERT INTO `oauth_access_tokens` VALUES ('4da13e22117d99479918fdf964f8a2afbe9ae
 INSERT INTO `oauth_access_tokens` VALUES ('4df3dcbcf7a3251dceaa10eb4fbaa49d58e2e39c271d3da71aa82267eda6dcec4e5862b56c20828c', '12', '1', null, '[\"*\"]', '0', '2019-03-04 07:01:02', '2019-03-04 07:01:02', '2020-03-04 07:01:02');
 INSERT INTO `oauth_access_tokens` VALUES ('4e17a46c77bbfeb92f57388b9b2fdcd6211e029b33edadfe7a5abbddf0119b8bcc47dbf0251f4c2d', '46', '1', null, '[\"*\"]', '0', '2019-09-23 07:59:47', '2019-09-23 07:59:47', '2020-09-23 07:59:47');
 INSERT INTO `oauth_access_tokens` VALUES ('4ee0ea9cb8f9f3e63a1ea3e2f5dea0886f07b8aae4185653484a05ff676a0e22b5596bef76275c43', '46', '1', null, '[\"*\"]', '0', '2019-10-15 13:33:04', '2019-10-15 13:33:04', '2020-10-15 13:33:04');
+INSERT INTO `oauth_access_tokens` VALUES ('4f1572e944a99c98cde1c6f8a95928cad09e18e7b0c08bc776d423f7d9886d79fabf9701dd66b85f', '74', '1', null, '[\"*\"]', '0', '2019-12-05 19:09:15', '2019-12-05 19:09:15', '2029-12-05 19:09:15');
 INSERT INTO `oauth_access_tokens` VALUES ('4f3ded9d0cc65721079dac4db1e31a4647c8b4fe34e3a85eb73133958a6a4a4f1f8ab6e95a200deb', '75', '1', null, '[\"*\"]', '0', '2019-11-21 11:58:43', '2019-11-21 11:58:43', '2029-11-21 11:58:43');
 INSERT INTO `oauth_access_tokens` VALUES ('4f3e43ecf74c0915823a223855486989bcf736e32a5b9bcc097b30cf291887500f7bff9931885567', '12', '1', null, '[\"*\"]', '0', '2019-03-16 02:24:54', '2019-03-16 02:24:54', '2020-03-16 02:24:54');
 INSERT INTO `oauth_access_tokens` VALUES ('4faa78919a6e9d2ac27be6eac51be5ffd5440408da056d33239551f6761f92a170043d225966c93e', '62', '1', null, '[\"*\"]', '0', '2019-10-13 14:22:45', '2019-10-13 14:22:45', '2020-10-13 14:22:45');
@@ -747,7 +748,9 @@ INSERT INTO `oauth_access_tokens` VALUES ('558bc27fb1c9dd44040bf6a1ac9bf1640e188
 INSERT INTO `oauth_access_tokens` VALUES ('55c3ea112b876cd7164ffda4e3e3f7d6c727f0b879bb2bec325d075551da838058084c1817f7def9', '12', '1', null, '[\"*\"]', '0', '2018-12-28 01:30:24', '2018-12-28 01:30:24', '2019-12-28 01:30:24');
 INSERT INTO `oauth_access_tokens` VALUES ('561a5802692b1c32c360bd393220cad1bff667542b0ed4571e5fdb44efb7324ac62caa28589f3c6d', '12', '1', null, '[\"*\"]', '0', '2019-01-11 07:12:47', '2019-01-11 07:12:47', '2020-01-11 07:12:47');
 INSERT INTO `oauth_access_tokens` VALUES ('563964069b574098b642a97d0180d449858405204725e43b063cbbb8b49bcbac23cd6cd329a81829', '43', '1', null, '[\"*\"]', '0', '2019-08-02 07:26:32', '2019-08-02 07:26:32', '2020-08-02 07:26:32');
+INSERT INTO `oauth_access_tokens` VALUES ('569e12969d71dd55fcb7a900199f4e171cfbb8627b5bf9c6081bed53db6e1e2ef02ea45485518e8c', '74', '1', null, '[\"*\"]', '0', '2019-12-05 02:20:54', '2019-12-05 02:20:54', '2029-12-05 02:20:54');
 INSERT INTO `oauth_access_tokens` VALUES ('56a70a12f1aa50f3daeea2bd7f6451f1944fa80a73b2179007f9d253041523a41ded8477726c6f38', '12', '1', null, '[\"*\"]', '0', '2019-03-21 06:15:26', '2019-03-21 06:15:26', '2020-03-21 06:15:26');
+INSERT INTO `oauth_access_tokens` VALUES ('5708d6146b0f47750e4ec213c7a9116c8138ab9200301f2a0447fb79607100e2eefede44463502ed', '74', '1', null, '[\"*\"]', '0', '2019-12-05 02:34:04', '2019-12-05 02:34:04', '2029-12-05 02:34:04');
 INSERT INTO `oauth_access_tokens` VALUES ('5719a7b63eeb8c8f0f6ddb20b3f0e84f8fff372d59ab3b2b6e181d87b2323fdf33f585df5c73a035', '74', '1', null, '[\"*\"]', '0', '2019-11-20 07:16:24', '2019-11-20 07:16:24', '2029-11-20 07:16:24');
 INSERT INTO `oauth_access_tokens` VALUES ('57e471aa29dbbdeb282583c8e72333c65dec582065632305f1072bd8eb0bb9d239524371c06c5988', '12', '1', null, '[\"*\"]', '0', '2018-12-24 07:17:36', '2018-12-24 07:17:36', '2019-12-24 07:17:36');
 INSERT INTO `oauth_access_tokens` VALUES ('5867f40fcb8c9dcc8e5aa64a129c08c4c7a1aae2a8000399fff570d97d7500be4ed0adf1c9a1873a', '75', '1', null, '[\"*\"]', '0', '2019-11-21 11:56:00', '2019-11-21 11:56:00', '2029-11-21 11:56:00');
@@ -825,6 +828,7 @@ INSERT INTO `oauth_access_tokens` VALUES ('6d27148dfb6a63b02b7af39a175b5a8cae2f0
 INSERT INTO `oauth_access_tokens` VALUES ('6dc045634b233a3cf54efb13c45f36e9288b7808dfd50418a42c266c01648ba68c06a41c9416c39a', '12', '1', null, '[\"*\"]', '0', '2019-03-28 06:55:10', '2019-03-28 06:55:10', '2020-03-28 06:55:10');
 INSERT INTO `oauth_access_tokens` VALUES ('6de4d88da0eb39bca51e4a38e1c778730658ccde0b81b57c113c22786e6f8ffdb1af5c83980b4f7a', '12', '1', null, '[\"*\"]', '0', '2019-03-20 09:39:10', '2019-03-20 09:39:10', '2020-03-20 09:39:10');
 INSERT INTO `oauth_access_tokens` VALUES ('6e2170afef7b1d2a1d924f1259d236f2c0297ab9a129f0eaca3d7a8bf3a414f576429fc1a112d6be', '12', '1', null, '[\"*\"]', '0', '2019-03-11 01:32:21', '2019-03-11 01:32:21', '2020-03-11 01:32:21');
+INSERT INTO `oauth_access_tokens` VALUES ('6e4bce10a80c33cdc534b4bbcc4e1546f9d8a761ff313eb1acb88aba1b23aaa42a39fa5d5fa914d3', '74', '1', null, '[\"*\"]', '0', '2019-12-06 03:18:42', '2019-12-06 03:18:42', '2029-12-06 03:18:42');
 INSERT INTO `oauth_access_tokens` VALUES ('6eb79f411af10fc6bbeb3c47e4b411e46553709359f181f1ffa5164b04783e46f2727d3c105dc983', '74', '1', null, '[\"*\"]', '0', '2019-11-21 08:06:48', '2019-11-21 08:06:48', '2029-11-21 08:06:48');
 INSERT INTO `oauth_access_tokens` VALUES ('6f55e8d3b0dd6893c560019346900b14baa7f8e0f18156edc2c11431f53dea55c5b67ddefb658200', '43', '1', null, '[\"*\"]', '0', '2019-10-07 11:04:21', '2019-10-07 11:04:21', '2020-10-07 11:04:21');
 INSERT INTO `oauth_access_tokens` VALUES ('6f56ec12804b544305a663182a799b8ad618a07eb18f891c4fbd5cff886c94067bdea9c87ff2f426', '74', '1', null, '[\"*\"]', '0', '2019-11-21 04:19:25', '2019-11-21 04:19:25', '2029-11-21 04:19:24');
@@ -1646,6 +1650,7 @@ INSERT INTO `oauth_refresh_tokens` VALUES ('50c14c89b8038f4efab9bfd583a42f8202c0
 INSERT INTO `oauth_refresh_tokens` VALUES ('50c9e6ed55016a9cb2d3ff6bd8a8a410d842d1b31f47fb03ed4f087c849e7fdebab5869077500a67', '1872ec06bb9d58e61387ae39377f76c139e795e14fca268838d52e5a28182cc3b02d765d3b7a9c6b', '0', '2030-11-21 13:01:12');
 INSERT INTO `oauth_refresh_tokens` VALUES ('5144eb22e900f786ac355812b8063dd091b4c6ab49f65229e9a716777924973e83aa00b72472a996', 'c00b3a1a51b429d0e4d4318c4adc92ea238a1c88d4e8bafcfd4c6a847210f46edf6905a83eb169ca', '0', '2020-10-30 07:21:23');
 INSERT INTO `oauth_refresh_tokens` VALUES ('5158dfd3b6447f4d5f86e3863430127b6b1cc94d33b73586b963719f8c588ca4214637d5f991c00b', '167d2dc22f8de7611fac738340d3caa32d607fc4cf16e219936b0a710b1aedc7eefbd13979235ad5', '1', '2019-12-24 06:31:10');
+INSERT INTO `oauth_refresh_tokens` VALUES ('51e7e24ad830ab4d58e548f81d3f28f102249286e38ab47b9ba0d0d941c176b698aead36e137cc6a', '6e4bce10a80c33cdc534b4bbcc4e1546f9d8a761ff313eb1acb88aba1b23aaa42a39fa5d5fa914d3', '0', '2030-12-06 03:18:42');
 INSERT INTO `oauth_refresh_tokens` VALUES ('51ef27dd72c3ad7bc49f501c673ba840a6c03e6eb63ab3dec602c1202c6956886c126a9b75a9654c', '1ce6438d96af8fca7f485c112bff36abab1bd70cb806335c071666473aa20a4ad3051d58c1e402fd', '0', '2020-10-13 15:54:39');
 INSERT INTO `oauth_refresh_tokens` VALUES ('523d30f2a38bf3d71d066cf3c4bf6e679ccdb4d7dbaf4db1d250f6c0c5c3b4dbdc0e68b8fcdfc647', '2cd1ed56da547100f8203390bbd6d2f12c1d78d3597eee2be2f0a64f1300b69ab8ac8ceb69c22dd8', '0', '2019-12-26 08:02:16');
 INSERT INTO `oauth_refresh_tokens` VALUES ('530a906a8925032006901eb1a6c5181371775d3734e8582d07f60500ce4b5f6fb5b59bee72fac4d1', 'ce42a4ecceeb93eec1643b606149d7ed58891c7366af5005d28c3061656ad148928ff6afe2b5da0c', '0', '2020-10-16 08:08:41');
@@ -1745,6 +1750,7 @@ INSERT INTO `oauth_refresh_tokens` VALUES ('6d0720e26c9461bbb29a369fed4c888668f3
 INSERT INTO `oauth_refresh_tokens` VALUES ('6d1b21dc92d04c4f49e0f542dc03eed1af6da195f779790e979a716307047a251c69a878e6b7f718', 'd0f91f044fd54b47e365f7aab2ef3ca3082570993b1d40b7a774bbb5a8fac42c39e43cf940577929', '0', '2019-12-24 11:49:05');
 INSERT INTO `oauth_refresh_tokens` VALUES ('6d1b3853c0c17f3e4369c2a5cba72193c57cbf6af2b0251ffe1e20ab96cbe5c29e924f6390e5e8ca', 'b50f6c3f98dd743148c6063511a278ac76cfb28564d23a76d5eec1b809cb6ee539005fe3a3b44e82', '0', '2020-03-22 11:21:52');
 INSERT INTO `oauth_refresh_tokens` VALUES ('6d4f93132ebcfcc2f5e80753fd447abd90c02f942830dc6412fa67c75c0c2f1158c386f1fdc17434', '5445b7f99b7b92f4d1d9788e50e69ca402a547d4a1f42010ee53bc4bb412a4fade6723e86fc9ada7', '0', '2020-03-23 02:27:41');
+INSERT INTO `oauth_refresh_tokens` VALUES ('6d50a02510a5c902d295ed9019118baa86a195331b63b2078783ec62bb6b2095a39f51d67bd4c5b1', '4f1572e944a99c98cde1c6f8a95928cad09e18e7b0c08bc776d423f7d9886d79fabf9701dd66b85f', '0', '2030-12-05 19:09:15');
 INSERT INTO `oauth_refresh_tokens` VALUES ('6d7459d930cef9bba451b99c51a985556ca554e12bff1527fbe0626cd355193c99718b159d491245', 'f50e540d7e4f64a3d9f916a7be18179fb73e7c9e852a768f4152c694e00b3b590ffc7a92701fc32b', '0', '2020-03-16 05:11:11');
 INSERT INTO `oauth_refresh_tokens` VALUES ('6e1834f8480e3adaf7a3b9e25089a7f5c0cbf11eae6ce4e591dfa9ca058b3cd9eb4e4553814d5d40', '28d6ab143867edbdef986ea88bf441d99ea9bf3cb5c9690bfe4a47a473183a2553edc041a2ee357a', '0', '2020-03-12 06:03:06');
 INSERT INTO `oauth_refresh_tokens` VALUES ('6e1cc03b3651e1796a730c55bde7148cd0d9f86a98e27bba0c39a76ee3a31d727b0aae1baeea6b22', '2561ccd800ff74fd88426396bde9931a0c3bbc4f2b294dfde6c168053943c8cbd5794beb97eda417', '0', '2020-03-13 11:20:04');
@@ -1756,6 +1762,7 @@ INSERT INTO `oauth_refresh_tokens` VALUES ('6f4068a3bd7df7ed66d427c1b278d44465ef
 INSERT INTO `oauth_refresh_tokens` VALUES ('6f863335a1c1396b9ca5efebffb54f19ad27fa28f24f3bac08e51b50bcc194131d8cfe86870deb1f', '40151a19d6bb337bb49d015f13103ea4e462e95605b308a22cd10d6203d9b4918a2439d2cc1f1b34', '0', '2020-03-17 08:11:02');
 INSERT INTO `oauth_refresh_tokens` VALUES ('6f9b67295bb6f1e8a393a0ba44b9c25f75d8326b308879f026dfa0bc90d555987aad34918189c8da', '5ab74bc92ddadcbb8e9e091c7a054265eb3a14997fb585bbb5326ab7ccd01eb694d1ca1f93b789ff', '0', '2020-08-17 07:12:13');
 INSERT INTO `oauth_refresh_tokens` VALUES ('6fa0979f6791a89d50925d905e0ef7e653d15e2548a09b230c4a03616c360874330feb8a6369b8c2', '0c466eb9f688054036a6bbf337586215a2af04831b76b8ea60a14f983bf71c1b36a4228316d7f5e0', '0', '2020-03-08 07:01:32');
+INSERT INTO `oauth_refresh_tokens` VALUES ('6fd8c8e8c653144e9b1bcb13cd24a224424f1f19cfdb4d5e673bfcc4cffd812a0bfb0dd0f50c2ac8', '569e12969d71dd55fcb7a900199f4e171cfbb8627b5bf9c6081bed53db6e1e2ef02ea45485518e8c', '0', '2030-12-05 02:20:54');
 INSERT INTO `oauth_refresh_tokens` VALUES ('7040a3d30fefc7b13d30e19c724b432c1d51e1cb525a4416bbda4dcb5b6d9904e9878f6ba0a6e08c', 'd7718ff23ebe66564f22244b15cb2d0bc18be741c03c81ec77e484eabb3905c2fd561c1d30410956', '1', '2019-12-24 06:31:15');
 INSERT INTO `oauth_refresh_tokens` VALUES ('70f0ed1ed43423bbe32b7092c02b8ceb63a5a20404271c27890957bc6afc686479f7219d903d2df7', 'e61700446f9df1aa2bbd83016e836ac7d7a585682f4ae7e86ddb0337f01735a4f1531937e564d7db', '0', '2020-09-26 08:30:14');
 INSERT INTO `oauth_refresh_tokens` VALUES ('712b9482577afb8c692e7a6842164f98eb87db5c6b813faf69728f5307a3925780150ec678afaedd', '30f9b3807fe41ac843c10b641ce3a6cf79d8822655831b967a009234cb1e4fb19cd22bd7fc857118', '0', '2020-03-15 04:59:22');
@@ -2010,6 +2017,7 @@ INSERT INTO `oauth_refresh_tokens` VALUES ('b952f5c07f8c15f39f8832a5b5490859449b
 INSERT INTO `oauth_refresh_tokens` VALUES ('b9e94d878938fb72ab9a302b90143f9fe988cdddc2c6f9bb7fee77828cc991bf8c1b8825710672c0', 'e1078a16099976386504f945e7854f7d720aa1072cc37c837d5555ad57860273a9dc8e981242bceb', '0', '2020-03-04 07:45:08');
 INSERT INTO `oauth_refresh_tokens` VALUES ('ba883f5daa4e582179a5ad8c7af6f2a4ee50ad8828ef450f855b51ce65b5a44e6df80299c320753a', 'a2bec383f2c492fa0ef2544e459eafb484c35e253b162b30c7e52619cf939d9d033da3c4c3e09083', '0', '2020-03-22 11:00:45');
 INSERT INTO `oauth_refresh_tokens` VALUES ('ba9051df8f7ea777a4e81563c21f6d933de1bc33add5f186a490218c08bae9f3818f66ba41d1979a', 'da50c1aa7bf01fb2a307092f3fd9a44f20f17a9eed58ef2a6cf48ed1c441b32b42dd5f9723022bbe', '1', '2019-12-24 06:31:17');
+INSERT INTO `oauth_refresh_tokens` VALUES ('baa5a4fdfa8c5a196de8a379d144017b1f90dc434b216367464d489c2f2738964a5bdfe7f363a7f9', '5708d6146b0f47750e4ec213c7a9116c8138ab9200301f2a0447fb79607100e2eefede44463502ed', '0', '2030-12-05 02:34:04');
 INSERT INTO `oauth_refresh_tokens` VALUES ('baba91e979595f324017690a3c1ff1c1f96091d05cb58433122207c71497d5f54fd73bea5cead7e9', 'f563d8c1405b54e460e5fee6f501547847b3ae5016b2fbf7277f035a71736487aa8e381ec7a11f94', '1', '2019-12-24 06:31:12');
 INSERT INTO `oauth_refresh_tokens` VALUES ('bb248186dca901cb2a2937c6a5af5bf30104a39190ac3df5bc376a528fc8805d13b34d72bb669b3c', 'c0708d9cb899394aa8d0e0773e9cabc94211a60de7794acebce640f5a6a4bfabecc91b926c495f09', '1', '2019-12-24 06:31:15');
 INSERT INTO `oauth_refresh_tokens` VALUES ('bb2c443b1aed0b2bee56af2da328c8012f68c186dfa60b3753bdc136eee622a34e3fde7121f3b965', 'e8ef8e6cb0a8632fa6bf30b3f1c0b7a263298fa0179fbdb712b1839be702940a3faa8ff41ed49d02', '1', '2019-12-24 06:31:21');
@@ -2392,7 +2400,7 @@ CREATE TABLE `price` (
 -- ----------------------------
 INSERT INTO `price` VALUES ('1', '46', '0', null, '2019-11-06 12:49:22', null, '0', null, null);
 INSERT INTO `price` VALUES ('2', '64', '0', null, '2019-11-06 12:59:47', null, '2', null, null);
-INSERT INTO `price` VALUES ('3', '74', '0', '2019-11-11 06:29:32', '2019-11-21 05:11:52', null, '1', '2019-11-11 16:39:23', null);
+INSERT INTO `price` VALUES ('3', '74', '3', '2019-11-11 06:29:32', '2019-12-05 02:25:36', null, '1000', '2019-11-11 16:39:23', '2020-12-02 08:31:04');
 INSERT INTO `price` VALUES ('4', '75', '3', '2019-11-21 12:32:15', '2019-12-02 08:31:04', null, '8610', '2019-12-02 08:31:04', '2020-12-02 08:31:04');
 INSERT INTO `price` VALUES ('5', '76', '0', '2019-11-30 05:21:31', '2019-12-04 07:23:57', null, '11', null, null);
 
@@ -2467,6 +2475,20 @@ CREATE TABLE `social_message` (
 -- Records of social_message
 -- ----------------------------
 INSERT INTO `social_message` VALUES ('1', '76', '测试', null, '0', '2019-12-04 07:23:57', '2019-12-04 07:23:57', null);
+
+-- ----------------------------
+-- Table structure for test
+-- ----------------------------
+DROP TABLE IF EXISTS `test`;
+CREATE TABLE `test` (
+  `test` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of test
+-- ----------------------------
+INSERT INTO `test` VALUES ('123');
+INSERT INTO `test` VALUES ('[\"message\",\"1\"]');
 
 -- ----------------------------
 -- Table structure for users
@@ -2586,6 +2608,6 @@ INSERT INTO `users` VALUES ('62', null, '球球', 'luka9001@50.com', '$2y$10$VC/
 INSERT INTO `users` VALUES ('63', null, '球球', 'luka9001@51.com', '$2y$10$SO.OIGyi.as5o63CBJBIKOgZOH0zcjuPGqNmEzY8mzYOkVCetrA1y', null, '2019-10-13 14:29:08', '2019-10-21 02:48:50', null, '1', '苏州', '1998-02-01', '172', null, '马德里', null, '1', null, null, '[\"\\/uploadFile\\/files\\/2019-10-20\\/0luka9001@51.com.png\",\"\\/uploadFile\\/files\\/2019-10-20\\/1luka9001@51.com.png\",\"\\/uploadFile\\/files\\/2019-10-20\\/2luka9001@51.com.png\"]', '水瓶座', null, null, '0', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '普通话,粤语,西班牙语', null, null, null, null, null, null, null, '1');
 INSERT INTO `users` VALUES ('64', null, '可可', 'luka9001@52.com', '$2y$10$ag7W7Fu2P1bbW7xBMok6dekCjXuwtY0rjdQV9NX9K0PGmOL4SxPka', null, '2019-10-13 16:20:36', '2019-11-06 12:59:47', null, '1', '苏州', '1995-02-01', '174', null, '马德里', null, '1', null, null, '[\"\\/uploadFile\\/files\\/2019-10-13\\/0luka9001@qq.com.png\",\"\\/uploadFile\\/files\\/2019-10-13\\/1luka9001@qq.com.png\",\"\\/uploadFile\\/files\\/2019-10-13\\/2luka9001@qq.com.png\"]', '水瓶座', null, null, '0', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '粤语,普通话,西班牙语', null, null, null, null, null, null, null, '1');
 INSERT INTO `users` VALUES ('65', '+15301555464', 'luka', 'luka9001@53.com', '$2y$10$pRMMpwCJ5QyF.MpKKchaUu2wZtRs7.oPkratPyaBwRv8XzEwM4ImK', null, '2019-11-02 09:06:40', '2019-11-02 09:08:09', null, '0', '东北', '1986-02-01', '181', null, '马德里', null, '1', null, null, '[\"\\/uploadFile\\/files\\/2019-11-02\\/0luka9001@qq.com.png\"]', '水瓶座', null, null, '0', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '普通话,西班牙语', null, null, null, null, null, null, null, '1');
-INSERT INTO `users` VALUES ('74', '+8615301555464', '比伯', null, '$2y$10$ezPbMKjYHND4TqCwB0aTnOgTnGX9vngjSBhwfiyClnp0YZ7a2bjdW', null, '2019-11-11 06:25:34', '2019-11-21 15:05:13', null, null, null, null, null, null, null, null, '0', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '1');
+INSERT INTO `users` VALUES ('74', '+8615301555464', '比伯', null, '$2y$10$ezPbMKjYHND4TqCwB0aTnOgTnGX9vngjSBhwfiyClnp0YZ7a2bjdW', null, '2019-11-11 06:25:34', '2019-12-05 02:25:36', null, '0', 'Suzhou', '1989-01-01', '181', '本科', 'Madrid', 'I am Good', '1', null, null, '[\"\\/uploadFile\\/files\\/2019-12-05\\/0+8615301555464.png\"]', '摩羯座', null, null, '0', '0', '0', '0', '1', '1990-01-01', 'Madrid', 'Suzhou', '160', '0', '0', '0', '0', '本科', '1', '1', '0', '0', '0', '0', '普通话,西班牙语,英语', '普通话,西班牙语', 'Boss', 'Boss', '6', '6', 'Ball', '180', '1');
 INSERT INTO `users` VALUES ('75', '+8615301555465', 'qq', null, '$2y$10$mMlSKSa.uPD0qGvflfk4vuN4zvTrffOVbXlFMhknmhXnhB6EA4MTq', null, '2019-11-21 11:03:01', '2019-12-02 08:31:04', null, '0', '苏州', '1990-01-01', '178', null, '马德里', null, '1', null, null, '[\"\\/uploadFile\\/files\\/2019-11-21\\/0+8615301555465.png\"]', '摩羯座', null, null, '0', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '普通话,粤语,英语,日语', null, null, null, null, null, null, null, '1');
 INSERT INTO `users` VALUES ('76', '+8615301555466', '天才', null, '$2y$10$Buoh3BPMJ/KSX6/gVXT/nuDm0q3dCd.eNfazRZ8UeLJ6A9slioBzu', null, '2019-11-21 12:57:08', '2019-12-04 07:23:57', null, '1', '苏州', '1994-02-01', '176', null, '马德里', null, '1', null, null, '[\"\\/uploadFile\\/files\\/2019-11-30\\/0+8615301555466.png\"]', '水瓶座', null, null, '0', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '普通话,粤语,西班牙语', null, null, null, null, null, null, null, '1');
