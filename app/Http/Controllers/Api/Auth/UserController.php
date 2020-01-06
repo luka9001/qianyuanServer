@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Utils\SMS;
+use App\Http\Utils\VipStatus;
 use App\Models\Price;
 use App\User;
 use Illuminate\Http\Request;
@@ -18,7 +19,6 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redis;
 use Laravel\Passport\Client;
-use App\Http\Utils\VipStatus;
 
 class UserController extends Controller
 {
@@ -53,7 +53,7 @@ class UserController extends Controller
 
             Redis::setex($mobile, 300, $code); //保留五分钟
 
-            return response()->json(array('code' => $code));
+            // return response()->json(array('code' => $code));
             $response = SMS::sendSMS($mobile, $code);
             if (strpos($response, 'Success') !== false) {
                 return response()->json(array('code' => 200));
@@ -282,12 +282,12 @@ class UserController extends Controller
 
         unset($user['email']);
         $price = $user->price()->first();
-        if($price != null){
+        if ($price != null) {
             $user['vip_level'] = VipStatus::isVipNow($price->vip_end_time) ? $price->vip_level : 0;
             $user['vip_start_time'] = $price->vip_start_time;
             $user['coin'] = $price->coin;
         }
-       
+
         return response()->json(array('code' => 200, 'data' => $user));
     }
 
