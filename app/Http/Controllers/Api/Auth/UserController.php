@@ -53,8 +53,6 @@ class UserController extends Controller
 
             Redis::setex($mobile, 1800, $code); //保留五分钟300,
 
-            // return response()->json(array('code' => $code));
-            Log::info($code);
             $response = SMS::sendSMS($mobile, $code);
             if (strpos($response, 'Success') !== false) {
                 return response()->json(array('code' => 200));
