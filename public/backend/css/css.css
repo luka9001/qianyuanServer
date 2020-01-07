@@ -1,0 +1,107 @@
+@charset "utf-8";
+*{margin:0;padding:0;}
+a{text-decoration:none;color:#333;}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td,button{margin:0;padding:0;font-family:"Helvetica Neue",Helvetica,"Hiragino Sans GB","Microsoft YaHei",Arial,sans-serif;-webkit-text-size-adjust:100%; font-size:14px; color:#666;}
+img{width:100%;border:0;vertical-align:middle;}
+ul, ol, li{list-style:none;}
+h1, h2, h3, h4, h5, h6{font-weight:normal;}
+.lx_cb{clear:both;margin:0;padding:0;}
+input{ background:none;border:0;}
+.dis_flex{display:flex;}
+.cursor{cursor:pointer;}
+.clearfix{ clear: both;}
+input[type="button"], input[type="submit"], input[type="reset"]{-webkit-appearance:none;}
+[data-role="transition"], [data-before="transition"]:before, [data-after="transition"]:after{-moz-transition:all 0.3s ease-in;-webkit-transition:all 0.3s ease-in;-o-transition:all 0.3s ease-in;-ms-transition:all 0.3s ease-in;transition:all 0.3s ease-in;}
+*{-webkit-tap-highlight-color:rgba(0,0,0,0);/*禁止链接高亮*/-webkit-touch-callout:none;}
+.clearfix:after{visibility:hidden;display:block;font-size:0;content:" ";clear:both;height:0}
+.bg_f3{ background: #f3f3f3;}
+.padding_b_5{ padding-bottom: 5rem;}
+.bg_fff{ background: #fff;}
+table {border-collapse: collapse;border-spacing: 0;}
+
+.fl{ float: left;}
+.fr{ float: right;}
+.border_b{ border-bottom: 2px solid #000;}
+
+.share-promotion-bg{ width: 100%; position: relative;}
+.share-promotion-bg img{ width: 100%;}
+/* 红包 */
+.dache_content_c{position: absolute; top: 15.3rem; width: 100%;}
+.dache_red_envelopes{  width: 100%; text-align: center;}
+.dache_red_envelopes p{ color: #fff; font-size: 1.3rem;}
+.dache_red_envelopes p span{ font-size: 2.5rem;}
+@media only screen and (width: 360px){
+    .dache_content_c{top: 17.3rem;}
+    .dache_red_envelopes p{ color: #fff; font-size: 1rem;}
+    .dache_red_envelopes p span{ font-size: 2.5rem;}
+}
+@media only screen and (width: 375px){
+    .dache_content_c{top: 17.6rem;}
+    .dache_red_envelopes p{ color: #fff; font-size: 1.3rem;}
+    .dache_red_envelopes p span{ font-size: 3.5rem;}
+}
+@media only screen and (width: 412px){
+    .dache_content_c{ top: 19.5rem;}
+    .dache_red_envelopes p{ color: #fff; font-size: 1.3rem;}
+    .dache_red_envelopes p span{ font-size: 3.5rem;}
+}
+@media only screen and (width: 414px){
+    .dache_content_c{ top: 19.6rem;}
+    .dache_red_envelopes p{ color: #fff; font-size: 1.3rem;}
+    .dache_red_envelopes p span{ font-size: 3.5rem;}
+}
+@media only screen and (width: 768px){
+    .dache_content_c{ top:36.3rem;}
+    .dache_red_envelopes p{ color: #fff; font-size: 2.5rem;}
+    .dache_red_envelopes p span{ font-size: 6.5rem;}
+}
+@media only screen and (width: 800px){
+    .dache_content_c{ top:38rem;}
+    .dache_red_envelopes p{ color: #fff; font-size: 1.5rem;}
+    .dache_red_envelopes p span{ font-size: 6.5rem;}
+}
+@media only screen and (width: 980px){
+    .dache_content_c{ top:47.5rem;}
+    .dache_red_envelopes p{ color: #fff; font-size: 1.5rem;}
+    .dache_red_envelopes p span{ font-size: 6.5rem;}
+}
+@media only screen and (width: 1280px){
+    .dache_content_c{ top:61.5rem;}
+    .dache_red_envelopes p{ color: #fff; font-size: 2.5rem;}
+    .dache_red_envelopes p span{ font-size: 9.5rem;}
+}
+@media only screen and (width: 1920px){
+    .dache_content_c{ top:93.5rem;}
+    .dache_red_envelopes p{ color: #fff; font-size: 3.5rem;}
+    .dache_red_envelopes p span{ font-size: 12.5rem;}
+}
+/* 手机验证 */
+.dache_phone_verification{ width: 80%; margin: 4rem 10% 0 10%;}
+.dache_phone_verification input{ height: 3rem; line-height: 3rem; text-align: center; width: 100%; border-radius: 200rem; -moz-border-radius: 200rem; -webkit-border-radius: 200rem; border: 1px solid #e5e5e5; font-size: 1rem; background: #fff; margin-bottom: 1.5rem;}
+.dache_phone_verification button{height: 3rem; line-height: 3rem; text-align: center; width: 100%; border-radius: 200rem; -moz-border-radius: 200rem; -webkit-border-radius: 200rem; background: #ff4a4a; font-size: 1.3rem; color: #fede2d; border: none;}
+
+/* 缴纳认证费 */
+.dache_certification_top{ padding-bottom: 3rem;}
+.dache_certification{ width: 80%; padding: 1rem 10%;}
+.dache_certification_top i{ width: 5rem; display: block; margin: 3rem auto 1rem auto;}
+.dache_certification_top h3{ text-align: center; font-size: 1.5rem; color: #000;}
+.dache_certification_top p{ font-size: 0.9rem; color: #666; text-align: center;}
+.dache_certification_top p span{ color: #f3542f;}
+
+.dache_certification_con{ margin-bottom: 3rem;}
+.dache_certification_title{ height: 2rem;}
+.dache_certification_title i{ height: 1px; width: 100%; background: #e4e4e4; display: block;}
+.dache_certification_title h3{ display: table; background: #fff; padding: 1rem; font-size: 1rem; color: #666; margin: -26px auto 0 auto;}
+h1.dache_peice_c{ text-align: center; color: #fb6541; font-size: 2rem;}
+h1.dache_peice_c span{ font-size: 6rem;}
+
+.dache_certification_price p{ text-align: center; color: #fb6541;}
+.dache_payment_method label{ padding-bottom: 1rem; height: 2.5rem; display: block;}
+.dache_payment_method label div{ margin-left: 0.5rem;}
+.dache_payment_method label h3{ font-size: 1rem; color: #000;}
+
+.dache_phone_verification2{ width: 100%; margin: 1rem 0 0 0;}
+.dache_phone_verification2 button{ height: 3rem; line-height: 3rem; text-align: center; width: 100%; border-radius: 200rem; -moz-border-radius: 200rem; -webkit-border-radius: 200rem; border: 0; font-size: 1rem; background: #fb6541; margin-bottom: 1.5rem; color: #fff;}
+
+
+
