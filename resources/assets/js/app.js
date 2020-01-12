@@ -22,6 +22,6 @@ Vue.component('example', require('./components/Example.vue'));
 Vue.component('main', require('./components/Main.vue'));
 Vue.component('layout', require('./components/Layout.vue'));
 
-const app = new Vue({
-    el: '#app'
-});
+// const app = new Vue({
+//     el: '#app'
+// });

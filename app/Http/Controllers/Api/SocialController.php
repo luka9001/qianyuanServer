@@ -20,6 +20,17 @@ use Ramsey\Uuid\Uuid;
 
 class SocialController extends Controller
 {
+    public $successStatus = 200;
+    public $failStatus = 500;
+
+    //删除自己发布的信息，后续添加权限控制scope
+    public function delMySocial(Request $request)
+    {
+        $id = request('id');
+        //只能删除自己的
+        SocialMessage::where('user_id', $request->user()->id)->destroy($id);
+        return response()->json(array('code' => 200));
+    }
     //根据获取用户昵称
     public function getUserInfoById(Request $request)
     {
@@ -91,12 +102,13 @@ class SocialController extends Controller
     public function getSocial(Request $request)
     {
         $socialMessage = SocialMessage::leftJoin('users', 'social_message.user_id', '=', 'users.id')->select('social_message.id', 'social_message.user_id', 'social_message.message', 'social_message.liked', 'social_message.created_at', 'social_message.photos', 'users.lifephoto', 'users.name', 'users.live', 'users.sex')->orderBy('id', 'desc')->paginate(10);
+        $newUserData = User::where('state', '!=', 0)->select('id', 'lifephoto')->orderBy('id', 'desc')->paginate(5);
         foreach ($socialMessage as $item) {
             $item['likescount'] = Likes::where('social_message_id', '=', $item->id)->count();
             $item['commentcount'] = Comment::where('social_message_id', '=', $item->id)->count();
         }
 
-        return response()->json(array('code' => 200, 'data' => $socialMessage));
+        return response()->json(array('code' => 200, 'data' => $socialMessage, 'user' => $newUserData));
     }
 
     //获取我发布的社交圈信息

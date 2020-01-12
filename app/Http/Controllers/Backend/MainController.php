@@ -15,6 +15,7 @@ class MainController extends BaseController
 {
     public function main(Request $request)
     {
+
         return view('Backend.main');
     }
 }

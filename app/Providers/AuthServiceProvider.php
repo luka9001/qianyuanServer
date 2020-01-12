@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Laravel\Passport\Passport;
 
@@ -28,12 +27,15 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         //
-	    Passport::routes();
+        Passport::routes();
+        // Passport::routes(function (RouteRegistrar $router) {
+        //     $router->forAccessTokens();
+        // }, ['middleware' => 'passport_validate']);
 
-	    Passport::enableImplicitGrant();
+        Passport::enableImplicitGrant();
 
-	    Passport::tokensExpireIn(Carbon::now()->addYears(10));
+        Passport::tokensExpireIn(Carbon::now()->addYears(10));
 //
-	    Passport::refreshTokensExpireIn(Carbon::now()->addYears(11));
+        Passport::refreshTokensExpireIn(Carbon::now()->addYears(11));
     }
 }

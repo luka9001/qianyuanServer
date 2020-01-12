@@ -49,6 +49,10 @@ return [
             'driver' => 'passport',
             'provider' => 'users',
         ],
+        'xcx' => [
+            'driver' => 'passport',
+            'provider' => 'usercu',
+        ],
     ],
 
     /*
@@ -78,6 +82,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\AdminUser::class,
         ],
+        'usercu' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],
     ],
 
     /*
@@ -98,6 +106,11 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'usercu' => [
+            'provider' => 'usercu',
             'table' => 'password_resets',
             'expire' => 60,
         ],

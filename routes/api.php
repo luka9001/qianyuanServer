@@ -65,6 +65,7 @@ Route::group(['middleware' => ['auth:api'], 'prefix' => 'v1'], function () {
     Route::post('/delfavorites', 'Api\MembersController@delFavorites');
     Route::post('/cmk', 'Api\MembersController@callMatchMaker');
 
+    Route::post('/delsocial', 'Api\SocialController@delMySocial');
     Route::post('/sendmessage', 'Api\SocialController@sendMessage');
     Route::post('/postlikes', 'Api\SocialController@postLike');
     Route::post('/postcomment', 'Api\SocialController@postComment');
@@ -91,3 +92,11 @@ Route::post('/register', 'Api\Auth\UserController@register');
 Route::post('/code', 'Api\Auth\UserController@emailCode');
 Route::post('/sc', 'Api\Auth\UserController@smsCode');
 Route::post('/refreshtoken', 'Api\Auth\UserController@refresh_token');
+
+//后台
+Route::post('admin/register', 'Api\Admin\UserController@WxRegister');
+Route::post('admin/login', 'Api\Admin\UserController@WxLogin');
+
+Route::group(['middleware' => 'auth:xcx'], function () {
+    Route::post('admin/details', 'Api\Admin\UserController@WxDetails');
+});

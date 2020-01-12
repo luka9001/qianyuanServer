@@ -23,6 +23,7 @@
     <div id="app">
     <el-header style="text-align: left; font-size: 50px"> UME友觅交友管理系统</el-header>
       <layout></layout>
+      <!-- @yield('content') -->
     </div>
   </body>
   @yield('page_js')
@@ -37,5 +38,13 @@
       color: #333;
     }
   </style>
+   <script>
+    new Vue({
+      el: '#app',
+      // data: function() {
+      //   return { visible: false }
+      // }
+    })
+  </script>
   <script src="{{ mix('js/app.js') }}"></script>
 </html>
