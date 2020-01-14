@@ -54,7 +54,7 @@ class UserController extends Controller
         if ($admin && password_verify($request->input('password'), $admin->password)) {
             \DB::table('oauth_access_tokens')->where('user_id', $admin->id)->where('name', 'admin')->update(['revoked' => 1]);
             $success['token'] = $admin->createToken('admin')->accessToken;
-            return response()->json(['success' => $success], $this->successStatus);
+            return response()->json(['data' => $success], $this->successStatus);
         } else {
             return response()->json(['error' => 'Unauthorised'], 401);
         }

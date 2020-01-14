@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redis;
 use Laravel\Passport\Client;
+use Ramsey\Uuid\Uuid;
 
 class UserController extends Controller
 {
@@ -385,7 +386,6 @@ class UserController extends Controller
         $user['height'] = $height;
         $user['education'] = $education;
         $user['live'] = $live;
-        // $user['phone'] = request('phone');
         $user['state'] = 1;
         $user['marrystatus'] = $marrystatus;
         $user['detail'] = $detail;
@@ -437,7 +437,8 @@ class UserController extends Controller
                 $entension = 'png';
 
                 $user = $request->user();
-                $newName = $clientName . $user->mobile . '.' . $entension;
+//                $newName = $clientName . $user->mobile . '.' . $entension;
+                $newName = Uuid::uuid4() . '.' . $entension;
                 $file->move($folder, $newName);
                 $src = '/uploadFile/files/' . $dateFolder . '/' . $newName;
                 array_push($photo, $src);

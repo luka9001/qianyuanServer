@@ -94,9 +94,12 @@ Route::post('/sc', 'Api\Auth\UserController@smsCode');
 Route::post('/refreshtoken', 'Api\Auth\UserController@refresh_token');
 
 //后台
-Route::post('admin/register', 'Api\Admin\UserController@WxRegister');
-Route::post('admin/login', 'Api\Admin\UserController@WxLogin');
+Route::group(['prefix' => 'v1'], function () {
+    Route::post('admin/register', 'Api\Admin\UserController@WxRegister');
+    Route::post('auth/loginValidate', 'Api\Admin\UserController@WxLogin');
 
-Route::group(['middleware' => 'auth:xcx'], function () {
+});
+
+Route::group(['middleware' => 'auth:xcx', 'prefix' => 'v1'], function () {
     Route::post('admin/details', 'Api\Admin\UserController@WxDetails');
 });

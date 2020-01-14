@@ -102,7 +102,7 @@ class SocialController extends Controller
     public function getSocial(Request $request)
     {
         $socialMessage = SocialMessage::leftJoin('users', 'social_message.user_id', '=', 'users.id')->select('social_message.id', 'social_message.user_id', 'social_message.message', 'social_message.liked', 'social_message.created_at', 'social_message.photos', 'users.lifephoto', 'users.name', 'users.live', 'users.sex')->orderBy('id', 'desc')->paginate(10);
-        $newUserData = User::where('state', '!=', 0)->select('id', 'lifephoto')->orderBy('id', 'desc')->paginate(5);
+        $newUserData = User::where('state', '!=', 0)->select('id', 'lifephoto')->orderBy('id', 'desc')->paginate(6);
         foreach ($socialMessage as $item) {
             $item['likescount'] = Likes::where('social_message_id', '=', $item->id)->count();
             $item['commentcount'] = Comment::where('social_message_id', '=', $item->id)->count();
