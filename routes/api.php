@@ -100,6 +100,9 @@ Route::group(['prefix' => 'v1'], function () {
 
 });
 
-Route::group(['middleware' => 'auth:xcx', 'prefix' => 'v1'], function () {
-    Route::post('admin/details', 'Api\Admin\UserController@WxDetails');
+Route::group(['middleware' => 'auth:xcx', 'prefix' => 'v1/admin'], function () {
+    Route::post('details', 'Api\Admin\UserController@WxDetails');
+    Route::get('wfc', 'Api\Admin\UserController@GetWaitForCheck');
+    Route::post('userinfo', 'Api\Admin\UserController@memberDetail');
+    Route::post('checkresult', 'Api\Admin\UserController@postCheckResult');
 });

@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Api\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use Illuminate\Http\Request;
-use Validator;
+use Illuminate\Support\Facades\Validator;
+use App\User;
 
 class UserController extends Controller
 {
@@ -70,5 +71,48 @@ class UserController extends Controller
         // $user = Admin::where('id', $request->input('id'))->first();
         $user = $request->user()->username;
         return response()->json(['success' => $user], $this->successStatus);
+    }
+
+    /**
+     * 获取未审核的用户
+     */
+    public function GetWaitForCheck()
+    {
+        $status = request('status');
+        $user = User::where([['check_status', $status], ['state', 1]])->select('name', 'mobile', 'live', 'id')->paginate(10);
+        return response()->json(['success' => $user], $this->successStatus);
+    }
+
+    /**
+     * 获取用户具体信息
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function memberDetail(Request $request)
+    {
+        $this->validate($request, [
+            'id' => 'required|numeric',
+        ]);
+        $id = request('id');
+        $user = User::find($id);
+
+        return response()->json(['success' => $user], $this->successStatus);
+    }
+
+    /**
+     * 获取审核结果
+     */
+    public function postCheckResult()
+    {
+        $id = \request('id');
+        $status = request('status');
+        $detail = request('detail');
+        $user = User::find($id);
+        $user->check_status = $status;
+        if ($status === 2) {
+            $user->check_detail = $detail;
+        }
+        $user->save();
+        return response()->json(['code' => 200]);
     }
 }
