@@ -48,6 +48,7 @@ class MembersController extends Controller
 
     /**
      * state 为 0 的账户 连照片都没有 所以不返回
+     * check_status 未审核用户不返回
      */
     public function getMembers(Request $request)
     {
@@ -60,9 +61,9 @@ class MembersController extends Controller
         $filter = request('filter');
         $activitiesAD = ActivitiesAD::orderBy('id', 'desc')->get();
         if ($filter === 2) {
-            $members = User::where('state', '!=', 0)->orderBy('id', 'desc')->paginate(10);
+            $members = User::where([['state', '!=', 0], ['check_status', 1]])->orderBy('id', 'desc')->paginate(10);
         } else {
-            $members = User::where([['state', '!=', 0], ['sex', $filter]])->orderBy('id', 'desc')->paginate(10);
+            $members = User::where([['state', '!=', 0], ['check_status', 1], ['sex', $filter]])->orderBy('id', 'desc')->paginate(10);
         }
         if (count($activitiesAD) >= $page) {
             return response()->json(array('code' => 200, 'data' => $members, 'ad' => $activitiesAD[$page - 1]));
@@ -71,6 +72,10 @@ class MembersController extends Controller
         }
     }
 
+    /**
+     * state 为 0 的账户 连照片都没有 所以不返回
+     * check_status 未审核用户不返回
+     */
     public function getMembersLogin(Request $request)
     {
         $this->validate($request, [
@@ -82,9 +87,9 @@ class MembersController extends Controller
         $filter = request('filter');
         $activitiesAD = ActivitiesAD::orderBy('id', 'desc')->get();
         if ($filter === 2) {
-            $members = User::where('state', '!=', 0)->orderBy('id', 'desc')->paginate(10);
+            $members = User::where([['state', '!=', 0], ['check_status', 1]])->orderBy('id', 'desc')->paginate(10);
         } else {
-            $members = User::where([['state', '!=', 0], ['sex', $filter]])->orderBy('id', 'desc')->paginate(10);
+            $members = User::where([['state', '!=', 0], ['check_status', 1], ['sex', $filter]])->orderBy('id', 'desc')->paginate(10);
         }
 
         if (count($activitiesAD) >= $page) {
@@ -117,6 +122,7 @@ class MembersController extends Controller
         unset($user['remember_token']);
         unset($user['password']);
         unset($user['email']);
+        unset($user['check_detail']);
         // $favoriteMeUid = $user->favoriteme()->where('who_f_me_uid', $request->user()->id)->first();
         // $user->favoriteMeUid = isset($favoriteMeUid->who_f_me_uid);
         $favoriteMeUid = $request->user()->favorites()->where('favorite_uid', $id)->first();
