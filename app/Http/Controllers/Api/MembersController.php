@@ -136,7 +136,8 @@ class MembersController extends Controller
         $priceInfo = PriceInfo::where('type', 1)->first();
         $user['payCoin'] = $priceInfo->coin;
 
-        if ($request->user()->sex === 1) {
+        //TODO::男性会员解锁聊天
+        if ($request->user()->sex === 0) {
             $pCount = PayForMessage::where([['user_id', $request->user()->id], ['message_uid', $id]])->count();
             if ($pCount > 0) {
                 $user['par_for_message'] = true;

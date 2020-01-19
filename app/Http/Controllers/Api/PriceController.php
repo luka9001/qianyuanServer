@@ -193,6 +193,8 @@ class PriceController extends Controller
                 return $matchMakerCoin * 10;
             case 3:
                 return $matchMakerCoin * 25;
+            default:
+                return 0;
         }
     }
 
