@@ -45,6 +45,7 @@ Route::group(['middleware' => ['auth:api'], 'prefix' => 'v1'], function () {
 });
 
 Route::group(['middleware' => ['auth:api'], 'prefix' => 'v1'], function () {
+    Route::post('/getsociallogin', 'Api\SocialController@getSocialLogin');
     Route::post('/getmysocial', 'Api\SocialController@getMySocial');
 
     Route::post('/getmemberslogin', 'Api\MembersController@getMembersLogin');
@@ -67,8 +68,10 @@ Route::group(['middleware' => ['auth:api'], 'prefix' => 'v1'], function () {
 
     Route::post('/delsocial', 'Api\SocialController@delMySocial');
     Route::post('/sendmessage', 'Api\SocialController@sendMessage');
+    Route::post('/getcommentslogin', 'Api\SocialController@getCommentsLogin');
     Route::post('/postlikes', 'Api\SocialController@postLike');
     Route::post('/postcomment', 'Api\SocialController@postComment');
+    Route::post('/delmycomment', 'Api\SocialController@delMyComment');
     Route::post('/gun', 'Api\SocialController@getUserInfoById');
 
     Route::post('/getcommentsbyuser', 'Api\SocialController@getCommentsByUser');

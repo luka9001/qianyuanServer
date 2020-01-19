@@ -31,6 +31,7 @@ class SocialController extends Controller
         SocialMessage::where('user_id', $request->user()->id)->destroy($id);
         return response()->json(array('code' => 200));
     }
+
     //根据获取用户昵称
     public function getUserInfoById(Request $request)
     {
@@ -43,6 +44,7 @@ class SocialController extends Controller
         $data['photo'] = $user->lifephoto;
         return response()->json(array('code' => 200, 'data' => $data));
     }
+
     //发布状态消息
     public function sendMessage(Request $request)
     {
@@ -104,6 +106,23 @@ class SocialController extends Controller
         $socialMessage = SocialMessage::leftJoin('users', 'social_message.user_id', '=', 'users.id')->select('social_message.id', 'social_message.user_id', 'social_message.message', 'social_message.liked', 'social_message.created_at', 'social_message.photos', 'users.lifephoto', 'users.name', 'users.live', 'users.sex')->orderBy('id', 'desc')->paginate(10);
         $newUserData = User::where('state', '!=', 0)->select('id', 'lifephoto')->orderBy('id', 'desc')->paginate(6);
         foreach ($socialMessage as $item) {
+            $item['likescount'] = Likes::where('social_message_id', '=', $item->id)->count();
+            $item['commentcount'] = Comment::where('social_message_id', '=', $item->id)->count();
+        }
+
+        return response()->json(array('code' => 200, 'data' => $socialMessage, 'user' => $newUserData));
+    }
+
+    //获取社交圈信息
+    public function getSocialLogin(Request $request)
+    {
+        $currentUserId = $request->user()->id;
+        $socialMessage = SocialMessage::leftJoin('users', 'social_message.user_id', '=', 'users.id')->select('social_message.id', 'social_message.user_id', 'social_message.message', 'social_message.liked', 'social_message.created_at', 'social_message.photos', 'users.lifephoto', 'users.name', 'users.live', 'users.sex')->orderBy('id', 'desc')->paginate(10);
+        $newUserData = User::where('state', '!=', 0)->select('id', 'lifephoto')->orderBy('id', 'desc')->paginate(6);
+        foreach ($socialMessage as $item) {
+            if ($item['user_id'] === $currentUserId) {
+                $item['is_current_user'] = 1;
+            }
             $item['likescount'] = Likes::where('social_message_id', '=', $item->id)->count();
             $item['commentcount'] = Comment::where('social_message_id', '=', $item->id)->count();
         }
@@ -184,6 +203,23 @@ class SocialController extends Controller
         }
     }
 
+    /**
+     * 删除自己发布的评论
+     * @param Request $request
+     */
+    public function delMyComment(Request $request)
+    {
+        $currentUserId = $request->user()->id;
+        $comment_id = request('comment_id');
+        Comment::where([['id', $comment_id], ['from_user_id', $currentUserId]])->delete();
+        return response()->json(array('code' => 200));
+    }
+
+    /**
+     * 未登录 获取评论
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getComments(Request $request)
     {
         $socialMessage_id = request('social_message_id');
@@ -196,6 +232,44 @@ class SocialController extends Controller
             // return response()->json(array('code' => 2000, 'data' => $comments));
             foreach ($comments as $key => $comment) {
                 $user_id = $comment->from_user_id;
+                $user = User::find($user_id);
+                $comment->name = $user['name'];
+                $comment->sex = $user['sex'];
+                $comment->live = $user['live'];
+                $comment->lifephoto = $user['lifephoto'];
+            }
+            $data = $comments;
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(array('code' => 201));
+        }
+        DB::commit();
+
+        return response()->json(array('code' => 200, 'data' => $data));
+    }
+
+    /**
+     * 登录后获取评论
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getCommentsLogin(Request $request)
+    {
+        $currentUserId = $request->user()->id;
+        $socialMessage_id = request('social_message_id');
+        $to_user_id = request('to_user_id');
+        DB::beginTransaction();
+        $data = null;
+        try {
+            // $comments = SocialMessage::find($socialMessage_id)->comments();
+            $comments = Comment::where('social_message_id', $socialMessage_id)->orderBy('id', 'desc')->paginate(10);
+            // return response()->json(array('code' => 2000, 'data' => $comments));
+            foreach ($comments as $key => $comment) {
+                $user_id = $comment->from_user_id;
+                if ($user_id === $currentUserId) {
+                    $comment->is_current_user = 1;
+                }
                 $user = User::find($user_id);
                 $comment->name = $user['name'];
                 $comment->sex = $user['sex'];
