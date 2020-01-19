@@ -422,6 +422,8 @@ class UserController extends Controller
         $user['nlanguage'] = $nlanguage;
         $user['noccupation'] = $noccupation;
         $user['nreligion'] = $nreligion;
+        //TODO:: 每次上传重置审核状态
+        $user['check_status'] = 0;
 
         $fileStoragePath = public_path() . '/uploadFile/files/';
         $dateFolder = date('Y-m-d', time()); // 日期作为目录
