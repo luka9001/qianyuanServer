@@ -252,32 +252,6 @@ class MembersController extends Controller
         return response()->json(array('code' => 200, 'data' => $data));
     }
 
-    //求助红娘
-    public function callMatchMaker(Request $request)
-    {
-        $this->validate($request, [
-            'id' => 'required|numeric',
-            'question' => 'required|digits:1',
-            'detail' => 'nullable|string|max:20',
-        ]);
-
-        $result = MatchMaker::create([
-            'wanted_uid' => request('id'),
-            'question' => request('question'),
-            'detail' => request('detail'),
-        ]);
-
-        $price = Price::where('user_id', $request->user()->id)->first();
-        $price->coin = $price->coin - request('payCoin');
-        $price->save();
-
-        if ($result) {
-            return response()->json(array('code' => 200));
-        } else {
-            return response()->json(array('code' => 201));
-        }
-    }
-
     public function postBlackList(Request $request)
     {
         if ($request->user()->state != 1) {
