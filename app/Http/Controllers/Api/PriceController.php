@@ -171,7 +171,7 @@ class PriceController extends Controller
                 $userPriceInfo->vip_end_time = self::vipEndTime($payInfo->product_content, $order->created_at);
                 $userPriceInfo->save();
             } else {
-                Price::create(['user_id' => $request->user()->id, 'coin' => vipCoin($payInfo->product_content), 'vip_level' => $payInfo->product_content, 'vip_start_time' => $order->created_at]);
+                Price::create(['user_id' => $request->user()->id, 'coin' => self::vipCoin($payInfo->product_content), 'vip_level' => $payInfo->product_content, 'vip_start_time' => $order->created_at]);
             }
         }
 
@@ -211,7 +211,6 @@ class PriceController extends Controller
             case 3:
                 return Carbon::parse($vip_start_time)->addYears(1)->toDateTimeString();
         }
-
     }
 
     public static function client()

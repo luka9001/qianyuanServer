@@ -137,7 +137,9 @@ Route::group([], function () {
  */
 Route::group(['middleware' => ['auth:api'], 'prefix' => 'v1'], function () {
     Route::post('/cmk', 'Api\MatckMakerController@callMatchMaker');
-    Route::get('/mkl', 'Api\MatckMakerController@getUserMatchMakerInfo');
+    Route::get('/mkp', 'Api\MatckMakerController@getUserMatchMakerPage');
+    Route::post('/mkl', 'Api\MatckMakerController@postUserMatchMakerLog');
+    Route::get('/mklp', 'Api\MatckMakerController@getUserMatchMakerLogPage');
 });
 
 
@@ -147,15 +149,26 @@ Route::group(['middleware' => ['auth:api'], 'prefix' => 'v1'], function () {
 Route::group(['prefix' => 'v1'], function () {
     Route::post('admin/register', 'Api\Admin\UserController@WxRegister');
     Route::post('auth/loginValidate', 'Api\Admin\UserController@WxLogin');
-
 });
 
 /**
- * 后他资料审核
+ * 后台资料审核
  */
 Route::group(['middleware' => 'auth:xcx', 'prefix' => 'v1/admin'], function () {
     Route::post('details', 'Api\Admin\UserController@WxDetails');
     Route::get('wfc', 'Api\Admin\UserController@GetWaitForCheck');
     Route::post('userinfo', 'Api\Admin\UserController@memberDetail');
     Route::post('checkresult', 'Api\Admin\UserController@postCheckResult');
+    Route::post('guv', 'Api\Admin\UserController@postGiveUserVip');
 });
+
+/**
+ * 后台红娘求助
+ */
+Route::group(['middleware' => 'auth:xcx', 'prefix' => 'v1/admin'], function () {
+    Route::get('mmp', 'Api\Admin\MatchMakerController@getMatchMakerPage');
+    Route::get('mmlp','Api\Admin\MatchMakerController@getAdminMatchMakerLogPage');
+    Route::post('mml','Api\Admin\MatchMakerController@postAdminMatchMakerLog');
+    Route::post('mmf','Api\Admin\MatchMakerController@postAdminMatchMakerFinish');
+});
+

@@ -3,8 +3,15 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Utils\VipStatus;
 use App\Models\Admin;
+use App\Models\Order;
+use App\Models\PayInfo;
+use App\Models\Price;
+use App\Models\PriceInfo;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\User;
 
@@ -53,7 +60,7 @@ class UserController extends Controller
     {
         $admin = Admin::where('username', $request->input('username'))->first();
         if ($admin && password_verify($request->input('password'), $admin->password)) {
-            \DB::table('oauth_access_tokens')->where('user_id', $admin->id)->where('name', 'admin')->update(['revoked' => 1]);
+            DB::table('oauth_access_tokens')->where('user_id', $admin->id)->where('name', 'admin')->update(['revoked' => 1]);
             $success['token'] = $admin->createToken('admin')->accessToken;
             return response()->json(['data' => $success], $this->successStatus);
         } else {
@@ -79,7 +86,7 @@ class UserController extends Controller
     public function GetWaitForCheck()
     {
         $status = request('status');
-        $user = User::where([['check_status', $status], ['state', 1]])->select('name', 'mobile', 'live', 'id')->paginate(10);
+        $user = User::where([['check_status', $status], ['state', 1]])->select('name', 'mobile', 'live', 'id')->orderBy('id', 'desc')->paginate(10);
         return response()->json(['success' => $user], $this->successStatus);
     }
 
@@ -96,6 +103,13 @@ class UserController extends Controller
         $id = request('id');
         $user = User::find($id);
 
+        $price = $user->price()->first();
+        if ($price != null) {
+            $user['vip_level'] = VipStatus::isVipNow($price->vip_end_time) ? $price->vip_level : 0;
+            $user['vip_start_time'] = $price->vip_start_time;
+            $user['coin'] = $price->coin;
+        }
+
         return response()->json(['success' => $user], $this->successStatus);
     }
 
@@ -104,7 +118,7 @@ class UserController extends Controller
      */
     public function postCheckResult()
     {
-        $id = \request('id');
+        $id = request('id');
         $status = request('status');
         $detail = request('detail');
         $user = User::find($id);
@@ -114,5 +128,77 @@ class UserController extends Controller
         }
         $user->save();
         return response()->json(['code' => 200]);
+    }
+
+    public function postGiveUserVip(Request $request)
+    {
+        $uid = request('uid');
+
+        $orderId = $uid;
+        $product = '官方赠送';
+        $product_type = request('product_type');
+
+        $order = Order::create([
+            'user_id' => $request->user()->id,
+            'order_id' => $orderId,
+            'price' => 0,
+            'product' => $product
+        ]);
+
+        $userPriceInfo = Price::where('user_id', $uid)->first();
+
+        $payInfo = PayInfo::where('type', $product_type)->first();
+        //小于3表示购买的心动币
+        if ($product_type < 3) {
+            if ($userPriceInfo != null) {
+                $userPriceInfo->coin = $userPriceInfo->coin + $payInfo->product_content;
+                $userPriceInfo->save();
+            } else {
+                Price::create(['user_id' => $uid, 'coin' => $payInfo->product_content, 'vip_level' => 0]);
+            }
+        } else {
+            if ($userPriceInfo !== null) {
+                $userPriceInfo->vip_level = $payInfo->product_content;
+                $userPriceInfo->coin = $userPriceInfo->coin + self::vipCoin($payInfo->product_content);
+                $userPriceInfo->vip_start_time = $order->created_at;
+                $userPriceInfo->vip_end_time = self::vipEndTime($payInfo->product_content, $order->created_at);
+                $userPriceInfo->save();
+            } else {
+                Price::create(['user_id' => $uid, 'coin' => self::vipCoin($payInfo->product_content), 'vip_level' => $payInfo->product_content, 'vip_start_time' => $order->created_at]);
+            }
+        }
+
+        return response()->json(array('code' => 200));
+    }
+
+    //充值会员赠送的金币
+    public function vipCoin($vip_level)
+    {
+        $matchMakerCoin = PriceInfo::where('type', 1)->first()->coin;
+        switch ($vip_level) {
+            case 1:
+                return $matchMakerCoin;
+            case 2:
+                return $matchMakerCoin * 10;
+            case 3:
+                return $matchMakerCoin * 25;
+            default:
+                return 0;
+        }
+    }
+
+    public function vipEndTime($vip_level, $vip_start_time)
+    {
+        switch ($vip_level) {
+            //一个月
+            case 1:
+                return Carbon::parse($vip_start_time)->addMonths(1)->toDateTimeString();
+            //半年
+            case 2:
+                return Carbon::parse($vip_start_time)->addMonths(6)->toDateTimeString();
+            //一年
+            case 3:
+                return Carbon::parse($vip_start_time)->addYears(1)->toDateTimeString();
+        }
     }
 }
