@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50728
 File Encoding         : 65001
 
-Date: 2020-01-21 21:18:54
+Date: 2020-01-21 22:47:12
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -237,7 +237,7 @@ CREATE TABLE `matchmaker_log` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `uid` int(11) NOT NULL COMMENT '谁求助',
+  `uid` int(11) NOT NULL COMMENT '用户回复关联users表id，客服回复关联admin表id',
   `type` int(1) NOT NULL COMMENT '0:用户,1:客服',
   `photos` longtext COLLATE utf8mb4_unicode_ci,
   `mid` int(11) NOT NULL COMMENT '对应matchmaker_id',
@@ -826,6 +826,7 @@ INSERT INTO `oauth_access_tokens` VALUES ('8ce323874727bfee6d14d01956b3902d6f761
 INSERT INTO `oauth_access_tokens` VALUES ('8d479db944f9d5282689ac4d17710d679300393fb74a281f29fad716d9bdd464be3e1d2741cb6e6c', '12', '1', null, '[\"*\"]', '0', '2019-03-08 07:26:55', '2019-03-08 07:26:55', '2020-03-08 07:26:55');
 INSERT INTO `oauth_access_tokens` VALUES ('8e18664fc8b20ef1a154e44670a90764f2c4f92bc40618a2024452709921272075bc1f034bf1fa48', '12', '1', null, '[\"*\"]', '0', '2019-03-21 08:01:22', '2019-03-21 08:01:22', '2020-03-21 08:01:22');
 INSERT INTO `oauth_access_tokens` VALUES ('8e2003855b32ef9024ec1861f029f1c983bda9399fdaeb10a4c92b0d6390a54702967ad9bf9b16b1', '12', '1', null, '[\"*\"]', '0', '2019-03-04 02:09:54', '2019-03-04 02:09:54', '2020-03-04 02:09:54');
+INSERT INTO `oauth_access_tokens` VALUES ('8e7066f545a18ce469b733fda6300a50499cadf53b9613a0e019791be92869d7e81f3c322f49f8b0', '89', '1', null, '[\"*\"]', '0', '2020-01-21 14:13:20', '2020-01-21 14:13:20', '2030-01-21 14:13:20');
 INSERT INTO `oauth_access_tokens` VALUES ('8f1066d058decdd7c2d2222f581a4a3e38076e95af47a19eadd67e451b2408bbdcc71ea56babcaa0', '12', '1', null, '[\"*\"]', '0', '2019-03-04 02:44:45', '2019-03-04 02:44:45', '2020-03-04 02:44:45');
 INSERT INTO `oauth_access_tokens` VALUES ('8f2d5f703475e8d06efe88d0a7e570549560d449bfffd3148a945e80b794e5f8c630d84102387012', '12', '1', null, '[\"*\"]', '0', '2019-03-12 05:21:24', '2019-03-12 05:21:24', '2020-03-12 05:21:24');
 INSERT INTO `oauth_access_tokens` VALUES ('8f4c14eb02e7c7a1cf1f4c776252746cd8d39dda7c7894096f90d6da483f23085f2b4ee8debc8815', '12', '1', null, '[\"*\"]', '0', '2019-03-08 07:37:11', '2019-03-08 07:37:11', '2020-03-08 07:37:11');
@@ -1530,6 +1531,7 @@ INSERT INTO `oauth_refresh_tokens` VALUES ('45f2b53d18b8860a9f40620edae76c99d982
 INSERT INTO `oauth_refresh_tokens` VALUES ('46575247ec2244de6d6169b6e9f059bd35e7bfc8d4db5bd5e9f66036ad216ab205fb3aa92c02855a', '2b1849b081a4f3ec2eee0f6d91e89e4224052103ba2f1155df8aa9e314688b349e80dc381a67e458', '0', '2020-03-03 07:48:56');
 INSERT INTO `oauth_refresh_tokens` VALUES ('46603ea168fcd7ff3c865f4c403116d3f0f61fd53e8cf25a53abb136daf6d24970164015369d5d4e', '0b58498090dff8e062b22f56e9cb425f3e5beca0858dae9241b7481b3f9ef534e727c84e45c1b86c', '0', '2020-03-15 05:33:46');
 INSERT INTO `oauth_refresh_tokens` VALUES ('46ae507141b747eb4115b166b396f34d506d0ffd181cdc7326e225d37dae203ef072b10f1d5f2493', '2acde208fe91b937967009caa7852dee3fdb941b90b27226479cad0199494d17c68911ec1c20c806', '0', '2020-08-07 03:42:42');
+INSERT INTO `oauth_refresh_tokens` VALUES ('46bd30d283f28025a161b9d33578f8ae3913e4d05905a2c6f23287f1680817f588de1240c8e14236', '8e7066f545a18ce469b733fda6300a50499cadf53b9613a0e019791be92869d7e81f3c322f49f8b0', '0', '2031-01-21 14:13:20');
 INSERT INTO `oauth_refresh_tokens` VALUES ('470495240510690fe23443972b304541a62addc8ca0093eee2fb11144274caf50e171db0aad96deb', 'c3f952e552d7d0cb4015240c8e0bc02cbddc9fe4f489426f2d4bf2de42ef85bbd0b31f60e709e59f', '0', '2020-08-17 06:32:58');
 INSERT INTO `oauth_refresh_tokens` VALUES ('4707bbe58e7abc9072f1b363fbb8ea815822c1815e09997ce670e0659a20cb746460f7b4108c67d8', 'efdb9ed05afc5c635ad8de43e381c0c56dd3632c27a7db423ae2961033a37c0e062e5e3e66cbc753', '0', '2020-03-20 06:09:41');
 INSERT INTO `oauth_refresh_tokens` VALUES ('472a20eff220ea8d6bd1051f449bc9fdc34319cdbddf72eed2543fd24042a213718ee6d844674c0f', '095cd5758527045ba05c0fc0400e6e447bd0b24bf9133655dc3342448374fa2bfe3a1a8f889f52f5', '0', '2020-03-15 05:01:08');
@@ -2192,22 +2194,23 @@ INSERT INTO `oauth_refresh_tokens` VALUES ('ffa65e9715cb972ec7c4b2ec61f164d3b9cc
 DROP TABLE IF EXISTS `order`;
 CREATE TABLE `order` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) DEFAULT NULL,
-  `order_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL COMMENT '如官方赠送，该字段关联admin表id',
+  `order_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '如果为官方赠送，该字段表示被赠送用户id',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `product` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `price` float(11,2) DEFAULT NULL COMMENT '订单金额',
-  `product_type` int(11) DEFAULT NULL COMMENT '产品类型',
+  `product` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '如官方赠送，则记录为官方赠送',
+  `price` float(11,2) DEFAULT NULL COMMENT '订单金额，0表示官方赠送',
+  `product_type` int(11) DEFAULT NULL COMMENT '产品类型,与pay_info表中type关联',
   PRIMARY KEY (`id`),
   KEY `users_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of order
 -- ----------------------------
+INSERT INTO `order` VALUES ('39', '5', '89', '2020-01-21 14:23:54', '2020-01-21 14:23:54', null, null, '官方赠送', '0.00', null);
 
 -- ----------------------------
 -- Table structure for password_resets
@@ -2309,11 +2312,12 @@ CREATE TABLE `price` (
   PRIMARY KEY (`id`),
   KEY `users_id` (`user_id`),
   CONSTRAINT `price_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of price
 -- ----------------------------
+INSERT INTO `price` VALUES ('7', '89', '1', '2020-01-21 14:14:24', '2020-01-21 14:44:41', null, '111', '2020-01-21 14:23:54', '2020-02-21 14:23:54');
 
 -- ----------------------------
 -- Table structure for price_info
@@ -2373,11 +2377,12 @@ CREATE TABLE `social_message` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `social_message_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of social_message
 -- ----------------------------
+INSERT INTO `social_message` VALUES ('20', '89', '呵呵', null, '0', '2020-01-21 14:44:41', '2020-01-21 14:44:41', null);
 
 -- ----------------------------
 -- Table structure for users
@@ -2440,8 +2445,9 @@ CREATE TABLE `users` (
   `check_detail` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '审核不通过理由',
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
+INSERT INTO `users` VALUES ('89', '+8615301555464', '卢克', null, '$2y$10$wsRSJv53GnJJ4LRM5KZI6u5NQT0rYBe2WanpN7eNw/qWYR1JX8HSu', null, '2020-01-21 14:13:20', '2020-01-21 14:44:41', null, '0', '苏州', '1990-01-01', '180', null, '马德里', null, '1', null, null, '[\"\\/uploadFile\\/files\\/2020-01-21\\/7e631ee4-cbe6-4fbe-a4ca-51d8e8513da4.png\"]', '摩羯座', null, null, '0', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '普通话,西班牙语', null, null, null, null, null, null, null, '1', '1', null);
