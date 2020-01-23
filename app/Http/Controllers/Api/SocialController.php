@@ -151,6 +151,9 @@ class SocialController extends Controller
         } else {
             $socialMessage = SocialMessage::leftJoin('users', 'social_message.user_id', '=', 'users.id')->where('social_message.user_id', $request->user()->id)->select('social_message.id', 'social_message.user_id', 'social_message.message', 'social_message.liked', 'social_message.created_at', 'social_message.photos', 'users.lifephoto', 'users.name', 'users.live', 'users.sex')->orderBy('id', 'desc')->paginate(10);
             foreach ($socialMessage as $item) {
+                if ($item['user_id'] === $currentUserId) {
+                    $item['is_current_user'] = 1;
+                }
                 $item['likescount'] = Likes::where('social_message_id', '=', $item->id)->count();
                 $item['commentcount'] = Comment::where('social_message_id', '=', $item->id)->count();
             }
