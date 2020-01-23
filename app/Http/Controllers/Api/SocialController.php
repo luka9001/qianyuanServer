@@ -28,8 +28,12 @@ class SocialController extends Controller
     {
         $id = request('id');
         //只能删除自己的
-        SocialMessage::where([['user_id', $request->user()->id], ['id', $id]])->destroy();
-        return response()->json(array('code' => 200));
+        try {
+            SocialMessage::where([['user_id', $request->user()->id], ['id', $id]])->delete();
+            return response()->json(array('code' => 200));
+        } catch (\Exception $e) {
+            return response()->json(array('code' => 201));
+        }
     }
 
     //根据获取用户昵称
