@@ -28,7 +28,7 @@ class SocialController extends Controller
     {
         $id = request('id');
         //只能删除自己的
-        SocialMessage::where('user_id', $request->user()->id)->destroy($id);
+        SocialMessage::where([['user_id', $request->user()->id], ['id', $id]])->destroy();
         return response()->json(array('code' => 200));
     }
 
