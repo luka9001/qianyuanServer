@@ -4,13 +4,16 @@ namespace App\Http\Controllers;
 
 class ActivityController extends Controller
 {
-    public function activityView()
-    {
-        return view('em');
+    public function adView(){
+        return view('ad');
     }
-
-    public function payPalClientView()
-    {
-        return view('paypalclient');
-    }
+//    public function activityView()
+//    {
+//        return view('em');
+//    }
+//
+//    public function payPalClientView()
+//    {
+//        return view('paypalclient');
+//    }
 }

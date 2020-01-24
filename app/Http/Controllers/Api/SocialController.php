@@ -320,6 +320,10 @@ class SocialController extends Controller
                 $comment->lifephoto = $user['lifephoto'];
 
                 $socialMessage = SocialMessage::find($comment->social_message_id);
+//                $message = $socialMessage->message;
+//                if($message.length >= 6){
+//                    $comment->message = substr($socialMessage->message, 0, 6);
+//                }
                 $comment->message = substr($socialMessage->message, 0, 6);
                 // $comment->photos = $socialMessage->photos;
             }

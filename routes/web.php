@@ -11,6 +11,10 @@
 |
  */
 
+use Illuminate\Support\Facades\Route;
+
+Route::get('ad','ActivityController@adView');
+
 //Route::get('/', function () {
 //    // return view('welcome');
 //});
