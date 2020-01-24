@@ -14,8 +14,11 @@ use App\Models\Likes;
 use App\Models\Price;
 use App\Models\SocialMessage;
 use App\User;
+use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Ramsey\Uuid\Uuid;
 
 class SocialController extends Controller
@@ -31,7 +34,7 @@ class SocialController extends Controller
         try {
             SocialMessage::where([['user_id', $request->user()->id], ['id', $id]])->delete();
             return response()->json(array('code' => 200));
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return response()->json(array('code' => 201));
         }
     }
@@ -108,7 +111,7 @@ class SocialController extends Controller
     public function getSocial(Request $request)
     {
         $socialMessage = SocialMessage::leftJoin('users', 'social_message.user_id', '=', 'users.id')->select('social_message.id', 'social_message.user_id', 'social_message.message', 'social_message.liked', 'social_message.created_at', 'social_message.photos', 'users.lifephoto', 'users.name', 'users.live', 'users.sex')->orderBy('id', 'desc')->paginate(10);
-        $newUserData = User::where('state', '!=', 0)->select('id', 'lifephoto')->orderBy('id', 'desc')->paginate(6);
+        $newUserData = User::where([['state', '!=', 0], ['check_status', '=', 1]])->select('id', 'lifephoto')->orderBy('id', 'desc')->paginate(6);
         foreach ($socialMessage as $item) {
             $item['likescount'] = Likes::where('social_message_id', '=', $item->id)->count();
             $item['commentcount'] = Comment::where('social_message_id', '=', $item->id)->count();
@@ -122,7 +125,7 @@ class SocialController extends Controller
     {
         $currentUserId = $request->user()->id;
         $socialMessage = SocialMessage::leftJoin('users', 'social_message.user_id', '=', 'users.id')->select('social_message.id', 'social_message.user_id', 'social_message.message', 'social_message.liked', 'social_message.created_at', 'social_message.photos', 'users.lifephoto', 'users.name', 'users.live', 'users.sex')->orderBy('id', 'desc')->paginate(10);
-        $newUserData = User::where('state', '!=', 0)->select('id', 'lifephoto')->orderBy('id', 'desc')->paginate(6);
+        $newUserData = User::where([['state', '!=', 0], ['check_status', '=', 1]])->select('id', 'lifephoto')->orderBy('id', 'desc')->paginate(6);
         foreach ($socialMessage as $item) {
             if ($item['user_id'] === $currentUserId) {
                 $item['is_current_user'] = 1;
@@ -217,6 +220,8 @@ class SocialController extends Controller
     /**
      * 删除自己发布的评论
      * @param Request $request
+     * @return JsonResponse
+     * @throws Exception
      */
     public function delMyComment(Request $request)
     {
@@ -229,7 +234,7 @@ class SocialController extends Controller
     /**
      * 未登录 获取评论
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function getComments(Request $request)
     {
@@ -251,7 +256,7 @@ class SocialController extends Controller
             }
             $data = $comments;
 
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack();
             return response()->json(array('code' => 201));
         }
@@ -263,7 +268,7 @@ class SocialController extends Controller
     /**
      * 登录后获取评论
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function getCommentsLogin(Request $request)
     {
@@ -289,7 +294,7 @@ class SocialController extends Controller
             }
             $data = $comments;
 
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack();
             return response()->json(array('code' => 201));
         }
@@ -319,12 +324,11 @@ class SocialController extends Controller
             }
             $data = $comments;
 
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack();
             return response()->json(array('code' => 201));
         }
         DB::commit();
-
         return response()->json(array('code' => 200, 'data' => $data));
     }
 
@@ -349,7 +353,7 @@ class SocialController extends Controller
             }
             $data = $comments;
 
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack();
             return response()->json(array('code' => 201));
         }
@@ -370,7 +374,7 @@ class SocialController extends Controller
                 $value->count = $count;
             }
             $data = $users;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack();
             return response()->json(array('code' => 201));
         }

@@ -154,7 +154,7 @@ Route::group(['prefix' => 'v1'], function () {
 /**
  * 后台资料审核
  */
-Route::group(['middleware' => 'auth:xcx', 'prefix' => 'v1/admin'], function () {
+Route::group(['middleware' => ['auth:xcx'], 'prefix' => 'v1/admin'], function () {
     Route::post('details', 'Api\Admin\UserController@WxDetails');
     Route::get('wfc', 'Api\Admin\UserController@GetWaitForCheck');
     Route::post('userinfo', 'Api\Admin\UserController@memberDetail');
@@ -165,7 +165,7 @@ Route::group(['middleware' => 'auth:xcx', 'prefix' => 'v1/admin'], function () {
 /**
  * 后台红娘求助
  */
-Route::group(['middleware' => 'auth:xcx', 'prefix' => 'v1/admin'], function () {
+Route::group(['middleware' => ['auth:xcx'], 'prefix' => 'v1/admin'], function () {
     Route::get('mmp', 'Api\Admin\MatchMakerController@getMatchMakerPage');
     Route::get('mmlp','Api\Admin\MatchMakerController@getAdminMatchMakerLogPage');
     Route::post('mml','Api\Admin\MatchMakerController@postAdminMatchMakerLog');
