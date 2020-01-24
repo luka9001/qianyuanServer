@@ -300,6 +300,7 @@ class SocialController extends Controller
         }
         DB::commit();
 
+//        $content = mb_convert_encoding( $data, 'UTF-8', 'UTF-8,GBK,GB2312,BIG5' );
         return response()->json(array('code' => 200, 'data' => $data));
     }
 
@@ -309,7 +310,7 @@ class SocialController extends Controller
         $data = null;
         try {
             $comments = Comment::where('to_user_id', $request->user()->id)->orWhere('from_user_id', $request->user()->id)->orderBy('id', 'desc')->paginate(10);
-            Comment::where([['to_user_id', $request->user()->id], ['state', 0]])->update(['state' => 1]);
+//            Comment::where([['to_user_id', $request->user()->id], ['state', 0]])->update(['state' => 1]);
             foreach ($comments as $key => $comment) {
                 $user_id = $comment->from_user_id;
                 $user = User::find($user_id);
@@ -325,6 +326,7 @@ class SocialController extends Controller
             $data = $comments;
 
         } catch (Exception $e) {
+            Log::info($e);
             DB::rollBack();
             return response()->json(array('code' => 201));
         }
