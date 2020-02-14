@@ -14,6 +14,8 @@ class SystemController extends Controller {
 		$data['j_register_status'] = $request->user()->j_register_status;
 		$data['check_status'] = $request->user()->check_status;
 		$data['check_detail'] = $request->user()->check_detail;
+		$data['uid'] = $request->user()->id;
+
 		return response()->json( array( 'code' => 200, 'version' => $data ) );
 	}
 }
