@@ -7,7 +7,7 @@ use App\Models\SystemInfo;
 use Illuminate\Http\Request;
 
 class SystemController extends Controller {
-	public function sysInfo(Request $request) {
+	public function getSysInfo(Request $request) {
 		$info = SystemInfo::find( 1 );
 		$data['android_version'] = $info->android_version;
 		$data['ios_version'] = $info->ios_version;
