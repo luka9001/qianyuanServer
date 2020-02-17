@@ -59,6 +59,7 @@ Route::group( [ 'middleware' => [ 'auth:api' ], 'prefix' => 'v1' ], function () 
 	Route::post( '/pi', 'Api\Auth\UserController@personalInformation' );
 	Route::post( '/getuserinfo', 'Api\Auth\UserController@getUserInfo' );
 	Route::post( '/pjs', 'Api\Auth\UserController@postJMessageStatus' );
+
 } );
 
 /**
@@ -76,6 +77,8 @@ Route::group( [ 'middleware' => [ 'auth:api' ], 'prefix' => 'v1' ], function () 
 	Route::post( '/agm', 'Api\JMessageController@addGroupMember' );
 	Route::post( '/gmi', 'Api\JMessageController@getMembersInfo' );
 	Route::post( '/ga', 'Api\JMessageController@groupAvatar' );
+	Route::get( '/groupimg/{groupId}', 'Api\JMessageController@groupAvatarImg' );
+	Route::get( '/img/{id}', 'Api\JMessageController@img' );
 } );
 
 /**
@@ -127,7 +130,7 @@ Route::group( [ 'middleware' => [ 'auth:api' ], 'prefix' => 'v1' ], function () 
 	Route::get( '/getsi', 'Api\SystemController@getSysInfo' );
 } );
 
-Route::group( ['prefix' => 'v1'], function () {
+Route::group( [ 'prefix' => 'v1' ], function () {
 	Route::get( '/getversion', 'Api\SystemController@getVersion' );
 } );
 
