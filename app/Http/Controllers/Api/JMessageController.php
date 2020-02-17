@@ -51,7 +51,7 @@ class JMessageController extends Controller {
 
 
 	public function addGroupMember( Request $request ) {
-		$userName     = env( 'JMESSAGE_TAG' ) . $request->user()->id;
+		$userName     = 'qy_' . $request->user()->id;
 		$appKey       = '27837b1c1fed6927c288e3df';
 		$masterSecret = 'c7664b0d3f55056db560ecab';
 
