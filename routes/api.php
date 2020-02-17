@@ -58,8 +58,6 @@ Route::group( [ 'middleware' => [ 'auth:api' ], 'prefix' => 'v1' ], function () 
 	Route::post( '/realname', 'Api\Auth\UserController@realNameAuthentication' );
 	Route::post( '/pi', 'Api\Auth\UserController@personalInformation' );
 	Route::post( '/getuserinfo', 'Api\Auth\UserController@getUserInfo' );
-	Route::post( '/pjs', 'Api\Auth\UserController@postJMessageStatus' );
-
 } );
 
 /**
@@ -74,6 +72,7 @@ Route::group( [ 'middleware' => [ 'auth:api' ], 'prefix' => 'v1' ], function () 
  * 极光api
  */
 Route::group( [ 'middleware' => [ 'auth:api' ], 'prefix' => 'v1' ], function () {
+	Route::post( '/pjs', 'Api\JMessageController@postJMessageStatus' );
 	Route::post( '/agm', 'Api\JMessageController@addGroupMember' );
 	Route::post( '/gmi', 'Api\JMessageController@getMembersInfo' );
 	Route::post( '/ga', 'Api\JMessageController@groupAvatar' );

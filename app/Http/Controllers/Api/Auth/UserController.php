@@ -539,20 +539,6 @@ class UserController extends Controller {
 		}
 	}
 
-	public function postJMessageStatus( Request $request ) {
-		$this->validate( $request, [
-			'status' => 'required|numeric',
-		] );
 
-		$status = request( 'status' );
-		if ( $status == 1 ) {
-			$request->user()->j_register_status = $status;
-			$request->user()->save();
-
-			return response()->json( array( 'code' => 200 ) );
-		}
-
-		return response()->json( array( 'code' => 201 ) );
-	}
 
 }
