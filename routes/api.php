@@ -127,6 +127,10 @@ Route::group( [ 'middleware' => [ 'auth:api' ], 'prefix' => 'v1' ], function () 
 	Route::get( '/getsi', 'Api\SystemController@getSysInfo' );
 } );
 
+Route::group( ['prefix' => 'v1'], function () {
+	Route::get( '/getversion', 'Api\SystemController@getVersion' );
+} );
+
 /**
  * 会员登录
  */

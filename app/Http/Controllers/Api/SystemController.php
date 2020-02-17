@@ -18,4 +18,11 @@ class SystemController extends Controller {
 
 		return response()->json( array( 'code' => 200, 'version' => $data ) );
 	}
+
+	public function getVersion(){
+		$info = SystemInfo::find( 1 );
+		$data['android_version'] = $info->android_version;
+		$data['ios_version'] = $info->ios_version;
+		return response()->json( array( 'code' => 200, 'version' => $data ) );
+	}
 }

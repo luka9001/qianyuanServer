@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Http\Request;
 use JMessage\IM\Group;
 use JMessage\JMessage;
+use Illuminate\Support\Facades\Log;
 
 class JMessageController extends Controller
 {
