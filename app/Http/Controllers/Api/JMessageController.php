@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use JMessage\IM\Group;
 use JMessage\JMessage;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Log;
 
 class JMessageController extends Controller {
 	public function postJMessageStatus( Request $request ) {
@@ -59,8 +60,8 @@ class JMessageController extends Controller {
 		$gid       = 41156304; //西班牙群
 		$usernames = [ $userName ];
 		$response  = $group->addMembers( $gid, $usernames );
-
-		return response()->json( array( 'code' => 200 ) );
+		Log::info($usernames);
+		return response()->json( array( 'code' => 200 ,'data'=>print_r($response,1)) );
 	}
 
 	public function getMembersInfo( Request $request ) {
