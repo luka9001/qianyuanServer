@@ -60,11 +60,16 @@ class MembersController extends Controller
         $page = request('page');
         $filter = request('filter');
         $activitiesAD = ActivitiesAD::orderBy('id', 'desc')->get();
-        if ($filter === 2) {
-            $members = User::where([['users.state', '!=', 0], ['users.check_status', 1]])->leftJoin('price','users.id','=','price.user_id')->select('users.id','users.sex','users.name','users.birthdate','users.starsign','users.education','price.vip_level')->orderBy('users.id', 'desc')->paginate(10);
-        } else {
-            $members = User::where([['users.state', '!=', 0], ['users.check_status', 1], ['users.sex', $filter]])->leftJoin('price','users.id','=','price.user_id')->select('users.id','users.sex','users.name','users.birthdate','users.starsign','users.education','price.vip_level')->orderBy('users.id', 'desc')->paginate(10);
-        }
+//        if ($filter === 2) {
+//            $members = User::where([['users.state', '!=', 0], ['users.check_status', 1]])->leftJoin('price','users.id','=','price.user_id')->select('users.id','users.sex','users.name','users.birthdate','users.starsign','users.education','price.vip_level')->orderBy('users.id', 'desc')->paginate(10);
+//        } else {
+//            $members = User::where([['users.state', '!=', 0], ['users.check_status', 1], ['users.sex', $filter]])->leftJoin('price','users.id','=','price.user_id')->select('users.id','users.sex','users.name','users.birthdate','users.starsign','users.education','price.vip_level')->orderBy('users.id', 'desc')->paginate(10);
+//        }
+	    if ($filter === 2) {
+		    $members = User::where([['state', '!=', 0], ['check_status', 1]])->orderBy('id', 'desc')->paginate(10);
+	    } else {
+		    $members = User::where([['state', '!=', 0], ['check_status', 1], ['sex', $filter]])->orderBy('id', 'desc')->paginate(10);
+	    }
         if (count($activitiesAD) >= $page) {
             return response()->json(array('code' => 200, 'data' => $members, 'ad' => $activitiesAD[$page - 1]));
         } else {
@@ -86,11 +91,16 @@ class MembersController extends Controller
         $page = request('page');
         $filter = request('filter');
         $activitiesAD = ActivitiesAD::orderBy('id', 'desc')->get();
-        if ($filter === 2) {
-            $members = User::where([['users.state', '!=', 0], ['users.check_status', 1]])->leftJoin('price','users.id','=','price.user_id')->select('users.id','users.sex','users.name','users.birthdate','users.starsign','users.education','price.vip_level')->orderBy('users.id', 'desc')->paginate(10);
-        } else {
-            $members = User::where([['users.state', '!=', 0], ['users.check_status', 1], ['users.sex', $filter]])->leftJoin('price','users.id','=','price.user_id')->select('users.id','users.sex','users.name','users.birthdate','users.starsign','users.education','price.vip_level')->orderBy('users.id', 'desc')->paginate(10);
-        }
+//        if ($filter === 2) {
+//            $members = User::where([['users.state', '!=', 0], ['users.check_status', 1]])->leftJoin('price','users.id','=','price.user_id')->select('users.id','users.sex','users.name','users.birthdate','users.starsign','users.education','price.vip_level')->orderBy('users.id', 'desc')->paginate(10);
+//        } else {
+//            $members = User::where([['users.state', '!=', 0], ['users.check_status', 1], ['users.sex', $filter]])->leftJoin('price','users.id','=','price.user_id')->select('users.id','users.sex','users.name','users.birthdate','users.starsign','users.education','price.vip_level')->orderBy('users.id', 'desc')->paginate(10);
+//        }
+	    if ($filter === 2) {
+		    $members = User::where([['state', '!=', 0], ['check_status', 1]])->paginate(10);
+	    } else {
+		    $members = User::where([['state', '!=', 0], ['check_status', 1], ['sex', $filter]])->paginate(10);
+	    }
 
         if (count($activitiesAD) >= $page) {
             return response()->json(array('code' => 200, 'data' => $members, 'ad' => $activitiesAD[$page - 1]));
@@ -105,8 +115,8 @@ class MembersController extends Controller
             'id' => 'required|numeric',
         ]);
         $id = request('id');
-//        $user = User::find($id);
-	    $user = User::where('users.id',$id)->leftJoin('price','users.id','=','price.user_id')->first();
+        $user = User::find($id);
+//	    $user = User::where('users.id',$id)->leftJoin('price','users.id','=','price.user_id')->first();
         unset($user['remember_token']);
         unset($user['password']);
 
