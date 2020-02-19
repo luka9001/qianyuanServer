@@ -97,9 +97,9 @@ class MembersController extends Controller
 //            $members = User::where([['users.state', '!=', 0], ['users.check_status', 1], ['users.sex', $filter]])->leftJoin('price','users.id','=','price.user_id')->select('users.id','users.sex','users.name','users.birthdate','users.starsign','users.education','price.vip_level')->orderBy('users.id', 'desc')->paginate(10);
 //        }
 	    if ($filter === 2) {
-		    $members = User::where([['state', '!=', 0], ['check_status', 1]])->paginate(10);
+		    $members = User::where([['state', '!=', 0], ['check_status', 1]])->orderBy('id', 'desc')->paginate(10);
 	    } else {
-		    $members = User::where([['state', '!=', 0], ['check_status', 1], ['sex', $filter]])->paginate(10);
+		    $members = User::where([['state', '!=', 0], ['check_status', 1], ['sex', $filter]])->orderBy('id', 'desc')->paginate(10);
 	    }
 
         if (count($activitiesAD) >= $page) {
