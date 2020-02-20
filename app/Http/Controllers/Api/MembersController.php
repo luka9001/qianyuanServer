@@ -177,7 +177,7 @@ class MembersController extends Controller {
 		] );
 		$id = request( 'id' );
         $user = User::find($id);
-        $price = Price::where('user_id',$id);
+        $price = Price::where('user_id',$id)->first();
         if(isset($price)){
 	        $user->vip_level = $price->vip_level;
         }
@@ -194,7 +194,7 @@ class MembersController extends Controller {
 		] );
 		$id = request( 'id' );
         $user = User::find($id);
-		$price = Price::where('user_id',$id);
+		$price = Price::where('user_id',$id)->first();
 		if(isset($price)){
 			$user->vip_level = $price->vip_level;
 		}
