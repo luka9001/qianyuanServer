@@ -176,8 +176,11 @@ class MembersController extends Controller {
 			'id' => 'required|numeric',
 		] );
 		$id = request( 'id' );
-//        $user = User::find($id);
-		$user = User::where( 'users.id', $id )->leftJoin( 'price', 'users.id', '=', 'price.user_id' )->first();
+        $user = User::find($id);
+        $price = Price::where('user_id',$id);
+        if(isset($price)){
+	        $user->vip_level = $price->vip_level;
+        }
 		unset( $user['remember_token'] );
 		unset( $user['password'] );
 		unset( $user['mobile'] );
@@ -190,8 +193,11 @@ class MembersController extends Controller {
 			'id' => 'required|numeric',
 		] );
 		$id = request( 'id' );
-//        $user = User::find($id);
-		$user = User::where( 'users.id', $id )->leftJoin( 'price', 'users.id', '=', 'price.user_id' )->first();
+        $user = User::find($id);
+		$price = Price::where('user_id',$id);
+		if(isset($price)){
+			$user->vip_level = $price->vip_level;
+		}
 		unset( $user['remember_token'] );
 		unset( $user['password'] );
 		unset( $user['email'] );
