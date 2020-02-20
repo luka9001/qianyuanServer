@@ -115,7 +115,7 @@ class SocialController extends Controller
         foreach ($socialMessage as $item) {
             $item['likescount'] = Likes::where('social_message_id', '=', $item->id)->count();
             $item['commentcount'] = Comment::where('social_message_id', '=', $item->id)->count();
-	        $price = Price::where('user_id',$item->id)->first();
+	        $price = Price::where('user_id',$item->user_id)->first();
 	        if(isset($price)){
 		        $item['vip_level']= $price->vip_level;
 	        }
@@ -136,7 +136,7 @@ class SocialController extends Controller
             }
             $item['likescount'] = Likes::where('social_message_id', '=', $item->id)->count();
             $item['commentcount'] = Comment::where('social_message_id', '=', $item->id)->count();
-	        $price = Price::where('user_id',$item->id)->first();
+	        $price = Price::where('user_id',$item->user_id)->first();
 	        if(isset($price)){
 		        $item['vip_level']= $price->vip_level;
 	        }
@@ -158,7 +158,7 @@ class SocialController extends Controller
                 }
                 $item['likescount'] = Likes::where('social_message_id', '=', $item->id)->count();
                 $item['commentcount'] = Comment::where('social_message_id', '=', $item->id)->count();
-	            $price = Price::where('user_id',$item->id)->first();
+	            $price = Price::where('user_id',$item->user_id)->first();
 	            if(isset($price)){
 		            $item['vip_level']= $price->vip_level;
 	            }
