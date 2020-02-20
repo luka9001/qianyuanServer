@@ -115,6 +115,10 @@ class SocialController extends Controller
         foreach ($socialMessage as $item) {
             $item['likescount'] = Likes::where('social_message_id', '=', $item->id)->count();
             $item['commentcount'] = Comment::where('social_message_id', '=', $item->id)->count();
+	        $price = Price::where('user_id',$item->id)->first();
+	        if(isset($price)){
+		        $item['vip_level']= $price->vip_level;
+	        }
         }
 
         return response()->json(array('code' => 200, 'data' => $socialMessage, 'user' => $newUserData));
@@ -132,6 +136,10 @@ class SocialController extends Controller
             }
             $item['likescount'] = Likes::where('social_message_id', '=', $item->id)->count();
             $item['commentcount'] = Comment::where('social_message_id', '=', $item->id)->count();
+	        $price = Price::where('user_id',$item->id)->first();
+	        if(isset($price)){
+		        $item['vip_level']= $price->vip_level;
+	        }
         }
 
         return response()->json(array('code' => 200, 'data' => $socialMessage, 'user' => $newUserData));
@@ -150,6 +158,10 @@ class SocialController extends Controller
                 }
                 $item['likescount'] = Likes::where('social_message_id', '=', $item->id)->count();
                 $item['commentcount'] = Comment::where('social_message_id', '=', $item->id)->count();
+	            $price = Price::where('user_id',$item->id)->first();
+	            if(isset($price)){
+		            $item['vip_level']= $price->vip_level;
+	            }
             }
         } else {
             $socialMessage = SocialMessage::leftJoin('users', 'social_message.user_id', '=', 'users.id')->where('social_message.user_id', $request->user()->id)->select('social_message.id', 'social_message.user_id', 'social_message.message', 'social_message.liked', 'social_message.created_at', 'social_message.photos', 'users.lifephoto', 'users.name', 'users.live', 'users.sex')->orderBy('id', 'desc')->paginate(10);
@@ -159,6 +171,10 @@ class SocialController extends Controller
                 }
                 $item['likescount'] = Likes::where('social_message_id', '=', $item->id)->count();
                 $item['commentcount'] = Comment::where('social_message_id', '=', $item->id)->count();
+	            $price = Price::where('user_id',$item->id)->first();
+	            if(isset($price)){
+		            $item['vip_level']= $price->vip_level;
+	            }
             }
         }
         return response()->json(array('code' => 200, 'data' => $socialMessage));
@@ -253,6 +269,10 @@ class SocialController extends Controller
                 $comment->sex = $user['sex'];
                 $comment->live = $user['live'];
                 $comment->lifephoto = $user['lifephoto'];
+	            $price = Price::where('user_id',$user_id)->first();
+	            if(isset($price)){
+		            $comment->vip_level= $price->vip_level;
+	            }
             }
             $data = $comments;
 
@@ -291,6 +311,10 @@ class SocialController extends Controller
                 $comment->sex = $user['sex'];
                 $comment->live = $user['live'];
                 $comment->lifephoto = $user['lifephoto'];
+	            $price = Price::where('user_id',$user_id)->first();
+	            if(isset($price)){
+		            $comment->vip_level= $price->vip_level;
+	            }
             }
             $data = $comments;
 
@@ -326,6 +350,10 @@ class SocialController extends Controller
 //                }
                 $comment->message = substr($socialMessage->message, 0, 6);
                 // $comment->photos = $socialMessage->photos;
+	            $price = Price::where('user_id',$user_id)->first();
+	            if(isset($price)){
+		            $comment->vip_level= $price->vip_level;
+	            }
             }
             $data = $comments;
 
