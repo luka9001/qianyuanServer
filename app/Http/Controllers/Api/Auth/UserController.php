@@ -538,7 +538,4 @@ class UserController extends Controller {
 			return $error_message;
 		}
 	}
-
-
-
 }

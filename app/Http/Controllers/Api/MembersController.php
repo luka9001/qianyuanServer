@@ -178,8 +178,9 @@ class MembersController extends Controller {
 		$id = request( 'id' );
         $user = User::find($id);
         $price = Price::where('user_id',$id)->first();
+        //该用户的vip标签
         if(isset($price)){
-	        $user->vip_level = $price->vip_level;
+	        $user->members_vip_level = $price->vip_level;
         }
 		unset( $user['remember_token'] );
 		unset( $user['password'] );
@@ -195,8 +196,9 @@ class MembersController extends Controller {
 		$id = request( 'id' );
         $user = User::find($id);
 		$price = Price::where('user_id',$id)->first();
+        //该用户的vip标签
 		if(isset($price)){
-			$user->vip_level = $price->vip_level;
+			$user->members_vip_level = $price->vip_level;
 		}
 		unset( $user['remember_token'] );
 		unset( $user['password'] );
@@ -213,7 +215,7 @@ class MembersController extends Controller {
 
 		$price = Price::where( 'user_id', $request->user()->id )->first();
 		if ( $price != null ) {
-
+            //当前登录并正在查看该用户的用户的vip权限
 			$user['vip_level']      = VipStatus::isVipNow( $price->vip_end_time ) ? $price->vip_level : 0;
 			$user['coin']           = $price->coin;
 			$user['vip_start_time'] = $price->vip_start_time;
