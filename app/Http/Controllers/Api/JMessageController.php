@@ -77,15 +77,15 @@ class JMessageController extends Controller
         foreach ($array as $key => $value) {
             $user = User::find($value);
             if ($user != null) {
-                if ($user['check_status'] === 1) {
-                    array_push($userArray, [
-                        'black_uid' => $user['id'],
-                        'name' => $user['name'],
-                        'sex' => $user['sex'],
-                        'live' => $user['live'],
-                        'lifephoto' => $user['lifephoto']
-                    ]);
-                }
+//                if ($user['check_status'] === 1) {
+                array_push($userArray, [
+                    'black_uid' => $user['id'],
+                    'name' => $user['name'],
+                    'sex' => $user['sex'],
+                    'live' => $user['live'],
+                    'lifephoto' => $user['lifephoto']
+                ]);
+//                }
             }
         }
 
