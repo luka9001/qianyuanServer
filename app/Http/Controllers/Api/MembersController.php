@@ -135,9 +135,9 @@ class MembersController extends Controller
             }
         }
         if (count($activitiesAD) >= $page) {
-            return response()->json(array('code' => 200, 'data' => $data, 'ad' => $activitiesAD[$page - 1], 'headerdata' => $headerData));
+            return response()->json(array('code' => 200, 'data' => $data, 'ad' => $activitiesAD[$page - 1], 'headerdata' => isset($headerData) ? $headerData : null));
         } else {
-            return response()->json(array('code' => 200, 'data' => $data, 'headerdata' => $headerData));
+            return response()->json(array('code' => 200, 'data' => $data, 'headerdata' => isset($headerData) ? $headerData : null));
         }
     }
 
@@ -223,9 +223,9 @@ class MembersController extends Controller
             }
         }
         if (count($activitiesAD) >= $page) {
-            return response()->json(array('code' => 200, 'data' => $members, 'ad' => $activitiesAD[$page - 1], 'headerdata' => $headerData));
+            return response()->json(array('code' => 200, 'data' => $members, 'ad' => $activitiesAD[$page - 1], 'headerdata' => isset($headerData) ? $headerData : null));
         } else {
-            return response()->json(array('code' => 200, 'data' => $members, 'headerdata' => $headerData));
+            return response()->json(array('code' => 200, 'data' => $members, 'headerdata' => isset($headerData) ? $headerData : null));
         }
     }
 
