@@ -195,6 +195,30 @@ class MembersController extends Controller
         }
 
         if (count($activitiesAD) >= $page) {
+            $headerData = [];
+            $ad = $activitiesAD[$page - 1];
+            $ad->datatype = 0;
+            array_push($headerData, $ad);
+            $party = Party::where('check_status', 1)->orderByDesc('id')->first();
+            if (isset($party)) {
+                $party->datatype = 1;
+                array_push($headerData, $party);
+            }
+            $user = User::where('id', 184)->first();
+            if (isset($user)) {
+                $user->datatype = 2;
+                array_push($headerData, $user);
+            }
+            $user = User::where('id', 179)->first();
+            if (isset($user)) {
+                $user->datatype = 2;
+                array_push($headerData, $user);
+            }
+            $user = User::where('id', 155)->first();
+            if (isset($user)) {
+                $user->datatype = 2;
+                array_push($headerData, $user);
+            }
             return response()->json(array('code' => 200, 'data' => $members, 'ad' => $activitiesAD[$page - 1]));
         } else {
             return response()->json(array('code' => 200, 'data' => $members));
