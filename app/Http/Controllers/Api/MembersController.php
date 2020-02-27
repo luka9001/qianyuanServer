@@ -108,8 +108,8 @@ class MembersController extends Controller
         }
         //配置header view信息，id,title,subtitle,type(0广告，1活动，2用户)
 
-        if ($page === 1) {
-            $headerData = [];
+        $headerData = [];
+        if ($page === '1') {
             $ad = ActivitiesAD::find(2);
             $ad->datatype = 0;
             array_push($headerData, $ad);
@@ -135,9 +135,9 @@ class MembersController extends Controller
             }
         }
         if (count($activitiesAD) >= $page) {
-            return response()->json(array('code' => 200, 'data' => $data, 'ad' => $activitiesAD[$page - 1], 'headerdata' => isset($headerData) ? $headerData : null));
+            return response()->json(array('code' => 200, 'data' => $data, 'ad' => $activitiesAD[$page - 1], 'headerdata' => $headerData));
         } else {
-            return response()->json(array('code' => 200, 'data' => $data, 'headerdata' => isset($headerData) ? $headerData : null));
+            return response()->json(array('code' => 200, 'data' => $data, 'headerdata' => $headerData));
         }
     }
 
@@ -196,8 +196,8 @@ class MembersController extends Controller
             DB::commit();
         }
 
-        if ($page === 1) {
-            $headerData = [];
+        $headerData = [];
+        if ($page === '1') {
             $ad = ActivitiesAD::find(2);
             $ad->datatype = 0;
             array_push($headerData, $ad);
@@ -223,9 +223,9 @@ class MembersController extends Controller
             }
         }
         if (count($activitiesAD) >= $page) {
-            return response()->json(array('code' => 200, 'data' => $members, 'ad' => $activitiesAD[$page - 1], 'headerdata' => isset($headerData) ? $headerData : null));
+            return response()->json(array('code' => 200, 'data' => $members, 'ad' => $activitiesAD[$page - 1], 'headerdata' => $headerData));
         } else {
-            return response()->json(array('code' => 200, 'data' => $members, 'headerdata' => isset($headerData) ? $headerData : null));
+            return response()->json(array('code' => 200, 'data' => $members, 'headerdata' => $headerData));
         }
     }
 
