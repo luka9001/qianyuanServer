@@ -201,4 +201,11 @@ Route::group(['middleware' => ['auth:xcx'], 'prefix' => 'v1/admin'], function ()
     Route::post('mml', 'Api\Admin\MatchMakerController@postAdminMatchMakerLog');
     Route::post('mmf', 'Api\Admin\MatchMakerController@postAdminMatchMakerFinish');
 });
-
+/**
+ * 后台线下活动审核
+ */
+Route::group(['middleware' => ['auth:xcx'], 'prefix' => 'v1/admin/party'], function (){
+    Route::get('wfc', 'Api\Admin\PartyController@GetWaitForCheck');
+    Route::post('partyinfo', 'Api\Admin\PartyController@partyDetail');
+    Route::post('checkresult', 'Api\Admin\PartyController@postCheckResult');
+});

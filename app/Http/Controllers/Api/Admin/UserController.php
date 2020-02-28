@@ -10,6 +10,7 @@ use App\Models\PayInfo;
 use App\Models\Price;
 use App\Models\PriceInfo;
 use Carbon\Carbon;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -23,9 +24,9 @@ class UserController extends Controller
     public $failStatus = 500;
 
     /**
-     *  微信小程序注册
+     *  注册
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function WxRegister(Request $request)
     {
@@ -54,7 +55,7 @@ class UserController extends Controller
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function WxLogin(Request $request)
     {
@@ -71,7 +72,7 @@ class UserController extends Controller
     /**
      * 查看用户详情
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function WxDetails(Request $request)
     {
@@ -81,7 +82,7 @@ class UserController extends Controller
     }
 
     /**
-     * 获取未审核的用户
+     * 根据未审核、审核、不通过各种状态获取用户列表
      */
     public function GetWaitForCheck()
     {
@@ -93,7 +94,7 @@ class UserController extends Controller
     /**
      * 获取用户具体信息
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function memberDetail(Request $request)
     {
@@ -114,7 +115,7 @@ class UserController extends Controller
     }
 
     /**
-     * 获取审核结果
+     * 提交审核结果
      */
     public function postCheckResult()
     {
@@ -130,6 +131,11 @@ class UserController extends Controller
         return response()->json(['code' => 200]);
     }
 
+    /**
+     * 给用户vip
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function postGiveUserVip(Request $request)
     {
         $uid = request('uid');
