@@ -12,6 +12,7 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use PayPalCheckoutSdk\Core\PayPalHttpClient;
 use PayPalCheckoutSdk\Core\SandboxEnvironment;
 use App\Http\Utils\VipStatus;
@@ -155,6 +156,7 @@ class PriceController extends Controller
         $userPriceInfo = Price::where('user_id', $request->user()->id)->first();
 
         $payInfo = PayInfo::where('type', $product_type)->first();
+        Log::info($payInfo->product_content);
         //小于3表示购买的心动币
         if ($product_type < 3) {
             if ($userPriceInfo != null) {

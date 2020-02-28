@@ -33,7 +33,7 @@ class JMessageController extends Controller
     {
         $groupId = request('groupId');
         if ($groupId === '41156304') {
-            $data['nickname'] = '西班牙';
+            $data['nickname'] = '西班牙交友俱乐部';
             $data['photo'] = '/img/spanish_group.png';
 
             return response()->json(array('code' => 200, 'data' => $data));
