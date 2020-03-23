@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Api\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Utils\VipStatus;
 use App\Models\Admin;
+use App\Models\MatchMaker;
 use App\Models\Order;
+use App\Models\Party;
 use App\Models\PayInfo;
 use App\Models\Price;
 use App\Models\PriceInfo;
@@ -22,6 +24,25 @@ class UserController extends Controller
     // use ProxyTrait;
     public $successStatus = 200;
     public $failStatus = 500;
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function init(Request $request)
+    {
+        try {
+            $unCheckUserCount = User::where('check_status', 0)->count();
+            $unCheckPartyCount = Party::where('check_status', 0)->count();
+            $unResolveMatchMakerCount = MatchMaker::where('status', 0)->count();
+            $success['unCheckUserCount'] = $unCheckUserCount;
+            $success['unCheckPartyCount'] = $unCheckPartyCount;
+            $success['unResolveMatchMakerCount'] = $unResolveMatchMakerCount;
+            return response()->json(['success' => $success], $this->successStatus);
+        } catch (\Exception $exception) {
+            return response()->json(['error' => $exception], $this->failStatus);
+        }
+    }
 
     /**
      *  注册
@@ -117,7 +138,7 @@ class UserController extends Controller
     /**
      * 提交审核结果
      */
-    public function postCheckResult()
+    public function postCheckResult(Request $request)
     {
         $id = request('id');
         $status = request('status');
@@ -126,9 +147,36 @@ class UserController extends Controller
         $user->check_status = $status;
         if ($status === 2) {
             $user->check_detail = $detail;
+        } else if ($status === 1) {
+            $this->giveVip($id, $request->user()->id);
         }
         $user->save();
         return response()->json(['code' => 200]);
+    }
+
+    private function giveVip($uid, $admin_uid)
+    {
+        $orderId = $uid;
+        $product = '官方赠送';
+
+        $order = Order::create([
+            'user_id' => $admin_uid,
+            'order_id' => $orderId,
+            'price' => 0,
+            'product' => $product
+        ]);
+
+        $userPriceInfo = Price::where('user_id', $uid)->first();
+
+        //此处为赠送新用户三天事件vip，但vip_level级别及图标设置为月度
+        if ($userPriceInfo !== null) {
+            $userPriceInfo->vip_level = 1;
+            $userPriceInfo->vip_start_time = $order->created_at;
+            $userPriceInfo->vip_end_time = self::vipEndTime(4, $order->created_at);
+            $userPriceInfo->save();
+        } else {
+            Price::create(['user_id' => $uid, 'coin' => 0, 'vip_level' => 1, 'vip_start_time' => $order->created_at]);
+        }
     }
 
     /**
@@ -205,6 +253,9 @@ class UserController extends Controller
             //一年
             case 3:
                 return Carbon::parse($vip_start_time)->addYears(1)->toDateTimeString();
+            //加三天
+            case 4:
+                return Carbon::parse($vip_start_time)->addDays(3)->toDateTimeString();
         }
     }
 }
