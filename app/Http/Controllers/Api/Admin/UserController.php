@@ -32,9 +32,11 @@ class UserController extends Controller
     public function init(Request $request)
     {
         try {
-            $unCheckUserCount = User::where('check_status', 0)->count();
+            $noUserInfoCount = User::where([['check_status', 0], ['state', 0]])->count();
+            $unCheckUserCount = User::where([['check_status', 0], ['state', 1]])->count();
             $unCheckPartyCount = Party::where('check_status', 0)->count();
             $unResolveMatchMakerCount = MatchMaker::where('status', 0)->count();
+            $success['noUserInfoCount'] = $noUserInfoCount;
             $success['unCheckUserCount'] = $unCheckUserCount;
             $success['unCheckPartyCount'] = $unCheckPartyCount;
             $success['unResolveMatchMakerCount'] = $unResolveMatchMakerCount;
@@ -108,7 +110,11 @@ class UserController extends Controller
     public function GetWaitForCheck()
     {
         $status = request('status');
-        $user = User::where([['check_status', $status], ['state', 1]])->select('name', 'mobile', 'live', 'id')->orderBy('id', 'desc')->paginate(10);
+        if ($status === '3') {
+            $user = User::where([['check_status', 0], ['state', 0]])->select('name', 'mobile', 'live', 'id')->orderBy('id', 'desc')->paginate(10);
+        } else {
+            $user = User::where([['check_status', $status], ['state', 1]])->select('name', 'mobile', 'live', 'id')->orderBy('id', 'desc')->paginate(10);
+        }
         return response()->json(['success' => $user], $this->successStatus);
     }
 
