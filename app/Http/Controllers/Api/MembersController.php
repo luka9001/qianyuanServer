@@ -81,7 +81,7 @@ class MembersController extends Controller
             } catch (\Exception $e) {
                 DB::rollBack();
 
-                return response()->json(array('code' => 201));
+                return response()->json(array('code' => 201,'error'=>$e));
             }
             DB::commit();
         } else {
@@ -102,7 +102,7 @@ class MembersController extends Controller
             } catch (\Exception $e) {
                 DB::rollBack();
 
-                return response()->json(array('code' => 201));
+                return response()->json(array('code' => 201,'error'=>$e));
             }
             DB::commit();
         }
