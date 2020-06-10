@@ -437,12 +437,14 @@ class UserController extends Controller
         $user['nreligion'] = $nreligion;
         //TODO:: 每次上传检查重置审核状态
         /**已通过审核用户必填信息未修改无需重置审核状态*/
-        if ($user['check_status'] === 1 && $user['birthdate'] === date("Y-m-d", strtotime($birthdate)) && $user['sex'] === ($sex === '男' ? 0 : 1) && $user['birthplace'] === $birthplace && $user['height'] === $height && $user['education'] === $education && $user['live'] === $live && $user['marrystatus'] === $marrystatus && $user['language'] === $language) {
-            $user['check_status'] = 1;
-        }
-        else{
-            $user['check_status'] = 0;
-        }
+//        if ($user['check_status'] === 1 && $user['birthdate'] === date("Y-m-d", strtotime($birthdate)) && $user['sex'] === ($sex === '男' ? 0 : 1) && $user['birthplace'] === $birthplace && $user['height'] === $height && $user['education'] === $education && $user['live'] === $live && $user['marrystatus'] === $marrystatus && $user['language'] === $language) {
+//            $user['check_status'] = 1;
+//        }
+//        else{
+//            $user['check_status'] = 0;
+//        }
+
+        $user['check_status'] = 1;
 
         $fileStoragePath = public_path() . '/uploadFile/files/';
         $dateFolder = date('Y-m-d', time()); // 日期作为目录
