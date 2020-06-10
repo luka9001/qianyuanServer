@@ -72,7 +72,7 @@ class PartyController extends Controller
 
             foreach ($files as $file) {
                 $clientName = $file->getClientOriginalName(); //初始名
-                $entension = 'png';
+                $entension = 'jpeg';
                 $newName = $dateFolder . '/' . Uuid::uuid4() . '.' . $entension;
                 $file->move($folder, $newName);
                 array_push($photos, $newName);

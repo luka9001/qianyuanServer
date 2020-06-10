@@ -238,7 +238,7 @@ class UserController extends Controller
             }
             foreach ($files as $file) {
                 $clientName = $file->getClientOriginalName(); //初始名
-                $entension = 'png';
+                $entension = 'jpeg';
 
                 $user = $request->user();
                 $newName = $clientName . $user->mobile . '.' . $entension;
@@ -455,7 +455,7 @@ class UserController extends Controller
             }
             foreach ($files as $file) {
                 $clientName = $file->getClientOriginalName(); //初始名
-                $entension = 'png';
+                $entension = 'jpeg';
 
                 $user = $request->user();
 //                $newName = $clientName . $user->mobile . '.' . $entension;
@@ -507,7 +507,7 @@ class UserController extends Controller
 
             foreach ($files as $file) {
                 $clientName = $file->getClientOriginalName(); //初始名
-                $entension = 'png';
+                $entension = 'jpeg';
 
                 $user = $request->user();
                 $newName = $clientName . $user->mobile . '.' . $entension;
