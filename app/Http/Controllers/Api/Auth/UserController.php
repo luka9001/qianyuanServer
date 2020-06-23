@@ -445,7 +445,6 @@ class UserController extends Controller
             else{
                 $user['check_status'] = 0;
             }
-
         }
         else{
             $user['check_status'] = 1;
