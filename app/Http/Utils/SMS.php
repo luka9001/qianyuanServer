@@ -18,7 +18,7 @@ class SMS
     {
         $postUrl = 'https://http-api.d7networks.com/send';
         $codeStr ='U&ME,code:' . $code;
-        $curlPost = ['to' => $to, 'from' => 'u&me', 'content' => $codeStr, 'username' => 'marc2209', 'password' => 'Pmtgh7Fl'];
+        $curlPost = ['to' => $to, 'from' => 'u&me', 'content' => $codeStr, 'username' => '', 'password' => ''];
         $ch = curl_init(); //初始化curl
         curl_setopt($ch, CURLOPT_URL, $postUrl); //抓取指定网页
         curl_setopt($ch, CURLOPT_HEADER, 0); //设置header
